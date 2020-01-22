@@ -34,6 +34,14 @@ target 'ecolote' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
+  pod 'ReactNativeNavigation', :path => '../node_modules/react-native-navigation'
+
+  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
+
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
   target 'ecoloteTests' do
     inherit! :search_paths
     # Pods for testing

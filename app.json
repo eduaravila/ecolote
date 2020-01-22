@@ -1,4 +1,9 @@
 {
-  "name": "ecolote",
-  "displayName": "ecolote"
+  "name": "Ecolote",
+  "displayName": "Ecolote",
+  "android": {
+    "adaptiveIcon": {
+      "backgroundColor": "#ED2C63"
+    }
+  }
 }
