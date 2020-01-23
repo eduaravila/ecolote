@@ -6,12 +6,11 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     backgroundColor: 'transparent',
-    height: '30%',
-    borderColor: 'black',
-    borderWidth: 1,
+    height: '35%',
   },
   logo: {
-    width: '33%',
+    width: '50%',
     height: '50%',
+    resizeMode: 'contain',
   },
 });

@@ -13,3 +13,9 @@ export function normalize(size: number): number {
     return Math.round(PixelRatio.roundToNearestPixel(newSize)) - 2;
   }
 }
+export function getColumn(porcentage: number) {
+  let columns = 5;
+  let separation = 10;
+  let column = SCREEN_WIDTH / columns - separation;
+  return column * porcentage;
+}
