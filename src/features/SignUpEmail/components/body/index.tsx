@@ -8,8 +8,14 @@ import {ButtonCustom} from '../../../../components/Button/Button';
 import {PRIMARY_DARK_COLOR} from '../../../../style/COLOR';
 import {HairLine} from '../../../../components/HairLine/HairLine';
 import {Caption} from '../../../../components/Caption/Caption';
+import {pushStack} from '../../../../navigation/navigators/stackUtils';
+import {ECOLOTE_SIGN_UP_USERNAME} from '../../../../navigation/screen_names';
 
-const Body: React.FC = () => {
+interface bodyType {
+  componentId: string;
+}
+
+const Body: React.FC<bodyType> = ({componentId}) => {
   const [email, setemail] = useState<string>('');
 
   const _set_email = (e: TextInputProps): void => {
@@ -32,7 +38,8 @@ const Body: React.FC = () => {
       <ButtonCustom
         borderColor={'transparent'}
         fillColor={PRIMARY_DARK_COLOR}
-        textColor={'white'}>
+        textColor={'white'}
+        onPress={() => pushStack(componentId, ECOLOTE_SIGN_UP_USERNAME)}>
         Continue
       </ButtonCustom>
       <HairLine style={styles.hairLine} />

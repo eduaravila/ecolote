@@ -7,7 +7,6 @@ export const styles = StyleSheet.create({
     width: '100%',
     position: 'absolute',
     bottom: normalize(20),
-    left: getColumn(0.5),
   },
   captionBold: {
     fontFamily: 'Rubik-Bold',

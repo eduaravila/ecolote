@@ -4,21 +4,19 @@ import GradientBackground from '../../../components/GradientBackground/GradientB
 import Header from '../components/header';
 import Status from '../components/status';
 import Body from '../components/body';
-import Footer from '../components/footer';
 
-interface componentIdType {
+interface SignUpUsernameType {
   componentId: string;
 }
 
-const SingUpEmail: React.FC<componentIdType> = props => {
+const SignUpUsername: React.FC<SignUpUsernameType> = props => {
   return (
     <GradientBackground>
       <Header />
-      <Status componentId={props.componentId!} />
-      <Body componentId={props.componentId!} />
-      <Footer />
+      <Status componentId={props.componentId} />
+      <Body componentId={props.componentId} />
     </GradientBackground>
   );
 };
 
-export default SingUpEmail;
+export default SignUpUsername;

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, TouchableWithoutFeedback} from 'react-native';
+import {View, TouchableWithoutFeedback, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {MiniButtonIconType, MiniButtonType} from './types';
@@ -28,7 +28,7 @@ const MiniButton: React.FC<MiniButtonType> = ({
   textColor = 'white',
 }) => {
   return (
-    <TouchableWithoutFeedback onPress={onPress}>
+    <TouchableOpacity onPress={onPress}>
       <View style={[styles.container, style]}>
         {iconName ? (
           <Subtitle2 style={[{color: textColor}]}>
@@ -47,7 +47,7 @@ const MiniButton: React.FC<MiniButtonType> = ({
           <Subtitle2 style={[{color: textColor}]}>{children}</Subtitle2>
         )}
       </View>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
 };
 
