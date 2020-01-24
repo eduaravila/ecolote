@@ -8,7 +8,7 @@ export interface ButtonCustomType {
   iconSize?: number;
   iconStyle?: {[t: string]: any};
   style?: {[t: string]: any};
-
+  onPress?: () => void;
 }
 
 export interface ButtonIconType {

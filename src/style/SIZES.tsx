@@ -1,21 +1,13 @@
-import {Dimensions, Platform, PixelRatio} from 'react-native';
-
-const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
-
-// based on iphone 5s's scale
-const scale: number = SCREEN_WIDTH / 320;
-
-export function normalize(size: number): number {
-  const newSize: number = size * scale;
-  if (Platform.OS === 'ios') {
-    return Math.round(PixelRatio.roundToNearestPixel(newSize));
-  } else {
-    return Math.round(PixelRatio.roundToNearestPixel(newSize)) - 2;
-  }
-}
-export function getColumn(porcentage: number) {
-  let columns = 5;
-  let separation = 10;
-  let column = SCREEN_WIDTH / columns - separation;
-  return column * porcentage;
-}
+export const H1_HEADLINE = 96;
+export const H2_HEADLINE = 60;
+export const H3_HEADLINE = 48;
+export const H4_HEADLINE = 34;
+export const H5_HEADLINE = 24;
+export const H6_HEADLINE = 20;
+export const SUBTITLE_1 = 16;
+export const SUBTITLE_2 = 14;
+export const BODY_1 = 16;
+export const BODY_2 = 14;
+export const BUTTON_SIZE = 14;
+export const CAPTION_SIZE = 12;
+export const OVERLINE_SIZE = 10;

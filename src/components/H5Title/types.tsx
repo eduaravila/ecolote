@@ -1,4 +1,6 @@
+import { ReactNode } from "react";
+
 export interface H5TitleTypes {
-  content: string;
+  children?: ReactNode;
   style?: {[t: string]: any};
 }

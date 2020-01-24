@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
-import {normalize, getColumn} from '../../../../style/SIZES';
+
+import {normalize, getColumn} from '../../../../style/UTILS';
 
 export const styles = StyleSheet.create({
   container: {

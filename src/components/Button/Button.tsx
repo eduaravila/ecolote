@@ -3,7 +3,7 @@ import {Svg, G, Path} from 'react-native-svg';
 import {TouchableNativeFeedback, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import {normalize} from '../../style/SIZES';
+import {normalize} from '../../style/UTILS';
 import {styles} from './styles';
 import {ButtonCustomType, ButtonIconType} from './types';
 
@@ -25,9 +25,10 @@ const ButtonCustom: React.FC<ButtonCustomType> = ({
   iconColor,
   iconStyle,
   style,
+  onPress,
 }) => {
   return (
-    <TouchableNativeFeedback onPress={() => {}} useForeground>
+    <TouchableNativeFeedback onPress={onPress} useForeground>
       <View style={[styles.container, {width: block ? '100%' : '50%'}, style]}>
         <Svg
           width="100%"

@@ -5,11 +5,11 @@ import Header from '../components/header';
 import Body from '../components/body';
 import Footer from '../components/footer/index';
 
-const Access: React.FC = () => {
+const Access: React.FC = props => {
   return (
     <GradientBackground>
       <Header />
-      <Body />
+      <Body {...props} />
       <Footer />
     </GradientBackground>
   );

@@ -1,5 +1,6 @@
-import React, {useState, useEffect, Fragment} from 'react';
-import {View} from 'react-native';
+import React from 'react';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+
 import LinearGradient from 'react-native-linear-gradient';
 import {GradientBackgroundType} from './types';
 import {PRIMARY_COLOR, PRIMARY_LIGHT_COLOR} from '../../style/COLOR';
@@ -12,15 +13,16 @@ const GradientBackground: React.FC<GradientBackgroundType> = ({
   children,
 }) => {
   return (
-    <LinearGradient
-      colors={[...colors]}
-      start={start}
-      end={end}
-      style={[styles.container]}>
-      {children}
-    </LinearGradient>
+    <KeyboardAwareScrollView contentContainerStyle={{flexGrow: 1}}>
+      <LinearGradient
+        colors={[...colors]}
+        start={start}
+        end={end}
+        style={[styles.container]}>
+        {children}
+      </LinearGradient>
+    </KeyboardAwareScrollView>
   );
 };
 
 export default GradientBackground;
- 

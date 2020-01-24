@@ -1,4 +1,6 @@
+import {ReactNode} from 'react';
+
 export interface H3TitleTypes {
-  content: string;
   style?: {[t: string]: any};
+  children?: ReactNode;
 }
