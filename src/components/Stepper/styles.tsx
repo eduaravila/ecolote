@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     width: normalize(30),
     height: normalize(30),
     borderRadius: normalize(100),
-    borderColor: 'white',
+    borderColor: 'transparent',
     borderWidth: 3,
     backgroundColor: 'white',
     marginVertical: normalize(10),

@@ -4,11 +4,17 @@ import {styles} from './styles';
 import {H6Title} from '../H6Title/H6Title';
 import {HeaderPhraseTypes} from './types';
 
-const HeaderPhrase: React.FC<HeaderPhraseTypes> = ({image, content}) => {
+const HeaderPhrase: React.FC<HeaderPhraseTypes> = ({
+  image,
+  content,
+  style,
+  textStyle,
+  imageStyle,
+}) => {
   return (
-    <View style={styles.constainer}>
-      <Image source={image} style={styles.logo} />
-      <H6Title style={styles.textRight}>{content}</H6Title>
+    <View style={[styles.constainer, style]}>
+      <Image source={image} style={[styles.logo, imageStyle]} />
+      <H6Title style={[styles.textRight, textStyle]}>{content}</H6Title>
     </View>
   );
 };
