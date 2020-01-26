@@ -1,10 +1,14 @@
 import React, {useState, useEffect} from 'react';
-import {Text} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 import {CaptionTypes} from './types';
 import {styles} from './styles';
 
-const Caption: React.FC<CaptionTypes> = ({children, style}) => {
-  return <Text style={[styles.container, style]}>{children}</Text>;
+const Caption: React.FC<CaptionTypes> = ({children, style, onPress}) => {
+  return (
+    <Text style={[styles.container, style]} onPress={onPress}>
+      {children}
+    </Text>
+  );
 };
 
 export {Caption};

@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     color: 'white',
     textAlignVertical: 'center',
     position: 'absolute',
-    paddingHorizontal: normalize(50),
+    paddingHorizontal: normalize(30),
     left: 0,
     top: 0,
   },

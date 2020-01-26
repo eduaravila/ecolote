@@ -1,9 +1,9 @@
 import {Navigation} from 'react-native-navigation';
 
 import {PRIMARY_DARK_COLOR} from '../../style/COLOR';
-import {ECOLOTE_ACCESS_WELCOME, ECOLOTE_LOG_IN} from '../screen_names';
+import {ECOLOTE_ACCESS_WELCOME} from '../screen_names';
 
-const goLogin = async () => {
+const goAccess = async () => {
   try {
     Navigation.setRoot({
       root: {
@@ -20,7 +20,7 @@ const goLogin = async () => {
           children: [
             {
               component: {
-                name: ECOLOTE_LOG_IN,
+                name: ECOLOTE_ACCESS_WELCOME,
               },
             },
           ],
@@ -34,4 +34,4 @@ const goLogin = async () => {
   }
 };
 
-export default goLogin;
+export default goAccess;

@@ -48,7 +48,7 @@ const InputCustom: React.FC<InputCustomType> = ({
       <TextInput
         keyboardType={keyboardType}
         style={[styles.input, {color: textColor}]}
-        onChange={e => onChange(e)}
+        onChange={onChange}
         placeholder={placeholder}
         placeholderTextColor={placeHolderColor}
         value={value}

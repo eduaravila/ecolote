@@ -13,16 +13,13 @@ const ModalCode: React.FC = () => {
   const [modalShow, setmodalShow] = useState<boolean>(true);
 
   const _toggle_modal = () => {
-    console.log('====================================');
-    console.log('presss');
-    console.log('====================================');
     setmodalShow(prev => !prev);
   };
   return (
     <Modal
       isVisible={modalShow}
       style={styles.container}
-      swipeDirection={['up', 'left', 'right', 'down']}
+      animationIn={'bounce'}
       onBackButtonPress={_toggle_modal}
       onBackdropPress={_toggle_modal}>
       <View style={styles.subContainer}>
