@@ -21,8 +21,8 @@ const Body: React.FC<bodyType> = ({componentId}) => {
   const [password, setpassword] = useState<string>('');
   const [passwordCpy, setpasswordCpy] = useState<string>('');
 
-  const _set_username = (e: TextInputProps): void => {
-    setusername(e.value!);
+  const _set_username = (e: string): void => {
+    setusername(e);
   };
 
   return (
@@ -33,23 +33,20 @@ const Body: React.FC<bodyType> = ({componentId}) => {
       </Subtitle1>
       <InputCustom
         placeholder={'Enter your username'}
-        value={username}
         keyboardType="default"
-        onChange={_set_username}
+        onChangeText={_set_username}
         style={styles.usernameInput}
       />
       <InputCustom
         placeholder={'Enter your password'}
-        value={password}
         keyboardType="default"
-        onChange={_set_username}
+        onChangeText={_set_username}
         style={styles.usernameInput}
       />
       <InputCustom
         placeholder={'Repeat your password'}
-        value={passwordCpy}
         keyboardType="default"
-        onChange={_set_username}
+        onChangeText={_set_username}
         style={styles.usernameInput}
       />
       <ButtonCustom

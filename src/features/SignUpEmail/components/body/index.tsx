@@ -1,5 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {View, Image, TextInputProps, Button} from 'react-native';
+import {
+  View,
+  TextInputChangeEventData,
+  NativeSyntheticEvent,
+} from 'react-native';
+import validator from 'validator';
+import {useForm} from 'react-hook-form';
 
 import {styles} from './styles';
 import {Subtitle1} from '../../../../components/Subtitle1/Subtitle1';
@@ -14,12 +20,21 @@ import {ECOLOTE_SIGN_UP_USERNAME} from '../../../../navigation/screen_names';
 interface bodyType {
   componentId: string;
 }
+type SignupForm = {
+  email: string;
+};
 
 const Body: React.FC<bodyType> = ({componentId}) => {
-  const [email, setemail] = useState<string>('');
+  const {register, setValue, handleSubmit, errors} = useForm();
 
-  const _set_email = (e: TextInputProps): void => {
-    setemail(e.value!);
+  const validate_inputs = ({email}: SignupForm) => console.log(email, errors);
+
+  const _set_email = (
+    name: string,
+    value: string,
+    validate: boolean = true,
+  ): void => {
+    setValue(name, value, validate);
   };
 
   return (
@@ -29,17 +44,25 @@ const Body: React.FC<bodyType> = ({componentId}) => {
         <Subtitle1 style={styles.textBold}>Email</Subtitle1>
       </Subtitle1>
       <InputCustom
+        error={!!errors.email}
         placeholder={'Enter your email'}
-        value={email}
+        errorMsg={'Invalid email'}
+        ref={register(
+          {name: 'email'},
+          {
+            required: true,
+            validate: (val: string) => validator.isEmail(val),
+          },
+        )}
         keyboardType="email-address"
-        onChange={_set_email}
+        onChangeText={e => _set_email('email', e)}
         style={styles.emailInput}
       />
       <ButtonCustom
         borderColor={'transparent'}
         fillColor={PRIMARY_DARK_COLOR}
         textColor={'white'}
-        onPress={() => pushStack(componentId, ECOLOTE_SIGN_UP_USERNAME)}>
+        onPress={handleSubmit(validate_inputs)}>
         Continue
       </ButtonCustom>
       <HairLine style={styles.hairLine} />

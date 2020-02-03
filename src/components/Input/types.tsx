@@ -1,16 +1,17 @@
-import {
-  TextInputProps,
-} from 'react-native';
+import {TextInput} from 'react-native';
+import {RefObject} from 'react';
 
 export interface InputCustomType {
   borderColor?: string;
   fillColor?: string;
+  ref?: any;
+  errorMsg?: string;
   block?: boolean;
+  error?: boolean;
   textColor?: string;
   style?: {[t: string]: any};
-  onChange: (e: TextInputProps) => void;
+  onChangeText?: (e: string) => void;
   placeholder: string;
-  value: string;
   placeHolderColor?: string;
   keyboardType?:
     | 'default'

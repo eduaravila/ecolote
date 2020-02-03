@@ -6,3 +6,5 @@ export const FACEBOOK_COLOR: string = '#3C579A';
 export const GOOGLE_SIGN_UP_COLOR: string = '#FFFFFF';
 
 export const INPUT_BORDER_COLOR = '#9B9B9B';
+
+export const INPUT_BORDER_COLOR_ERROR = '#FB952A';

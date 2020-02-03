@@ -19,12 +19,12 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
   const [username, setusername] = useState<string>('');
   const [password, setpassword] = useState<string>('');
 
-  const _setpassword = (e: TextInputProps) => {
-    setpassword(e.value!);
+  const _setpassword = (e: string) => {
+    setpassword(e);
   };
 
-  const _setusername = (e: TextInputProps) => {
-    setusername(e.value!);
+  const _setusername = (e: string) => {
+    setusername(e);
   };
 
   return (
@@ -43,9 +43,8 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
       </Subtitle1>
       <InputCustom
         placeholder={'Enter your Email / Username'}
-        value={username}
         keyboardType="email-address"
-        onChange={_setusername}
+        onChangeText={_setusername}
         style={styles.userInput}
       />
 

@@ -15,12 +15,12 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
   const [username, setusername] = useState<string>('');
   const [password, setpassword] = useState<string>('');
 
-  const _setpassword = (e: TextInputProps) => {
-    setpassword(e.value!);
+  const _setpassword = (e: string) => {
+    setpassword(e);
   };
 
-  const _setusername = (e: TextInputProps) => {
-    setusername(e.value!);
+  const _setusername = (e: string) => {
+    setusername(e);
   };
 
   return (
@@ -28,16 +28,14 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
       <H5Title style={styles.title}>{'Welcome Back'}</H5Title>
       <InputCustom
         placeholder={'Email / Username'}
-        value={username}
         keyboardType="email-address"
-        onChange={_setusername}
+        onChangeText={_setusername}
         style={styles.userInput}
       />
       <InputCustom
         placeholder={'Password'}
-        value={password}
         keyboardType="email-address"
-        onChange={_setpassword}
+        onChangeText={_setpassword}
         style={styles.userInput}
       />
       <ButtonCustom
@@ -48,7 +46,6 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
         onPress={() => pushStack(componentId, ECOLOTE_SIGN_UP_CODE)}>
         Log in
       </ButtonCustom>
-      
     </View>
   );
 };

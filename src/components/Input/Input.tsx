@@ -1,14 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import {Svg, G, Path} from 'react-native-svg';
 import {TouchableNativeFeedback, Text, View, TextInput} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {styles} from './styles';
 import {InputCustomType} from './types';
 import {
   INPUT_BORDER_COLOR,
-  PRIMARY_COLOR,
+  INPUT_BORDER_COLOR_ERROR,
   PRIMARY_LIGHT_COLOR,
 } from '../../style/COLOR';
+import {Overline} from '../Overline/Overline';
+import {normalize} from '../../style/UTILS';
 
 const InputCustom: React.FC<InputCustomType> = ({
   borderColor = INPUT_BORDER_COLOR,
@@ -18,8 +21,10 @@ const InputCustom: React.FC<InputCustomType> = ({
   placeHolderColor = INPUT_BORDER_COLOR,
   placeholder,
   style,
-  onChange,
-  value,
+  ref,
+  onChangeText,
+  error = false,
+  errorMsg = '',
   keyboardType = 'default',
 }) => {
   return (
@@ -41,19 +46,28 @@ const InputCustom: React.FC<InputCustomType> = ({
           <Path
             d="M 4 0 L 0 6.060623168945313 L 0 43.93937683105469 L 4 50 L 300 50 L 304 43.93937683105469 L 304 6.060623168945313 L 300 0 L 4 0 M 2.385498046875 -3 L 4 -3 L 300 -3 L 301.614501953125 -3 L 302.5038452148438 -1.652542114257813 L 306.5038452148438 4.408084869384766 L 307 5.159873962402344 L 307 6.060623168945313 L 307 43.93937683105469 L 307 44.84012603759766 L 306.5038452148438 45.59191513061523 L 302.5038452148438 51.65254211425781 L 301.614501953125 53 L 300 53 L 4 53 L 2.385498046875 53 L 1.49615478515625 51.65254211425781 L -2.50384521484375 45.59191513061523 L -3 44.84012603759766 L -3 43.93937683105469 L -3 6.060623168945313 L -3 5.159873962402344 L -2.50384521484375 4.408084869384766 L 1.49615478515625 -1.652542114257813 L 2.385498046875 -3 Z"
             stroke="none"
-            fill={borderColor}
+            fill={error ? INPUT_BORDER_COLOR_ERROR : borderColor}
           />
         </G>
       </Svg>
       <TextInput
         keyboardType={keyboardType}
         style={[styles.input, {color: textColor}]}
-        onChange={onChange}
+        onChangeText={onChangeText}
+        ref={ref}
         placeholder={placeholder}
         placeholderTextColor={placeHolderColor}
-        value={value}
         selectionColor={PRIMARY_LIGHT_COLOR}
       />
+      {error && (
+        <Icon
+          name={'alert-octagon'}
+          size={normalize(24)}
+          style={styles.errorIcon}
+          color={INPUT_BORDER_COLOR_ERROR}
+        />
+      )}
+      {error && <Overline style={styles.error}>* {errorMsg}</Overline>}
     </View>
   );
 };

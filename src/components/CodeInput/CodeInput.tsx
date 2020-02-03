@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef, Ref} from 'react';
+import React, {useState, useEffect, useRef, Ref, RefObject} from 'react';
 import {View, TextInput} from 'react-native';
 
 import {styles} from './styles';
@@ -9,7 +9,7 @@ const CodeInput: React.FC<CodeInputTypes> = ({
   style,
   keyboardType = 'number-pad',
 }) => {
-  const [inputs, setInputs] = useState<Ref[]>([
+  const [inputs, setInputs] = useState<any>([
     ...Array.apply(null, Array(size)).map((_, i) => useRef(null)),
   ]);
   const nextInput = (i: number): void => {
