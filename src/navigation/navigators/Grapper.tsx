@@ -1,14 +1,20 @@
 import React, {ReactNode} from 'react';
+import Orientation from 'react-native-orientation';
+
 import {StatusBarCustom} from '../../components/StatusBar/StatusBarCustom';
 
 export function Grapper(MyComponent: React.FunctionComponent<any>) {
   return () => {
     return class StoreWrapper extends React.Component<any, any> {
+      componentDidMount() {
+        Orientation.lockToPortrait();
+      }
       constructor(props: any) {
         super(props);
       }
 
       render() {
+
         return (
           <>
             <StatusBarCustom />

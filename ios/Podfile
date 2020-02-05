@@ -44,6 +44,8 @@ target 'ecolote' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'react-native-orientation', :path => '../node_modules/react-native-orientation'
+
   target 'ecoloteTests' do
     inherit! :search_paths
     # Pods for testing

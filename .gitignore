@@ -21,6 +21,7 @@ DerivedData
 *.ipa
 *.xcuserstate
 design/
+inspiration/
 # Android/IntelliJ
 #
 build/

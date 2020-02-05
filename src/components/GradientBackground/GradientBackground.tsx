@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-
+import Orientation from 'react-native-orientation';
 import LinearGradient from 'react-native-linear-gradient';
+
 import {GradientBackgroundType} from './types';
 import {PRIMARY_COLOR, PRIMARY_LIGHT_COLOR} from '../../style/COLOR';
 import {styles} from './styles';
@@ -14,6 +15,7 @@ const GradientBackground: React.FC<GradientBackgroundType> = ({
   end = {x: 1, y: 0.7},
   children,
 }) => {
+  
   const [paddingBottom, setpaddingBottom] = useState<number>(normalize(0));
 
   return (
@@ -21,8 +23,7 @@ const GradientBackground: React.FC<GradientBackgroundType> = ({
       contentContainerStyle={{flexGrow: 1}}
       scrollEnabled={true}
       onKeyboardDidShow={() => setpaddingBottom(normalize(100))}
-      onKeyboardDidHide={() => setpaddingBottom(normalize(0))}
-     >
+      onKeyboardDidHide={() => setpaddingBottom(normalize(0))}>
       <LinearGradient
         colors={[...colors]}
         start={start}
