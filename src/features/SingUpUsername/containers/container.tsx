@@ -7,6 +7,7 @@ import Body from '../components/body';
 
 interface SignUpUsernameType {
   componentId: string;
+  email: string;
 }
 
 const SignUpUsername: React.FC<SignUpUsernameType> = props => {
@@ -14,7 +15,7 @@ const SignUpUsername: React.FC<SignUpUsernameType> = props => {
     <GradientBackground>
       <Header />
       <Status componentId={props.componentId} />
-      <Body componentId={props.componentId} />
+      <Body {...props} />
     </GradientBackground>
   );
 };

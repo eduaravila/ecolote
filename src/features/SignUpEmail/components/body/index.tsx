@@ -1,11 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import {
-  View,
-  TextInputChangeEventData,
-  NativeSyntheticEvent,
-} from 'react-native';
+import React, {useState} from 'react';
+import {View} from 'react-native';
 import validator from 'validator';
 import {useForm} from 'react-hook-form';
+import {gql} from 'apollo-boost';
+import {useLazyQuery} from '@apollo/react-hooks';
 
 import {styles} from './styles';
 import {Subtitle1} from '../../../../components/Subtitle1/Subtitle1';
@@ -14,7 +12,7 @@ import {ButtonCustom} from '../../../../components/Button/Button';
 import {PRIMARY_DARK_COLOR} from '../../../../style/COLOR';
 import {HairLine} from '../../../../components/HairLine/HairLine';
 import {Caption} from '../../../../components/Caption/Caption';
-import {pushStack} from '../../../../navigation/navigators/stackUtils';
+import {pushStackWithProps} from '../../../../navigation/navigators/stackUtils';
 import {ECOLOTE_SIGN_UP_USERNAME} from '../../../../navigation/screen_names';
 
 interface bodyType {
@@ -24,10 +22,38 @@ type SignupForm = {
   email: string;
 };
 
-const Body: React.FC<bodyType> = ({componentId}) => {
-  const {register, setValue, handleSubmit, errors} = useForm();
+const CHECK_USER_EMAIL_IS_AVAILABLE_GQL = gql`
+  query CheckUserEmailAvailable($username: String, $email: String) {
+    CheckUserEmailAvailable(userInfo: {username: $username, email: $email}) {
+      msg
+      code
+    }
+  }
+`;
 
-  const validate_inputs = ({email}: SignupForm) => console.log(email, errors);
+const Body: React.FC<bodyType> = ({componentId}) => {
+  const {register, setValue, handleSubmit, errors, getValues} = useForm();
+  let [
+    checkUserAvailable,
+    {data, loading, error, networkStatus},
+  ] = useLazyQuery(CHECK_USER_EMAIL_IS_AVAILABLE_GQL, {
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'network-only',
+    onCompleted: () => {
+      let {email} = getValues();
+      if (data && !loading) {
+        pushStackWithProps(componentId, ECOLOTE_SIGN_UP_USERNAME, {email});
+      }
+    },
+  });
+
+  const validate_inputs = ({email}: SignupForm) => {
+    if (!loading) {
+      let val = checkUserAvailable({
+        variables: {email},
+      });
+    }
+  };
 
   const _set_email = (
     name: string,
@@ -44,16 +70,19 @@ const Body: React.FC<bodyType> = ({componentId}) => {
         <Subtitle1 style={styles.textBold}>Email</Subtitle1>
       </Subtitle1>
       <InputCustom
-        error={!!errors.email}
+        error={!!errors.email || !!error}
         placeholder={'Enter your email'}
-        errorMsg={'Invalid email'}
-        ref={register(
-          {name: 'email'},
-          {
-            required: true,
-            validate: (val: string) => validator.isEmail(val),
-          },
-        )}
+        onSubmitEditing={handleSubmit(validate_inputs)}
+        errorMsg={error ? 'Email already registered ' : 'Invalid email'}
+        ref={() =>
+          register(
+            {name: 'email'},
+            {
+              required: true,
+              validate: (val: string) => validator.isEmail(val),
+            },
+          )
+        }
         keyboardType="email-address"
         onChangeText={e => _set_email('email', e)}
         style={styles.emailInput}

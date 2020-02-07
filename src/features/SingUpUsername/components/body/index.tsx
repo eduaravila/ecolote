@@ -1,5 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import {View, Image, TextInputProps, Button} from 'react-native';
+import React, {useRef} from 'react';
+import {View} from 'react-native';
+import {useForm} from 'react-hook-form';
+import {gql} from 'apollo-boost';
+import {useLazyQuery, useMutation} from '@apollo/react-hooks';
+import validator from 'validator';
 
 import {styles} from './styles';
 import {Subtitle1} from '../../../../components/Subtitle1/Subtitle1';
@@ -14,15 +18,73 @@ import {
 
 interface bodyType {
   componentId: string;
+  email: string;
 }
 
-const Body: React.FC<bodyType> = ({componentId}) => {
-  const [username, setusername] = useState<string>('');
-  const [password, setpassword] = useState<string>('');
-  const [passwordCpy, setpasswordCpy] = useState<string>('');
+type SignupForm = {
+  username: string;
+  password: string;
+  passwordR: string;
+};
 
-  const _set_username = (e: string): void => {
-    setusername(e);
+const CHECK_USER_EMAIL_IS_AVAILABLE_GQL = gql`
+  query CheckUserEmailAvailable($username: String, $email: String) {
+    CheckUserEmailAvailable(userInfo: {username: $username, email: $email}) {
+      msg
+      code
+    }
+  }
+`;
+const REGISTER_USER_GQL = gql`
+  mutation RegisterUser(
+    $username: String!
+    $email: String!
+    $password: String!
+  ) {
+    RegisterUser(
+      registerInfo: {username: $username, password: $password, email: $email}
+    ) {
+      msg
+      code
+    }
+  }
+`;
+
+const Body: React.FC<bodyType> = ({componentId, email}) => {
+  const {register, setValue, handleSubmit, errors, getValues} = useForm();
+  const passwordRef = useRef<any>();
+  const passwordRRef = useRef<any>();
+
+  let [registerUser] = useMutation(REGISTER_USER_GQL, {
+    errorPolicy: 'none',
+    notifyOnNetworkStatusChange: true,
+    onCompleted: val => {
+      pushStack(componentId, ECOLOTE_SIGN_UP_CODE);
+    },
+  });
+
+  let [
+    checkUserAvailable,
+    {data, loading, error, networkStatus},
+  ] = useLazyQuery(CHECK_USER_EMAIL_IS_AVAILABLE_GQL, {
+    errorPolicy: 'none',
+    notifyOnNetworkStatusChange: true,
+    onCompleted: val => {
+      let {password, username} = getValues();
+      registerUser({variables: {username, password, email}});
+    },
+  });
+
+  const validate_inputs = ({username, password, passwordR}: SignupForm) => {
+    if (!loading) checkUserAvailable({variables: {username}});
+  };
+
+  const _set_value = (
+    name: string,
+    value: string,
+    validate: boolean = true,
+  ): void => {
+    setValue(name, value, validate);
   };
 
   return (
@@ -34,19 +96,73 @@ const Body: React.FC<bodyType> = ({componentId}) => {
       <InputCustom
         placeholder={'Enter your username'}
         keyboardType="default"
-        onChangeText={_set_username}
+        returnKeyType="next"
+        onSubmitEditing={() => passwordRef.current!.focus()}
+        error={!!errors.username || !!error}
+        errorMsg={error ? 'Username already registered ' : 'Invalid username'}
+        ref={() =>
+          register(
+            {name: 'username'},
+            {
+              required: true,
+              validate: {
+                value: (val: string) =>
+                  validator.isLength(val, {min: 1, max: 15}),
+                message: 'sss',
+              },
+            },
+          )
+        }
+        onChangeText={e => _set_value('username', e)}
         style={styles.usernameInput}
       />
       <InputCustom
         placeholder={'Enter your password'}
         keyboardType="default"
-        onChangeText={_set_username}
+        textContentType="newPassword"
+        secureTextEntry={true}
+        returnKeyType="next"
+        error={!!errors.password}
+        onSubmitEditing={() => passwordRRef.current!.focus()}
+        errorMsg={'8 characters, 1 uppercase, 1 lowecase, 1 number'}
+        ref={(e: any) => {
+          passwordRef.current = e;
+          register(
+            {name: 'password'},
+            {
+              required: true,
+              validate: (val: string) =>
+                validator.matches(
+                  val,
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d$@$!%*?&]{8,}/,
+                ),
+            },
+          );
+          return e;
+        }}
+        onChangeText={e => _set_value('password', e)}
         style={styles.usernameInput}
       />
       <InputCustom
+        error={!!errors.passwordR}
+        errorMsg={'Invalid password'}
+        onSubmitEditing={handleSubmit(validate_inputs)}
         placeholder={'Repeat your password'}
+        secureTextEntry={true}
         keyboardType="default"
-        onChangeText={_set_username}
+        textContentType="newPassword"
+        ref={(e: any) => {
+          passwordRRef.current = e;
+          register(
+            {name: 'passwordR'},
+            {
+              required: true,
+              validate: (val: string) => val == getValues().password,
+            },
+          );
+          return e;
+        }}
+        onChangeText={e => _set_value('passwordR', e)}
         style={styles.usernameInput}
       />
       <ButtonCustom
@@ -54,7 +170,7 @@ const Body: React.FC<bodyType> = ({componentId}) => {
         fillColor={PRIMARY_DARK_COLOR}
         textColor={'white'}
         style={styles.getcodeButton}
-        onPress={() => pushStack(componentId, ECOLOTE_SIGN_UP_CODE)}>
+        onPress={handleSubmit(validate_inputs)}>
         Get a code in my email
       </ButtonCustom>
     </View>

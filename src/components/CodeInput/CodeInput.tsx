@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef, Ref, RefObject} from 'react';
+import React, {useState, useRef} from 'react';
 import {View, TextInput} from 'react-native';
 
 import {styles} from './styles';
@@ -12,6 +12,7 @@ const CodeInput: React.FC<CodeInputTypes> = ({
   const [inputs, setInputs] = useState<any>([
     ...Array.apply(null, Array(size)).map((_, i) => useRef(null)),
   ]);
+
   const nextInput = (i: number): void => {
     if (i != size - 1) {
       inputs[i + 1].current!.focus();

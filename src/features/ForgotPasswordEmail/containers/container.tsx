@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useRef} from 'react';
 
 import GradientBackground from '../../../components/GradientBackground/GradientBackground';
 import Header from '../components/header';

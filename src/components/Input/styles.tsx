@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     color: 'white',
     textAlignVertical: 'center',
     position: 'absolute',
-    paddingHorizontal: normalize(40),
+    paddingHorizontal: normalize(20),
     left: 0,
     top: 0,
     flex: 1,
@@ -23,14 +23,16 @@ export const styles = StyleSheet.create({
   },
   error: {
     width: '100%',
-    marginTop: normalize(10),
+    marginTop: normalize(5),
     textAlign: 'left',
     paddingHorizontal: normalize(10),
     fontFamily: 'Rubik-Bold',
   },
   errorIcon: {
     position: 'absolute',
-    right: '5%',
-    top: normalize(16),
+    right: '0%',
+    height: '100%',
+    paddingHorizontal: normalize(20),
+    textAlignVertical: 'center',
   },
 });

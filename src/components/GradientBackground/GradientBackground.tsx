@@ -1,27 +1,55 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import Orientation from 'react-native-orientation';
 import LinearGradient from 'react-native-linear-gradient';
+import {ScrollView, Button, Text, Animated} from 'react-native';
 
 import {GradientBackgroundType} from './types';
 import {PRIMARY_COLOR, PRIMARY_LIGHT_COLOR} from '../../style/COLOR';
 import {styles} from './styles';
-import {ScrollView} from 'react-native';
 import {normalize} from '../../style/UTILS';
+
+import * as Animatable from 'react-native-animatable';
+import {useStoreState} from '../../state/store';
 
 const GradientBackground: React.FC<GradientBackgroundType> = ({
   colors = [PRIMARY_COLOR, PRIMARY_LIGHT_COLOR],
   start = {x: 1, y: 0.2},
   end = {x: 1, y: 0.7},
   children,
+  messageRef = useRef(null),
 }) => {
-  
+  const messageScale = new Animated.Value(0);
+
   const [paddingBottom, setpaddingBottom] = useState<number>(normalize(0));
+  let errorMsg = useStoreState(state => state.networkStatus.msg);
+
+  const bounce = () => {
+    if (messageRef?.current) {
+      messageRef.current
+        .animate({
+          0: {
+            height: 0,
+          },
+          1: {
+            height: normalize(20),
+          },
+        })
+        .then((endState: any) =>
+          console.log(
+            endState.finished ? 'bounce finished' : 'bounce cancelled',
+          ),
+        );
+    }
+  };
+  useEffect(() => {
+    bounce();
+  }, [errorMsg]);
 
   return (
     <KeyboardAwareScrollView
       contentContainerStyle={{flexGrow: 1}}
       scrollEnabled={true}
+      keyboardShouldPersistTaps={'handled'}
       onKeyboardDidShow={() => setpaddingBottom(normalize(100))}
       onKeyboardDidHide={() => setpaddingBottom(normalize(0))}>
       <LinearGradient
@@ -30,7 +58,7 @@ const GradientBackground: React.FC<GradientBackgroundType> = ({
         end={end}
         style={[styles.container]}>
         <ScrollView
-          keyboardShouldPersistTaps="always"
+          keyboardShouldPersistTaps="handled"
           style={{height: '100%', width: '100%'}}
           contentContainerStyle={{
             height: '100%',
@@ -39,6 +67,9 @@ const GradientBackground: React.FC<GradientBackgroundType> = ({
           {children}
         </ScrollView>
       </LinearGradient>
+      <Animatable.View style={styles.messageContainer} ref={messageRef}>
+        <Text style={styles.messageText}>{errorMsg}</Text>
+      </Animatable.View>
     </KeyboardAwareScrollView>
   );
 };

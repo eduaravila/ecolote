@@ -1,5 +1,7 @@
 import {StyleSheet} from 'react-native';
-import {getColumn} from '../../style/UTILS';
+import {getColumn, normalize} from '../../style/UTILS';
+import {INPUT_BORDER_COLOR_ERROR} from '../../style/COLOR';
+import {CAPTION_SIZE} from '../../style/SIZES';
 
 export const styles = StyleSheet.create({
   container: {
@@ -7,5 +9,18 @@ export const styles = StyleSheet.create({
     height: '100%',
     paddingLeft: getColumn(0.5),
     paddingRight: getColumn(0.5),
+  },
+  messageContainer: {
+    width: '100%',
+    height: normalize(0),
+    justifyContent: 'center',
+    backgroundColor: INPUT_BORDER_COLOR_ERROR,
+  },
+  messageText: {
+    color: 'white',
+    fontFamily: 'Rubik-Bold',
+    fontSize: CAPTION_SIZE,
+    width: '100%',
+    textAlign: 'center',
   },
 });

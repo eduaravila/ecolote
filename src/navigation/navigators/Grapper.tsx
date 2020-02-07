@@ -1,7 +1,11 @@
 import React, {ReactNode} from 'react';
 import Orientation from 'react-native-orientation';
+import {ApolloProvider} from '@apollo/react-hooks';
+import {StoreProvider} from 'easy-peasy';
 
 import {StatusBarCustom} from '../../components/StatusBar/StatusBarCustom';
+import {client} from '../../api';
+import store from '../../state/store';
 
 export function Grapper(MyComponent: React.FunctionComponent<any>) {
   return () => {
@@ -14,12 +18,13 @@ export function Grapper(MyComponent: React.FunctionComponent<any>) {
       }
 
       render() {
-
         return (
-          <>
-            <StatusBarCustom />
-            <MyComponent {...this.props} />
-          </>
+          <ApolloProvider client={client}>
+            <StoreProvider store={store}>
+              <StatusBarCustom />
+              <MyComponent {...this.props} />
+            </StoreProvider>
+          </ApolloProvider>
         );
       }
     };
