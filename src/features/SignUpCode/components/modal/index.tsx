@@ -10,12 +10,14 @@ import {styles} from './styles';
 import HeaderPhrase from '../../../../components/HeaderPhrase/HeaderPhrase';
 
 const logo_image = require('../../../../assets/img/logo_suprise.png');
+
 interface modalType {
   check: boolean;
   setCheck: (e: boolean) => void;
   updateStopWatch: (e: number) => void;
   username: string;
   setToken: (e: string) => void;
+  email: string;
 }
 
 const RESEND_VERIFY_CODE = gql`
@@ -33,6 +35,7 @@ const ModalCode: React.FC<modalType> = ({
   updateStopWatch,
   username,
   setToken,
+  email,
 }) => {
   const [modalShow, setmodalShow] = useState<boolean>(false);
   const [inacativity, setinacativity] = useState<number>(10);
@@ -91,7 +94,7 @@ const ModalCode: React.FC<modalType> = ({
           disabled={loading}
           style={styles.sendcodeButton}
           onPress={_resend_verify_code}>
-          Resend code to example@example.com
+          Resend code to {email}
         </ButtonCustom>
       </View>
     </Modal>

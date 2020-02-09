@@ -14,7 +14,7 @@ public class MainActivity extends NavigationActivity {
    */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    SplashScreen.show(this);
+    SplashScreen.show(this,R.style.SplashScreenTheme);
     super.onCreate(savedInstanceState);
   }
 

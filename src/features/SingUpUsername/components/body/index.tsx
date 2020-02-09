@@ -10,14 +10,7 @@ import {Subtitle1} from '../../../../components/Subtitle1/Subtitle1';
 import {InputCustom} from '../../../../components/Input/Input';
 import {ButtonCustom} from '../../../../components/Button/Button';
 import {PRIMARY_DARK_COLOR} from '../../../../style/COLOR';
-import {
-  pushStack,
-  pushStackWithProps,
-} from '../../../../navigation/navigators/stackUtils';
-import {
-  ECOLOTE_SIGN_UP_USERNAME,
-  ECOLOTE_SIGN_UP_CODE,
-} from '../../../../navigation/screen_names';
+import goSignUpCode from '../../../../navigation/navigators/SignUpCode';
 
 interface bodyType {
   componentId: string;
@@ -54,7 +47,14 @@ const REGISTER_USER_GQL = gql`
 `;
 
 const Body: React.FC<bodyType> = ({componentId, email}) => {
-  const {register, setValue, handleSubmit, errors, getValues} = useForm();
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    errors,
+    getValues,
+    reset,
+  } = useForm();
   const passwordRef = useRef<any>();
   const passwordRRef = useRef<any>();
 
@@ -65,8 +65,8 @@ const Body: React.FC<bodyType> = ({componentId, email}) => {
       notifyOnNetworkStatusChange: true,
       onCompleted: ({RegisterUser}) => {
         let {username} = getValues();
-
-        pushStackWithProps(componentId, ECOLOTE_SIGN_UP_CODE, {
+        reset();
+        goSignUpCode({
           token: RegisterUser.msg,
           email,
           username,

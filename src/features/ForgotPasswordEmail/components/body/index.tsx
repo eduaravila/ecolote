@@ -1,5 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import {View, TextInputProps} from 'react-native';
+import React from 'react';
+import {View, Alert} from 'react-native';
+import {useForm} from 'react-hook-form';
+import validator from 'validator';
+import {gql} from 'apollo-boost';
+import {useLazyQuery} from '@apollo/react-hooks';
 
 import {ButtonCustom} from '../../../../components/Button/Button';
 import {styles} from './styles';
@@ -14,17 +18,61 @@ import {InputCustom} from '../../../../components/Input/Input';
 import {H6Title} from '../../../../components/H6Title/H6Title';
 import {MiniButton} from '../../../../components/MiniButton/MiniButton';
 import {Subtitle1} from '../../../../components/Subtitle1/Subtitle1';
+import goForgotPasswordCode from '../../../../navigation/navigators/ForgotPasswordCode';
+
+interface formType {
+  email: string;
+}
+
+const RESTORE_PASSWORD_CODE_GQL = gql`
+  query RestorePasswordCode($email: String!) {
+    RestorePasswordCode(restorePasswordCodeInput: {email: $email}) {
+      msg
+      code
+    }
+  }
+`;
 
 const Body: React.FC<bodyTypes> = ({componentId}) => {
-  const [username, setusername] = useState<string>('');
-  const [password, setpassword] = useState<string>('');
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    errors,
+    getValues,
+    reset,
+  } = useForm();
 
-  const _setpassword = (e: string) => {
-    setpassword(e);
+  let [
+    restorePasswordCode,
+    {data, loading, error, networkStatus},
+  ] = useLazyQuery(RESTORE_PASSWORD_CODE_GQL, {
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'network-only',
+    onCompleted: ({RestorePasswordCode}) => {
+      let {email} = getValues();
+      reset();
+      goForgotPasswordCode({
+        token: RestorePasswordCode.msg,
+        email,
+      });
+    },
+  });
+
+  const validate_inputs = ({email}: formType) => {
+    if (!loading) {
+      let val = restorePasswordCode({
+        variables: {email},
+      });
+    }
   };
 
-  const _setusername = (e: string) => {
-    setusername(e);
+  const _set_email = (
+    name: string,
+    value: string,
+    validate: boolean = true,
+  ): void => {
+    setValue(name, value, validate);
   };
 
   return (
@@ -42,9 +90,16 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
         <Subtitle1 style={styles.textBold}>password.</Subtitle1>
       </Subtitle1>
       <InputCustom
+        ref={() => {
+          register(
+            {name: 'email'},
+            {required: true, validate: (val: string) => validator.isEmail(val)},
+          );
+        }}
         placeholder={'Enter your Email / Username'}
         keyboardType="email-address"
-        onChangeText={_setusername}
+        onSubmitEditing={handleSubmit(validate_inputs)}
+        onChangeText={(e: string) => _set_email('email', e)}
         style={styles.userInput}
       />
 
@@ -53,9 +108,7 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
         fillColor={PRIMARY_DARK_COLOR}
         textColor={'white'}
         style={styles.sendButton}
-        onPress={() =>
-          pushStack(componentId, ECOLOTE_FORGOT_PASSWORD_RESET_PASSWORD)
-        }>
+        onPress={handleSubmit(validate_inputs)}>
         Send
       </ButtonCustom>
     </View>

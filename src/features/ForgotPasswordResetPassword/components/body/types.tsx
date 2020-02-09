@@ -1,4 +1,5 @@
 export interface bodyTypes {
-    componentId: string;
-  }
-  
+  componentId: string;
+  code: string;
+  token: string;
+}

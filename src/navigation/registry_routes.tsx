@@ -11,6 +11,7 @@ import {
   ECOLOTE_FORGOT_PASSWORD_EMAIL,
   ECOLOTE_FORGOT_PASSWORD_RESET_PASSWORD,
   ECOLOTE_FORGOT_PASSWORD_SUCCESS,
+  ECOLOTE_FORGOT_PASSWORD_CODE,
 } from './screen_names';
 //* features
 import Access from '../features/access/containers/index';
@@ -23,6 +24,7 @@ import LogIn from '../features/Login/containers/container';
 import ForgotPasswordEmail from '../features/ForgotPasswordEmail/containers/container';
 import ForgotPasswordResetPassword from '../features/ForgotPasswordResetPassword/containers/container';
 import ForgotPasswordSuccess from '../features/ForgotPasswordSuccess/containers/container';
+import ForgotPasswordCode from '../features/ForgotPasswordCode/containers/container';
 
 const registryComponents = () => {
   Navigation.registerComponent(ECOLOTE_ACCESS_WELCOME, Grapper(Access));
@@ -45,6 +47,10 @@ const registryComponents = () => {
   Navigation.registerComponent(
     ECOLOTE_FORGOT_PASSWORD_SUCCESS,
     Grapper(ForgotPasswordSuccess),
+  );
+  Navigation.registerComponent(
+    ECOLOTE_FORGOT_PASSWORD_CODE,
+    Grapper(ForgotPasswordCode),
   );
 };
 

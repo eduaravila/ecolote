@@ -1,40 +1,76 @@
-import React, {useState, useEffect} from 'react';
+import React, {useRef} from 'react';
 import {View, TextInputProps} from 'react-native';
+import {gql} from 'apollo-boost';
+import {useForm} from 'react-hook-form';
+import {useMutation} from '@apollo/react-hooks';
+import validator from 'validator';
 
 import {ButtonCustom} from '../../../../components/Button/Button';
 import {styles} from './styles';
-import {
-  pushStack,
-  popStack,
-} from '../../../../navigation/navigators/stackUtils';
 import {bodyTypes} from './types';
-import {
-  ECOLOTE_SIGN_UP_CODE,
-  ECOLOTE_FORGOT_PASSWORD_SUCCESS,
-} from '../../../../navigation/screen_names';
 import {PRIMARY_DARK_COLOR} from '../../../../style/COLOR';
 import {InputCustom} from '../../../../components/Input/Input';
 import {H6Title} from '../../../../components/H6Title/H6Title';
-import {MiniButton} from '../../../../components/MiniButton/MiniButton';
 import {Subtitle1} from '../../../../components/Subtitle1/Subtitle1';
+import goForgotPasswordSuccess from '../../../../navigation/navigators/ForgotPasswordSuccess';
 
-const Body: React.FC<bodyTypes> = ({componentId}) => {
-  const [username, setusername] = useState<string>('');
-  const [password, setpassword] = useState<string>('');
+interface formType {
+  password: string;
+}
 
-  const _setusername = (e: string) => {
-    setusername(e);
+const RESTORE_PASSWORD_SET_NET_GQL = gql`
+  mutation RestorePasswordSetNew(
+    $code: String!
+    $token: String!
+    $password: String!
+  ) {
+    RestorePasswordSetNew(
+      passwordResetInfo: {code: $code, token: $token, password: $password}
+    ) {
+      msg
+      code
+    }
+  }
+`;
+
+const Body: React.FC<bodyTypes> = ({componentId, code, token}) => {
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    errors,
+    getValues,
+    reset,
+  } = useForm();
+  const passwordRef = useRef<any>();
+  const passwordRRef = useRef<any>();
+
+  let [
+    restorePasswordSetNew,
+    {data: dataRestorePasswordSetNew, loading},
+  ] = useMutation(RESTORE_PASSWORD_SET_NET_GQL, {
+    errorPolicy: 'none',
+    notifyOnNetworkStatusChange: true,
+    onCompleted: () => {
+      reset();
+      goForgotPasswordSuccess();
+    },
+  });
+
+  const validate_inputs = ({password}: formType) => {
+    if (!loading) restorePasswordSetNew({variables: {password, code, token}});
   };
 
+  const _set_value = (
+    name: string,
+    value: string,
+    validate: boolean = true,
+  ): void => {
+    setValue(name, value, validate);
+  };
   return (
     <View>
-      <MiniButton
-        onPress={() => popStack(componentId)}
-        iconName={'arrow-left-drop-circle'}>
-        Back
-      </MiniButton>
       <H6Title style={styles.title}>{'Now set your new password'}</H6Title>
-
       <Subtitle1 style={styles.descriptionText}>
         Please put a password with at least{'\n'}
         <Subtitle1 style={styles.textBold}>* 8 characters</Subtitle1>
@@ -48,14 +84,51 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
       </Subtitle1>
       <InputCustom
         placeholder={'Enter your new password'}
-        keyboardType="email-address"
-        onChangeText={_setusername}
+        keyboardType="default"
+        textContentType="newPassword"
+        secureTextEntry={true}
+        returnKeyType="next"
+        error={!!errors.password}
+        onSubmitEditing={() => passwordRRef.current!.focus()}
+        errorMsg={'8 characters, 1 uppercase, 1 lowecase, 1 number'}
+        ref={(e: any) => {
+          passwordRef.current = e;
+          register(
+            {name: 'password'},
+            {
+              required: true,
+              validate: (val: string) =>
+                validator.matches(
+                  val,
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d$@$!%*?&]{8,}/,
+                ),
+            },
+          );
+          return e;
+        }}
+        onChangeText={e => _set_value('password', e)}
         style={styles.userInput}
       />
       <InputCustom
+        error={!!errors.passwordR}
+        errorMsg={'Invalid password'}
+        onSubmitEditing={handleSubmit(validate_inputs)}
         placeholder={'Repeat your password'}
-        keyboardType="email-address"
-        onChangeText={_setusername}
+        secureTextEntry={true}
+        keyboardType="default"
+        textContentType="newPassword"
+        ref={(e: any) => {
+          passwordRRef.current = e;
+          register(
+            {name: 'passwordR'},
+            {
+              required: true,
+              validate: (val: string) => val == getValues().password,
+            },
+          );
+          return e;
+        }}
+        onChangeText={e => _set_value('passwordR', e)}
         style={styles.userInput}
       />
 
@@ -64,7 +137,7 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
         fillColor={PRIMARY_DARK_COLOR}
         textColor={'white'}
         style={styles.sendButton}
-        onPress={() => pushStack(componentId, ECOLOTE_FORGOT_PASSWORD_SUCCESS)}>
+        onPress={handleSubmit(validate_inputs)}>
         Change password
       </ButtonCustom>
     </View>

@@ -67,7 +67,6 @@ const Body: React.FC<bodyType> = ({
   let [verifyAccount, {data: dataVerifyAccount, error, loading}] = useMutation(
     VERIFY_ACCOUNT_GQL,
     {
-      errorPolicy: 'all',
       notifyOnNetworkStatusChange: true,
       onError: e => e,
       onCompleted: ({VerifyAccount}) => {

@@ -32,7 +32,14 @@ const CHECK_USER_EMAIL_IS_AVAILABLE_GQL = gql`
 `;
 
 const Body: React.FC<bodyType> = ({componentId}) => {
-  const {register, setValue, handleSubmit, errors, getValues} = useForm();
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    errors,
+    getValues,
+    reset,
+  } = useForm();
   let [
     checkUserAvailable,
     {data, loading, error, networkStatus},
@@ -41,6 +48,7 @@ const Body: React.FC<bodyType> = ({componentId}) => {
     fetchPolicy: 'network-only',
     onCompleted: () => {
       let {email} = getValues();
+      reset();
       if (data && !loading) {
         pushStackWithProps(componentId, ECOLOTE_SIGN_UP_USERNAME, {email});
       }

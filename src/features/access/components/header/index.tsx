@@ -3,7 +3,7 @@ import {View, Image} from 'react-native';
 import {styles} from './styles';
 import {H3Title} from '../../../../components/H3Title/H3Title';
 
-const logo_image = require('../../../../assets/img/logox8.png');
+const logo_image = require('../../../../assets/img/eco_guadalupe_8.gif');
 
 const Header: React.FC = () => {
   return (

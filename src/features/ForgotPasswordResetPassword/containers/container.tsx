@@ -6,15 +6,16 @@ import Body from '../components/body';
 
 interface ForgotPasswordResetPasswordTypes {
   componentId: string;
+  token: string;
+  code: string;
 }
 const ForgotPasswordResetPassword: React.FC<ForgotPasswordResetPasswordTypes> = props => {
   return (
     <GradientBackground>
       <Header />
-      <Body componentId={props.componentId} />
+      <Body {...props} />
     </GradientBackground>
   );
 };
 
 export default ForgotPasswordResetPassword;
-``

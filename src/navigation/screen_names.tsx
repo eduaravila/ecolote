@@ -10,3 +10,5 @@ export const ECOLOTE_FORGOT_PASSWORD_RESET_PASSWORD: string =
   'ecolote.forgot.password.reset.password';
 export const ECOLOTE_FORGOT_PASSWORD_SUCCESS: string =
   'ecolote.forgot.password.success';
+export const ECOLOTE_FORGOT_PASSWORD_CODE: string =
+  'ecolote.forgot.password.code';

@@ -45,6 +45,7 @@ const SingUpCode: React.FC<componentIdType> = props => {
         updateStopWatch={updateStopWatch}
       />
       <ModalCode
+        email={props.email}
         setCheck={_setCheck}
         check={check}
         setToken={_set_token}

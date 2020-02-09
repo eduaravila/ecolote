@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
   },
 
   text: {
+    marginHorizontal: normalize(5),
     width: '100%',
     height: '100%',
     textAlign: 'center',
