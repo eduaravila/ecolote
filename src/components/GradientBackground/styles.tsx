@@ -12,7 +12,6 @@ export const styles = StyleSheet.create({
   },
   messageContainer: {
     width: '100%',
-    height: normalize(0),
     justifyContent: 'center',
     backgroundColor: INPUT_BORDER_COLOR_ERROR,
   },
@@ -21,6 +20,7 @@ export const styles = StyleSheet.create({
     fontFamily: 'Rubik-Bold',
     fontSize: CAPTION_SIZE,
     width: '100%',
+
     textAlign: 'center',
   },
 });

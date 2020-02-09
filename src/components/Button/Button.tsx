@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {normalize} from '../../style/UTILS';
 import {styles} from './styles';
 import {ButtonCustomType, ButtonIconType} from './types';
+import {INPUT_BORDER_COLOR} from '../../style/COLOR';
 
 const ButtonIcon: React.FC<ButtonIconType> = ({
   name = 'undefined',
@@ -25,10 +26,14 @@ const ButtonCustom: React.FC<ButtonCustomType> = ({
   iconColor,
   iconStyle,
   style,
+  disabled = false,
   onPress,
 }) => {
   return (
-    <TouchableNativeFeedback onPress={onPress} useForeground>
+    <TouchableNativeFeedback
+      onPress={onPress}
+      useForeground
+      disabled={disabled}>
       <View style={[styles.container, {width: block ? '100%' : '50%'}, style]}>
         <Svg
           width="100%"
@@ -39,7 +44,7 @@ const ButtonCustom: React.FC<ButtonCustomType> = ({
             id="Path_135"
             data-name="Path 135"
             transform="translate(3 3)"
-            fill={fillColor}>
+            fill={disabled ? INPUT_BORDER_COLOR : fillColor}>
             <Path
               d="M4,0H300l4,6.061V43.939L300,50H4L0,43.939V6.061Z"
               stroke="none"

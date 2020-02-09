@@ -21,7 +21,7 @@ const GradientBackground: React.FC<GradientBackgroundType> = ({
   const messageScale = new Animated.Value(0);
 
   const [paddingBottom, setpaddingBottom] = useState<number>(normalize(0));
-  let errorMsg = useStoreState(state => state.networkStatus.msg);
+  let {msg, show} = useStoreState(state => state.networkStatus);
 
   const bounce = () => {
     if (messageRef?.current) {
@@ -41,9 +41,31 @@ const GradientBackground: React.FC<GradientBackgroundType> = ({
         );
     }
   };
+  const bounceOff = () => {
+    if (messageRef?.current) {
+      messageRef.current
+        .animate({
+          0: {
+            height: normalize(20),
+          },
+          1: {
+            height: normalize(0),
+          },
+        })
+        .then((endState: any) =>
+          console.log(
+            endState.finished ? 'bounce finished' : 'bounce cancelled',
+          ),
+        );
+    }
+  };
   useEffect(() => {
-    bounce();
-  }, [errorMsg]);
+    if (show) {
+      bounce();
+    } else {
+      bounceOff();
+    }
+  }, [show]);
 
   return (
     <KeyboardAwareScrollView
@@ -67,9 +89,11 @@ const GradientBackground: React.FC<GradientBackgroundType> = ({
           {children}
         </ScrollView>
       </LinearGradient>
-      <Animatable.View style={styles.messageContainer} ref={messageRef}>
-        <Text style={styles.messageText}>{errorMsg}</Text>
-      </Animatable.View>
+      {show && (
+        <Animatable.View style={styles.messageContainer} ref={messageRef}>
+          <Animatable.Text style={styles.messageText}>{msg}</Animatable.Text>
+        </Animatable.View>
+      )}
     </KeyboardAwareScrollView>
   );
 };

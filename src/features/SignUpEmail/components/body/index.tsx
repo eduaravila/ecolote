@@ -70,10 +70,14 @@ const Body: React.FC<bodyType> = ({componentId}) => {
         <Subtitle1 style={styles.textBold}>Email</Subtitle1>
       </Subtitle1>
       <InputCustom
-        error={!!errors.email || !!error}
+        error={!!errors.email || !!error?.graphQLErrors}
         placeholder={'Enter your email'}
         onSubmitEditing={handleSubmit(validate_inputs)}
-        errorMsg={error ? 'Email already registered ' : 'Invalid email'}
+        errorMsg={
+          error?.graphQLErrors.length
+            ? 'Email already registered '
+            : 'Invalid email'
+        }
         ref={() =>
           register(
             {name: 'email'},
@@ -88,6 +92,7 @@ const Body: React.FC<bodyType> = ({componentId}) => {
         style={styles.emailInput}
       />
       <ButtonCustom
+        disabled={loading}
         borderColor={'transparent'}
         fillColor={PRIMARY_DARK_COLOR}
         textColor={'white'}

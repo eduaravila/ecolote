@@ -10,7 +10,10 @@ import {Subtitle1} from '../../../../components/Subtitle1/Subtitle1';
 import {InputCustom} from '../../../../components/Input/Input';
 import {ButtonCustom} from '../../../../components/Button/Button';
 import {PRIMARY_DARK_COLOR} from '../../../../style/COLOR';
-import {pushStack} from '../../../../navigation/navigators/stackUtils';
+import {
+  pushStack,
+  pushStackWithProps,
+} from '../../../../navigation/navigators/stackUtils';
 import {
   ECOLOTE_SIGN_UP_USERNAME,
   ECOLOTE_SIGN_UP_CODE,
@@ -55,13 +58,22 @@ const Body: React.FC<bodyType> = ({componentId, email}) => {
   const passwordRef = useRef<any>();
   const passwordRRef = useRef<any>();
 
-  let [registerUser] = useMutation(REGISTER_USER_GQL, {
-    errorPolicy: 'none',
-    notifyOnNetworkStatusChange: true,
-    onCompleted: val => {
-      pushStack(componentId, ECOLOTE_SIGN_UP_CODE);
+  let [registerUser, {data: dataRegisterUser}] = useMutation(
+    REGISTER_USER_GQL,
+    {
+      errorPolicy: 'none',
+      notifyOnNetworkStatusChange: true,
+      onCompleted: ({RegisterUser}) => {
+        let {username} = getValues();
+
+        pushStackWithProps(componentId, ECOLOTE_SIGN_UP_CODE, {
+          token: RegisterUser.msg,
+          email,
+          username,
+        });
+      },
     },
-  });
+  );
 
   let [
     checkUserAvailable,
@@ -108,7 +120,7 @@ const Body: React.FC<bodyType> = ({componentId, email}) => {
               validate: {
                 value: (val: string) =>
                   validator.isLength(val, {min: 1, max: 15}),
-                message: 'sss',
+                message: 'invalid username',
               },
             },
           )
@@ -166,6 +178,7 @@ const Body: React.FC<bodyType> = ({componentId, email}) => {
         style={styles.usernameInput}
       />
       <ButtonCustom
+        disabled={loading}
         borderColor={'transparent'}
         fillColor={PRIMARY_DARK_COLOR}
         textColor={'white'}

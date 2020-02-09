@@ -10,6 +10,10 @@ export const styles = StyleSheet.create({
   iconBack: {
     fontWeight: 'bold',
   },
+  title: {
+    textAlign: 'left',
+    width: '100%',
+  },
   backButton: {
     alignSelf: 'flex-start',
   },

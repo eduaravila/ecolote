@@ -2,20 +2,20 @@ import {Action, action} from 'easy-peasy';
 
 interface setErrorType {
   msg: string;
-  error: boolean;
+  show: boolean;
 }
 
 export interface errorModelType {
   msg: string;
-  error: boolean;
+  show: boolean;
   setStatus: Action<errorModelType, setErrorType>;
 }
 
 export const errorModel: errorModelType = {
   msg: '',
-  error: false,
+  show: false,
   setStatus: action((state, pl) => {
     state.msg = pl.msg;
-    state.error = pl.error;
+    state.show = pl.show;
   }),
 };

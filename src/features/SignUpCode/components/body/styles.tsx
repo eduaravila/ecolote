@@ -9,16 +9,18 @@ export const styles = StyleSheet.create({
   },
   textBold: {
     fontFamily: 'Rubik-Bold',
+    textAlign: 'left',
   },
   textLabel: {
     textAlign: 'left',
     width: '100%',
   },
+
   continuebutton: {
     marginVertical: normalize(40),
     width: '100%',
   },
-  textUnderline:{
-      textDecorationLine:"underline"
-  }
+  textUnderline: {
+    textDecorationLine: 'underline',
+  },
 });

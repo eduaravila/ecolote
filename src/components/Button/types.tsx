@@ -9,6 +9,7 @@ export interface ButtonCustomType {
   iconStyle?: {[t: string]: any};
   style?: {[t: string]: any};
   onPress?: () => void;
+  disabled?: boolean;
 }
 
 export interface ButtonIconType {

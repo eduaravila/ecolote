@@ -10,6 +10,7 @@ import goAccess from './src/navigation/navigators/Access';
 registryComponents();
 
 Navigation.events().registerAppLaunchedListener(() => {
+ 
   Orientation.lockToPortrait();
   SplashScreen.hide();
   Navigation.setDefaultOptions({

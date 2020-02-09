@@ -1,22 +1,18 @@
-import React, {useState, useEffect} from 'react';
-import {View, Image} from 'react-native';
+import React from 'react';
+import {View} from 'react-native';
 
 import {styles} from './styles';
-import {MiniButton} from '../../../../components/MiniButton/MiniButton';
 import {Stepper} from '../../../../components/Stepper/Stepper';
-import {popStack} from '../../../../navigation/navigators/stackUtils';
-import { HeaderTypes} from './types';
+import {HeaderTypes} from './types';
+import {H6Title} from '../../../../components/H6Title/H6Title';
 
 const Header: React.FC<HeaderTypes> = ({componentId}) => {
   return (
     <View style={styles.constainer}>
-      <MiniButton
-        onPress={() => popStack(componentId)}
-        style={styles.backButton}
-        iconName={'arrow-left-drop-circle'}
-        iconStyle={styles.iconBack}>
-        Back
-      </MiniButton>
+      <H6Title style={styles.title}>
+        Enter the code that you receive in you mail
+      </H6Title>
+
       <Stepper size={3} active={3} />
     </View>
   );

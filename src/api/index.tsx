@@ -8,12 +8,21 @@ import store from '../state/store';
 const errorLink = new ErrorLink(({graphQLErrors, networkError}: any) => {
   if (graphQLErrors)
     graphQLErrors.map(({message, locations, path, extensions}: any) =>
-      console.log(extensions),
+      console.log('gql error', message),
     );
 
   if (networkError) {
+    if (store.getState().networkStatus.show) return;
+
+    let timer = setTimeout(() => {
+      store.dispatch.networkStatus.setStatus({
+        show: false,
+        msg: 'Network Error 📛',
+      });
+    }, 10000);
+
     store.dispatch.networkStatus.setStatus({
-      error: true,
+      show: true,
       msg: 'Network Error 📛',
     });
   }

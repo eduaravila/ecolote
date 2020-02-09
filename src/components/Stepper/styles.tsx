@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
     width: '100%',
     marginVertical: normalize(20),
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
     flexWrap: 'wrap',
   },
@@ -42,6 +42,7 @@ export const styles = StyleSheet.create({
     height: 2,
     borderColor: 'white',
     borderWidth: 1,
+    marginHorizontal: normalize(5),
     zIndex: 1,
     borderStyle: 'dashed',
   },
@@ -62,5 +63,19 @@ export const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     textAlignVertical: 'center',
+  },
+  stepperContainerLine: {
+    justifyContent: 'space-between',
+    borderWidth: 1,
+    borderColor: 'red',
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+  },
+
+  stepperContainer: {
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'red',
   },
 });
