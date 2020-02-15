@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.github.yamill.orientation.OrientationPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
@@ -45,7 +46,7 @@ public class MainApplication extends NavigationApplication {
     // No need to add RnnPackage and MainReactPackage
     return Arrays.<ReactPackage>asList(
         // eg. new VectorIconsPackage()
-        new SplashScreenReactPackage(), new SvgPackage(), new LinearGradientPackage(),new VectorIconsPackage(),new OrientationPackage()  );
+        new SplashScreenReactPackage(), new SvgPackage(), new LinearGradientPackage(),new VectorIconsPackage(),new OrientationPackage(),new RNGestureHandlerPackage() );
 
   }
 

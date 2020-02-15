@@ -46,6 +46,8 @@ target 'ecolote' do
 
   pod 'react-native-orientation', :path => '../node_modules/react-native-orientation'
 
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
   target 'ecoloteTests' do
     inherit! :search_paths
     # Pods for testing

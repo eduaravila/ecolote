@@ -19,6 +19,7 @@ import {H6Title} from '../../../../components/H6Title/H6Title';
 import {MiniButton} from '../../../../components/MiniButton/MiniButton';
 import {Subtitle1} from '../../../../components/Subtitle1/Subtitle1';
 import goForgotPasswordCode from '../../../../navigation/navigators/ForgotPasswordCode';
+import {Stepper} from '../../../../components/Stepper/Stepper';
 
 interface formType {
   email: string;
@@ -82,6 +83,7 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
         iconName={'arrow-left-drop-circle'}>
         Back
       </MiniButton>
+      <Stepper size={3} active={1} />
       <H6Title style={styles.title}>{'You forgot your password?'}</H6Title>
 
       <Subtitle1 style={styles.descriptionText}>

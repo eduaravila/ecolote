@@ -74,6 +74,8 @@ const ModalCode: React.FC<modalType> = ({
 
   return (
     <Modal
+      hideModalContentWhileAnimating
+      useNativeDriver
       isVisible={inacativity <= 0 && check}
       style={styles.container}
       animationIn={'bounce'}

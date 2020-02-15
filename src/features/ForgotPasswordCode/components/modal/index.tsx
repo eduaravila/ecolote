@@ -35,8 +35,6 @@ const ModalCode: React.FC<modalType> = ({
 }) => {
   const [modalShow, setmodalShow] = useState<boolean>(false);
   const [inacativity, setinacativity] = useState<number>(10);
-  
-  
 
   let [
     restorePasswordCode,
@@ -75,6 +73,8 @@ const ModalCode: React.FC<modalType> = ({
 
   return (
     <Modal
+      hideModalContentWhileAnimating
+      useNativeDriver
       isVisible={inacativity <= 0 && check}
       style={styles.container}
       animationIn={'bounce'}
