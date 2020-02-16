@@ -19,7 +19,7 @@ const GradientBackground: React.FC<GradientBackgroundType> = ({
   messageRef = useRef(null),
 }) => {
   const messageScale = new Animated.Value(0);
-
+  
   const [paddingBottom, setpaddingBottom] = useState<number>(normalize(0));
   let {msg, show} = useStoreState(state => state.networkStatus);
 

@@ -12,3 +12,7 @@ export const ECOLOTE_FORGOT_PASSWORD_SUCCESS: string =
   'ecolote.forgot.password.success';
 export const ECOLOTE_FORGOT_PASSWORD_CODE: string =
   'ecolote.forgot.password.code';
+export const ECOLOTE_DASHBOARD_CHALLENGE: string =
+  'ecolote.dashboard.challenge';
+export const ECOLOTE_DASHBOARD: string =
+  'ecolote.dashboard';

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.swmansion.reanimated.ReanimatedPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.github.yamill.orientation.OrientationPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -22,7 +23,7 @@ import java.util.List;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.horcrux.svg.SvgPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
-
+import com.swmansion.reanimated.ReanimatedPackage;
 public class MainApplication extends NavigationApplication {
 
   @Override
@@ -46,7 +47,7 @@ public class MainApplication extends NavigationApplication {
     // No need to add RnnPackage and MainReactPackage
     return Arrays.<ReactPackage>asList(
         // eg. new VectorIconsPackage()
-        new SplashScreenReactPackage(), new SvgPackage(), new LinearGradientPackage(),new VectorIconsPackage(),new OrientationPackage(),new RNGestureHandlerPackage() );
+        new SplashScreenReactPackage(), new SvgPackage(), new LinearGradientPackage(),new VectorIconsPackage(),new OrientationPackage(),new RNGestureHandlerPackage(), new ReanimatedPackage() );
 
   }
 
