@@ -5,6 +5,7 @@ import {TabView, SceneMap} from 'react-native-tab-view';
 import Body from '../components/body/index';
 import {NavigationBar} from '../../../components/NavigationBar/NavigationBar';
 import GradientBackgroundNormal from '../../../components/GradientBackgroundNormal/GradientBackgroundNormal';
+import Head from '../components/header';
 
 const FirstRoute = () => (
   <View style={[styles.scene, {backgroundColor: '#ff4081'}]} />
@@ -29,6 +30,7 @@ const Challenge: React.FC = () => {
 
   return (
     <GradientBackgroundNormal>
+      <Head />
       <Body />
     </GradientBackgroundNormal>
   );

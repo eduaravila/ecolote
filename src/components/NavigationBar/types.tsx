@@ -5,7 +5,6 @@ export interface NavigationImageType {
 }
 
 export interface NavigationBarItemType {
-  logo: ImageSourcePropType;
   active?: boolean;
   label: string;
   itemRef?:any
