@@ -9,6 +9,7 @@ const Header: React.FC = () => {
   return (
     <View style={styles.constainer}>
       <Image source={logo_image} style={styles.logo} />
+      
       <H3Title>Ecolote</H3Title>
     </View>
   );

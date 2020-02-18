@@ -6,6 +6,8 @@ import Body from '../components/body/index';
 import {NavigationBar} from '../../../components/NavigationBar/NavigationBar';
 import GradientBackgroundNormal from '../../../components/GradientBackgroundNormal/GradientBackgroundNormal';
 import Head from '../components/header';
+import GradientBackground from '../../../components/GradientBackground/GradientBackground';
+import {getColumn} from '../../../style/UTILS';
 
 const FirstRoute = () => (
   <View style={[styles.scene, {backgroundColor: '#ff4081'}]} />
@@ -29,10 +31,12 @@ const Challenge: React.FC = () => {
   });
 
   return (
-    <GradientBackgroundNormal>
+    <GradientBackground
+      colors={['transparent', 'transparent']}
+      style={{paddingLeft: getColumn(0.1), paddingRight: getColumn(0.1)}}>
       <Head />
       <Body />
-    </GradientBackgroundNormal>
+    </GradientBackground>
   );
 };
 

@@ -9,3 +9,5 @@ export const INPUT_BORDER_COLOR = '#9B9B9B';
 
 export const INPUT_BORDER_COLOR_ERROR = '#FB952A';
 export const LABEL_ACTIVE_BACKGROUND_COLOR = '#FFDADE';
+
+export const STAT_LABEL_COLOR ="#C81A50"

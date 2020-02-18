@@ -36,10 +36,11 @@ const LogoImage = (source: any) => {
     />
   );
 };
+
 const initialLayout = {width: Dimensions.get('window').width};
 
 const Dashboard: React.FC = () => {
-  const [index, setIndex] = React.useState(3);
+  const [index, setIndex] = React.useState(2);
 
   const [routes] = React.useState([
     {

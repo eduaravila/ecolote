@@ -16,10 +16,11 @@ const GradientBackground: React.FC<GradientBackgroundType> = ({
   start = {x: 1, y: 0.2},
   end = {x: 1, y: 0.7},
   children,
+  style,
   messageRef = useRef(null),
 }) => {
   const messageScale = new Animated.Value(0);
-  
+
   const [paddingBottom, setpaddingBottom] = useState<number>(normalize(0));
   let {msg, show} = useStoreState(state => state.networkStatus);
 
@@ -78,7 +79,7 @@ const GradientBackground: React.FC<GradientBackgroundType> = ({
         colors={[...colors]}
         start={start}
         end={end}
-        style={[styles.container]}>
+        style={[styles.container, style]}>
         <ScrollView
           keyboardShouldPersistTaps="handled"
           style={{height: '100%', width: '100%'}}
