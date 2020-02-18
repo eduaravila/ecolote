@@ -1,17 +1,25 @@
 import React from 'react';
 import {View, Image} from 'react-native';
+import TouchableScale from 'react-native-touchable-scale';
 
 import {styles} from './styles';
 import {ColorButton} from '../../../../components/ColorButton/ColorButton';
-
 const arena_logo = require('../../../../assets/img/aqua_palace.gif');
-const Body: React.FC = () => {
+
+interface BodyType {
+  toggle_visibility: (e: boolean) => void;
+  loading: boolean;
+}
+
+const Body: React.FC<BodyType> = ({toggle_visibility, loading}) => {
   return (
     <View style={styles.container}>
-      <View style={styles.arenaContainer}>
+      <TouchableScale style={styles.arenaContainer} tension={100} friction={1}>
         <Image source={arena_logo} style={styles.arena} />
-      </View>
-      <ColorButton>{'Play'}</ColorButton>
+      </TouchableScale>
+      <ColorButton onPress={() => toggle_visibility(true)} cancel={loading}>
+        {loading ? 'Cancel ' : 'Play'}
+      </ColorButton>
     </View>
   );
 };

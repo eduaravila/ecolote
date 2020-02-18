@@ -51,4 +51,36 @@ export const styles = StyleSheet.create({
     width: normalize(32),
     height: normalize(32),
   },
+  loadingStat: {
+    width: '100%',
+  },
+  loadingContainer: {
+    width: '100%',
+    padding: 0,
+  },
+  loadingTitle: {
+    fontSize: normalize(30),
+    width: '80%',
+    zIndex: 5,
+    textAlign: 'center',
+  },
+  loadingContainerJr: {
+    height: '100%',
+    width: '100%',
+  },
+  loadingContent: {
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    elevation: 0,
+  },
+  loadingIcon: {
+    width: normalize(100),
+    height: normalize(100),
+    position: 'absolute',
+    left: normalize(-10),
+    transform: [{rotate: '30deg'}],
+  },
+  loadingIconContainer: {
+    width: '20%',
+  },
 });

@@ -2,13 +2,13 @@ import React, {useState, useRef, useEffect} from 'react';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import LinearGradient from 'react-native-linear-gradient';
 import {ScrollView, Button, Text, Animated} from 'react-native';
+import * as Animatable from 'react-native-animatable';
 
 import {GradientBackgroundType} from './types';
 import {PRIMARY_COLOR, PRIMARY_LIGHT_COLOR} from '../../style/COLOR';
 import {styles} from './styles';
 import {normalize} from '../../style/UTILS';
 
-import * as Animatable from 'react-native-animatable';
 import {useStoreState} from '../../state/store';
 
 const GradientBackground: React.FC<GradientBackgroundType> = ({

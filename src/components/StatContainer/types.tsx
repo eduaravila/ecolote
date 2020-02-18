@@ -10,4 +10,5 @@ export interface StateContainerType {
   contentStyle?: {[t: string]: any};
   borderStyle?: {[t: string]: any};
   logoStyle?: {[t: string]: any};
+  logoContainerStyle?: {[t: string]: any};
 }

@@ -8,15 +8,12 @@ import Challenge from '../../Challenge/containers/container';
 import {Image} from 'react-native-animatable';
 import {normalize} from '../../../style/UTILS';
 import GradientBackgroundNormal from '../../../components/GradientBackgroundNormal/GradientBackgroundNormal';
+import ComingSoon from '../../CommingSoon/containers/container';
 
 const challenge_logo = require('../../../assets/img/flag.gif');
 const store_logo = require('../../../assets/img/store.png');
 const inventory_logo = require('../../../assets/img/chest.png');
 const community_logo = require('../../../assets/img/people.gif');
-
-const SecondRoute = () => (
-  <View style={[styles.scene, {backgroundColor: '#673ab7'}]} />
-);
 
 const LogoImage = (source: any) => {
   return (style: object) => (
@@ -70,13 +67,18 @@ const Dashboard: React.FC = () => {
       case 'challenge':
         return <Challenge />;
       case 'store':
-        return <SecondRoute />;
+        return <ComingSoon />;
+      case 'community':
+        return <ComingSoon />;
+      case 'inventory':
+        return <ComingSoon />;
     }
   };
 
   return (
     <GradientBackgroundNormal>
       <TabView
+      
         lazy={false}
         swipeVelocityImpact={0}
         renderTabBar={NavigationBar}

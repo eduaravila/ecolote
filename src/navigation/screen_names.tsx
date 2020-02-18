@@ -14,5 +14,5 @@ export const ECOLOTE_FORGOT_PASSWORD_CODE: string =
   'ecolote.forgot.password.code';
 export const ECOLOTE_DASHBOARD_CHALLENGE: string =
   'ecolote.dashboard.challenge';
-export const ECOLOTE_DASHBOARD: string =
-  'ecolote.dashboard';
+export const ECOLOTE_DASHBOARD: string = 'ecolote.dashboard';
+export const ECOLOTE_COMING_SOON: string = 'ecolote.coming.soon';

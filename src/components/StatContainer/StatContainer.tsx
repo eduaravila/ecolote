@@ -13,12 +13,13 @@ const StatContainer: React.FC<StateContainerType> = ({
   styleJr,
   contentStyle,
   borderStyle,
-  logoStyle
+  logoStyle,
+  logoContainerStyle
 }) => {
   return (
     <View style={[styles.container, style]}>
       {!!icon && (
-        <View style={styles.logoContainer}>
+        <View style={[styles.logoContainer,logoContainerStyle]}>
           <Image source={icon} style={[styles.logo,logoStyle]} />
           <Subtitle2 style={styles.iconText}>{iconText}</Subtitle2>
         </View>

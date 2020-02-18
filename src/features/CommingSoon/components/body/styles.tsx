@@ -6,7 +6,8 @@ export const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: normalize(15),
+    height: '100%',
+    alignSelf: 'center',
   },
   arena: {
     width: normalize(250),
@@ -19,5 +20,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     width: normalize(300),
     height: normalize(300),
+  },
+  title: {
+    fontSize: normalize(36),
   },
 });

@@ -13,6 +13,7 @@ import {normalize} from '../../style/UTILS';
 const NavigationBar: React.FC<any> = props => {
   return (
     <TabBar
+      
       pressColor={LABEL_ACTIVE_BACKGROUND_COLOR}
       pressOpacity={1}
       {...props}

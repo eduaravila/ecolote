@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
   bottom: {
     width: '100%',
     left: 0,
-    top: normalize(10),
+    top: normalize(8),
     height: normalize(80),
     position: 'absolute',
   },
@@ -35,7 +35,10 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     alignSelf: 'center',
     zIndex: 11,
+    width: '100%',
+    fontSize: normalize(36),
     height: normalize(70),
+    textAlign: 'center',
     textAlignVertical: 'center',
   },
 });

@@ -15,6 +15,7 @@ import {
   ECOLOTE_FORGOT_PASSWORD_CODE,
   ECOLOTE_DASHBOARD_CHALLENGE,
   ECOLOTE_DASHBOARD,
+  ECOLOTE_COMING_SOON,
 } from './screen_names';
 //* features
 import Access from '../features/access/containers/index';
@@ -30,6 +31,7 @@ import ForgotPasswordSuccess from '../features/ForgotPasswordSuccess/containers/
 import ForgotPasswordCode from '../features/ForgotPasswordCode/containers/container';
 import Challenge from '../features/Challenge/containers/container';
 import Dashboard from '../features/Dashboard/containers/container';
+import CoomingSoon from '../features/CommingSoon/containers/container';
 
 const registryComponents = () => {
   Navigation.registerComponent(ECOLOTE_ACCESS_WELCOME, () =>
@@ -67,6 +69,9 @@ const registryComponents = () => {
   );
   Navigation.registerComponent(ECOLOTE_DASHBOARD, () =>
     gestureHandlerRootHOC(Grapper(Dashboard)()),
+  );
+  Navigation.registerComponent(ECOLOTE_COMING_SOON, () =>
+    gestureHandlerRootHOC(Grapper(CoomingSoon)()),
   );
 };
 
