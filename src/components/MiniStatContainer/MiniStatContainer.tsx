@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {View} from 'react-native';
+import TouchableScale from 'react-native-touchable-scale';
+import {Image} from 'react-native-animatable';
+
 import {styles} from './styles';
 import {MiniStateContainerType} from './types';
-import {Image} from 'react-native-animatable';
 
 const MiniStateContainer: React.FC<MiniStateContainerType> = ({
   icon,
@@ -10,11 +12,11 @@ const MiniStateContainer: React.FC<MiniStateContainerType> = ({
   logoStyle,
 }) => {
   return (
-    <View style={[styles.container, style]}>
+    <TouchableScale style={[styles.container, style]} tension={300} friction={10}>
       <View style={styles.logoContainer}>
         <Image source={icon} style={[styles.logo, logoStyle]} />
       </View>
-    </View>
+    </TouchableScale>
   );
 };
 

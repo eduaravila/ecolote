@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
     marginTop: normalize(50),
     elevation: 5,
   },
+
   top: {
     width: '100%',
     height: normalize(80),

@@ -8,5 +8,14 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: normalize(20),
   },
-  arenaContainer: {},
+  arena: {
+    width: normalize(300),
+    height: normalize(300),
+    resizeMode: 'contain',
+  },
+  arenaContainer: {
+    elevation: 10,
+    width: normalize(300),
+    height: normalize(300),
+  },
 });
