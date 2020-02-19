@@ -38,6 +38,8 @@ export const styles = StyleSheet.create({
     width: normalize(46),
     height: normalize(46),
     overflow: 'visible',
+    resizeMode: 'contain',
+
   },
   logoContainer: {
     elevation: 10,

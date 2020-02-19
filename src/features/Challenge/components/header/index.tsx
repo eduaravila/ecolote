@@ -15,7 +15,7 @@ const level_image = require('../../../../assets/img/level.png');
 const trophy_image = require('../../../../assets/img/trophy.png');
 const config_image = require('../../../../assets/img/cog.png');
 const news_image = require('../../../../assets/img/newspaper.png');
-const zoom_image = require('../../../../assets/img/zoom.png');
+const zoom_image = require('../../../../assets/img/zoom.gif');
 
 interface HeadType {
   show: boolean;
