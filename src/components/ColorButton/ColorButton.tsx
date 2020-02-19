@@ -13,10 +13,11 @@ const ColorButton: React.FC<ColorButtomType> = ({
   children,
   onPress,
   cancel,
+  style,
 }) => {
   return (
     <TouchableScale
-      style={styles.container}
+      style={[styles.container, style]}
       tension={300}
       friction={10}
       onPress={onPress}>

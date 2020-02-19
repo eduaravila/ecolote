@@ -1,19 +1,15 @@
-import React, {useState, useEffect} from 'react';
-import {View} from 'react-native';
+import React, {useState, useRef} from 'react';
 import {styles} from './styles';
-import {BoxShadow} from 'react-native-shadow';
 import {SceneRendererProps, TabBar} from 'react-native-tab-view';
-import {
-  LABEL_ACTIVE_BACKGROUND_COLOR,
-  PRIMARY_DARK_COLOR,
-} from '../../style/COLOR';
+import {LABEL_ACTIVE_BACKGROUND_COLOR} from '../../style/COLOR';
 import {NavigationBarItem} from './NavigationItem';
 import {normalize} from '../../style/UTILS';
+import * as Animatable from 'react-native-animatable';
+import {useStoreState} from '../../state/store';
 
 const NavigationBar: React.FC<any> = props => {
   return (
     <TabBar
-      
       pressColor={LABEL_ACTIVE_BACKGROUND_COLOR}
       pressOpacity={1}
       {...props}
@@ -50,7 +46,7 @@ const NavigationBar: React.FC<any> = props => {
         justifyContent: 'space-evenly',
         height: normalize(50),
       }}
-      style={styles.container}
+      style={[styles.container, {height: normalize(50)}]}
     />
   );
 };

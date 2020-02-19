@@ -14,10 +14,15 @@ export const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   arenaContainer: {
-    elevation: 10,
     justifyContent: 'center',
     alignItems: 'center',
     width: normalize(300),
     height: normalize(300),
+  },
+  playButton: {
+    marginTop: normalize(10),
+  },
+  cancelButton: {
+    marginTop: normalize(20),
   },
 });

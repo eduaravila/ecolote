@@ -7,7 +7,6 @@ export const styles = StyleSheet.create({
     width: normalize(160),
     alignSelf: 'center',
     alignContent: 'center',
-    marginTop: normalize(50),
     elevation: 5,
   },
 

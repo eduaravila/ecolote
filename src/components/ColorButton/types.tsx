@@ -6,4 +6,5 @@ export interface ColorButtomType {
   colorFirst?: string;
   colorSecond?: string;
   cancel: boolean;
+  style?: {[t: string]: any};
 }

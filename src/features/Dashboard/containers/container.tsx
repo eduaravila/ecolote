@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {View, StyleSheet, Dimensions} from 'react-native';
 import ViewPagerAdapter from 'react-native-tab-view-viewpager-adapter';
 import {TabView} from 'react-native-tab-view';
+import * as Animatable from 'react-native-animatable';
 
 import {NavigationBar} from '../../../components/NavigationBar/NavigationBar';
 import Challenge from '../../Challenge/containers/container';
@@ -9,6 +10,7 @@ import {Image} from 'react-native-animatable';
 import {normalize} from '../../../style/UTILS';
 import GradientBackgroundNormal from '../../../components/GradientBackgroundNormal/GradientBackgroundNormal';
 import ComingSoon from '../../CommingSoon/containers/container';
+import {useStoreState} from '../../../state/store';
 
 const challenge_logo = require('../../../assets/img/flag.gif');
 const store_logo = require('../../../assets/img/store.png');
@@ -36,8 +38,32 @@ const LogoImage = (source: any) => {
 
 const initialLayout = {width: Dimensions.get('window').width};
 
-const Dashboard: React.FC = () => {
+interface DashboardType {
+  bottomRef?: any;
+}
+const Dashboard: React.FC<DashboardType> = ({bottomRef = useRef(null)}) => {
   const [index, setIndex] = React.useState(2);
+  const {show} = useStoreState(store => store.BottomNavigation);
+
+  const goDown = () => {
+    if (bottomRef?.current) {
+      bottomRef.current.bounceOutDown(500).then((e: any) => e);
+    }
+  };
+
+  const goUp = () => {
+    if (bottomRef?.current) {
+      bottomRef.current.bounceInUp(500).then((e: any) => e);
+    }
+  };
+
+  useEffect(() => {
+    if (show) {
+      goDown();
+    } else {
+      goUp();
+    }
+  }, [show]);
 
   const [routes] = React.useState([
     {
@@ -78,10 +104,14 @@ const Dashboard: React.FC = () => {
   return (
     <GradientBackgroundNormal>
       <TabView
-      
+        swipeEnabled={!show}
         lazy={false}
         swipeVelocityImpact={0}
-        renderTabBar={NavigationBar}
+        renderTabBar={(props: any) => (
+          <Animatable.View ref={bottomRef}>
+            <NavigationBar {...props} />
+          </Animatable.View>
+        )}
         tabBarPosition={'bottom'}
         navigationState={{index, routes}}
         renderScene={renderScene}
