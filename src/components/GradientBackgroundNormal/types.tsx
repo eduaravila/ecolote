@@ -6,4 +6,6 @@ export interface GradientBackgroundType {
   start?: {x: number; y: number};
   end?: {x: number; y: number};
   children: ReactNode;
+  style?: {[t: string]: any};
+
 }

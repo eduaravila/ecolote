@@ -10,14 +10,14 @@ import {normalize} from '../../style/UTILS';
 
 import * as Animatable from 'react-native-animatable';
 import {useStoreState} from '../../state/store';
-import { BackgroundNormal } from './image';
-
+import {BackgroundNormal} from './image';
 
 const GradientBackgroundNormal: React.FC<GradientBackgroundType> = ({
   colors = [PRIMARY_COLOR, PRIMARY_LIGHT_COLOR],
   start = {x: 1, y: 0.2},
   end = {x: 1, y: 0.7},
   children,
+  style,
   messageRef = useRef(null),
 }) => {
   const messageScale = new Animated.Value(0);
@@ -79,7 +79,7 @@ const GradientBackgroundNormal: React.FC<GradientBackgroundType> = ({
       <BackgroundNormal />
       <ScrollView
         keyboardShouldPersistTaps="handled"
-        style={{height: '100%', width: '100%'}}
+        style={[style, {height: '100%', width: '100%'}]}
         contentContainerStyle={{
           height: '100%',
           paddingBottom,

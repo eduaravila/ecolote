@@ -7,6 +7,7 @@ import GradientBackground from '../../../components/GradientBackground/GradientB
 import {getColumn} from '../../../style/UTILS';
 import {useStoreActions, useStoreState} from '../../../state/store';
 import Footer from '../components/footer';
+import goGame from '../../../navigation/navigators/Game';
 
 const Challenge: React.FC = () => {
   const [searching, setsearching] = useState<boolean>(false);
@@ -18,6 +19,7 @@ const Challenge: React.FC = () => {
   const _toggle_searching = (e: boolean) => {
     setsearching(i => !i);
     setVisibilityBottom({show: !show});
+    goGame()
   };
 
   return (

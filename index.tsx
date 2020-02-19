@@ -18,7 +18,7 @@ Navigation.events().registerAppLaunchedListener(() => {
   Navigation.setDefaultOptions({
     statusBar: {
       style: 'light',
-      backgroundColor: PRIMARY_COLOR,
+      backgroundColor: PRIMARY_DARK_COLOR,
     },
     layout: {
       orientation: ['portrait'],

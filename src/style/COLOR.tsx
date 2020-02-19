@@ -10,4 +10,7 @@ export const INPUT_BORDER_COLOR = '#9B9B9B';
 export const INPUT_BORDER_COLOR_ERROR = '#FB952A';
 export const LABEL_ACTIVE_BACKGROUND_COLOR = '#FFDADE';
 
-export const STAT_LABEL_COLOR ="#C81A50"
+export const STAT_LABEL_COLOR = '#C81A50';
+export const REPLACE_COLOR = '#6AB14F';
+export const REPLACE_COLOR_DARK = '#50853B';
+export const BATHROOM_COLOR = '#4772FF';

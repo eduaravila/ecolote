@@ -16,3 +16,4 @@ export const ECOLOTE_DASHBOARD_CHALLENGE: string =
   'ecolote.dashboard.challenge';
 export const ECOLOTE_DASHBOARD: string = 'ecolote.dashboard';
 export const ECOLOTE_COMING_SOON: string = 'ecolote.coming.soon';
+export const ECOLOTE_GAME: string = 'ecolote.game';

@@ -1,16 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import Top from './colorButtonTop.svg';
-import TopCancel from './colorButtonTopCancel.svg';
-import Middle from './colorButtonMiddle.svg';
-import MiddleCancel from './colorButtonMiddleCancel.svg';
-import Bottom from './colorButtonBottom.svg';
 import TouchableScale from 'react-native-touchable-scale';
 import {styles} from './styles';
 import {H3Title} from '../H3Title/H3Title';
 import {ColorButtomType} from './types';
 import Svg, {Defs, LinearGradient, Stop, Path} from 'react-native-svg';
 
-const ColorButton: React.FC<ColorButtomType> = ({
+const ColorButtonMini: React.FC<ColorButtomType> = ({
   children,
   onPress,
   cancel = false,
@@ -25,43 +20,28 @@ const ColorButton: React.FC<ColorButtomType> = ({
       tension={300}
       friction={10}
       onPress={onPress}>
-      <Svg
-        width="100%"
-        height="86"
-        viewBox="0 0 194 86"
-        style={styles.top}
-        preserveAspectRatio="none">
+      <Svg width="90" height="86" viewBox="0 0 90 86" style={styles.top} preserveAspectRatio="none">
         <Path
           id="Path_318"
           data-name="Path 318"
-          d="M10,0H184c.074.108,9.962,9.857,10,10V76L184,86H10L0,76V10Z"
+          d="M4.639,0H85.361C85.4.108,89.982,9.857,90,10V76L85.361,86H4.639L0,76V10Z"
           fill={topColor}
         />
       </Svg>
 
-      <Svg
-        width="100%"
-        height="86"
-        viewBox="0 0 194 86"
-        style={styles.middle}
-        preserveAspectRatio="none">
+      <Svg width="90" height="86" viewBox="0 0 90 86" style={styles.middle}>
         <Path
           id="Path_318"
           data-name="Path 318"
-          d="M10,0H184c.074.108,9.962,9.857,10,10V76L184,86H10L0,76V10Z"
+          d="M4.639,0H85.361C85.4.108,89.982,9.857,90,10V76L85.361,86H4.639L0,76V10Z"
           fill={middleColor}
         />
       </Svg>
-      <Svg
-        width="100%"
-        height="86"
-        viewBox="0 0 194 86"
-        style={styles.bottom}
-        preserveAspectRatio="none">
+      <Svg width="90" height="86" viewBox="0 0 90 86" style={styles.bottom}>
         <Path
           id="Path_318"
           data-name="Path 318"
-          d="M10,0H184c.074.108,9.962,9.857,10,10V76L184,86H10L0,76V10Z"
+          d="M4.639,0H85.361C85.4.108,89.982,9.857,90,10V76L85.361,86H4.639L0,76V10Z"
           fill={bottomColor}
         />
       </Svg>
@@ -70,4 +50,16 @@ const ColorButton: React.FC<ColorButtomType> = ({
   );
 };
 
-export {ColorButton};
+export {ColorButtonMini};
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="90"
+  height="86"
+  viewBox="0 0 90 86">
+  <path
+    id="Path_318"
+    data-name="Path 318"
+    d="M4.639,0H85.361C85.4.108,89.982,9.857,90,10V76L85.361,86H4.639L0,76V10Z"
+    fill="#69b14e"
+  />
+</svg>;
