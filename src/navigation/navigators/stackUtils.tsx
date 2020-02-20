@@ -13,6 +13,7 @@ export const pushStackWithProps = (
   componentId: string,
   name: string,
   props = {},
+  options = {},
 ) => {
   Navigation.push(componentId, {
     component: {
@@ -20,6 +21,7 @@ export const pushStackWithProps = (
       passProps: {
         ...props,
       },
+      options,
     },
   });
 };

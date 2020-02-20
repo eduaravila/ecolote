@@ -5,16 +5,18 @@ export const styles = StyleSheet.create({
   constainer: {
     width: '100%',
     backgroundColor: 'transparent',
-    marginVertical: normalize(10),
+    height: '20%',
+    marginVertical: normalize(20),
   },
-  logo: {
-    width: normalize(150),
-    height: normalize(150),
-    resizeMode: 'contain',
-    alignSelf: 'center',
-  },
+  
   back: {
     alignSelf: 'flex-end',
     marginVertical: normalize(10),
+  },
+  badgeContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    marginVertical: normalize(20),
   },
 });

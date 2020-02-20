@@ -17,6 +17,7 @@ import {
   ECOLOTE_DASHBOARD,
   ECOLOTE_COMING_SOON,
   ECOLOTE_GAME,
+  ECOLOTE_GAME_DESCRIPTION,
 } from './screen_names';
 //* features
 import Access from '../features/access/containers/index';
@@ -34,6 +35,7 @@ import Challenge from '../features/Challenge/containers/container';
 import Dashboard from '../features/Dashboard/containers/container';
 import CoomingSoon from '../features/CommingSoon/containers/container';
 import Game from '../features/Game/containers/container';
+import GameDescrption from '../features/GameDescription/containers/container';
 
 const registryComponents = () => {
   Navigation.registerComponent(ECOLOTE_ACCESS_WELCOME, () =>
@@ -77,6 +79,9 @@ const registryComponents = () => {
   );
   Navigation.registerComponent(ECOLOTE_GAME, () =>
     gestureHandlerRootHOC(Grapper(Game)()),
+  );
+  Navigation.registerComponent(ECOLOTE_GAME_DESCRIPTION, () =>
+    gestureHandlerRootHOC(Grapper(GameDescrption)()),
   );
 };
 

@@ -7,18 +7,18 @@ import Footer from '../components/footer';
 import GradientBackgroundNormal from '../../../components/GradientBackgroundNormal/GradientBackgroundNormal';
 import {getColumn} from '../../../style/UTILS';
 
-interface GameTypes {
+interface GameDescrptionTypes {
   componentId: string;
 }
-const Game: React.FC<GameTypes> = props => {
+const GameDescrption: React.FC<GameDescrptionTypes> = props => {
   return (
     <GradientBackgroundNormal
       style={{paddingLeft: getColumn(0.5), paddingRight: getColumn(0.5)}}>
-      <Header />
+      <Header componentId={props.componentId} />
       <Body componentId={props.componentId} />
-      <Footer componentId={props.componentId}/> 
+      <Footer />
     </GradientBackgroundNormal>
   );
 };
 
-export default Game;
+export default GameDescrption;

@@ -14,3 +14,4 @@ export const STAT_LABEL_COLOR = '#C81A50';
 export const REPLACE_COLOR = '#6AB14F';
 export const REPLACE_COLOR_DARK = '#50853B';
 export const BATHROOM_COLOR = '#4772FF';
+export const GAME_POINT_INACTIVE = '#DE4169';
