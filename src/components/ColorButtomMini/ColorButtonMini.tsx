@@ -15,7 +15,7 @@ const ColorButtonMini: React.FC<ColorButtomType> = ({
   middleColor = '#005894',
 }) => {
   return (
-    <TouchableScale
+    <TouchableScale 
       style={[styles.container, style]}
       tension={300}
       friction={10}

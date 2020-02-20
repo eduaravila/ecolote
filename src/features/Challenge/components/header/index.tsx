@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {View, Text} from 'react-native';
+import {View, Animated} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
 import {StatContainer} from '../../../../components/StatContainer/StatContainer';
@@ -9,6 +9,7 @@ import {styles} from './styles';
 import {STAT_LABEL_COLOR} from '../../../../style/COLOR';
 import {H3Title} from '../../../../components/H3Title/H3Title';
 import {H6Title} from '../../../../components/H6Title/H6Title';
+import {normalize} from '../../../../style/UTILS';
 
 const coin_image = require('../../../../assets/img/dinero_es_dinero.png');
 const level_image = require('../../../../assets/img/level.png');
@@ -28,14 +29,48 @@ const Head: React.FC<HeadType> = ({
   ref = useRef(null),
   refLoading = useRef(null),
 }) => {
+  let [loadingSize] = useState(new Animated.Value(0));
+
   const goUpLoading = () => {
     if (refLoading?.current) {
-      refLoading.current.bounceOutUp(500).then((e: any) => e);
+      refLoading.current
+        .animate({
+          0: {
+            width: '100%',
+            height: '100%',
+            opacity: 1,
+            transform: [
+              {
+                scale: 1,
+              },
+            ],
+          },
+          1: {
+            width: '0%',
+            height: '0%',
+            opacity: 0,
+            transform: [
+              {
+                scale: 0,
+              },
+            ],
+          },
+        })
+        .then((e: any) => e);
     }
   };
   const goDownLoading = () => {
     if (refLoading?.current) {
-      refLoading.current.bounceInDown(500).then((e: any) => e);
+      refLoading.current
+        .animate({
+          0: {width: '0%', height: '0%', opacity: 0},
+          1: {
+            width: '100%',
+            height: '100%',
+            opacity: 1,
+          },
+        })
+        .then((e: any) => e);
     }
   };
 
@@ -53,7 +88,7 @@ const Head: React.FC<HeadType> = ({
 
   useEffect(() => {
     if (show) {
-      goDownLoading()
+      goDownLoading();
       goUp();
     } else {
       goUpLoading();

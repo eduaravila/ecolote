@@ -12,11 +12,12 @@ const GameBadge: React.FC<GameBadgeType> = ({
   title = '',
   name = '',
   logo,
+  style,
 }) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <Subtitle1 style={styles.textBold}>{title}</Subtitle1>
-      <Svg width={normalize(61)} height={normalize(64)} viewBox="0 0 64 61">
+      <Svg width={'100%'} height={'100%'} viewBox="0 0 64 61">
         <Path
           id="Path_318"
           data-name="Path 318"

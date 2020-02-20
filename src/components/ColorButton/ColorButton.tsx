@@ -9,15 +9,16 @@ import {styles} from './styles';
 import {H3Title} from '../H3Title/H3Title';
 import {ColorButtomType} from './types';
 import Svg, {Defs, LinearGradient, Stop, Path} from 'react-native-svg';
+import {PRIMARY_COLOR, PRIMARY_DARK_COLOR} from '../../style/COLOR';
 
 const ColorButton: React.FC<ColorButtomType> = ({
   children,
   onPress,
   cancel = false,
   style,
-  topColor = '#0097fe',
+  topColor = PRIMARY_COLOR,
   bottomColor = '#000',
-  middleColor = '#005894',
+  middleColor = PRIMARY_DARK_COLOR,
 }) => {
   return (
     <TouchableScale

@@ -18,6 +18,9 @@ import {
   ECOLOTE_COMING_SOON,
   ECOLOTE_GAME,
   ECOLOTE_GAME_DESCRIPTION,
+  ECOLOTE_GAME_COMENTARY,
+  ECOLOTE_GAME_CHECK,
+  ECOLOTE_GAME_GALLERY,
 } from './screen_names';
 //* features
 import Access from '../features/access/containers/index';
@@ -36,6 +39,9 @@ import Dashboard from '../features/Dashboard/containers/container';
 import CoomingSoon from '../features/CommingSoon/containers/container';
 import Game from '../features/Game/containers/container';
 import GameDescrption from '../features/GameDescription/containers/container';
+import GameComentary from '../features/GameComentary/containers/container';
+import GameCheck from '../features/GameCheck/containers/container';
+import GameGallery from '../features/GameGallery/containers/container';
 
 const registryComponents = () => {
   Navigation.registerComponent(ECOLOTE_ACCESS_WELCOME, () =>
@@ -82,6 +88,15 @@ const registryComponents = () => {
   );
   Navigation.registerComponent(ECOLOTE_GAME_DESCRIPTION, () =>
     gestureHandlerRootHOC(Grapper(GameDescrption)()),
+  );
+  Navigation.registerComponent(ECOLOTE_GAME_COMENTARY, () =>
+    gestureHandlerRootHOC(Grapper(GameComentary)()),
+  );
+  Navigation.registerComponent(ECOLOTE_GAME_CHECK, () =>
+    gestureHandlerRootHOC(Grapper(GameCheck)()),
+  );
+  Navigation.registerComponent(ECOLOTE_GAME_GALLERY, () =>
+    gestureHandlerRootHOC(Grapper(GameGallery)()),
   );
 };
 

@@ -1,7 +1,7 @@
 import {TextInput} from 'react-native';
 import {RefObject} from 'react';
 
-export interface InputCustomType {
+export interface TextAreaType {
   multiline?: boolean;
   numberOfLines?: number;
   borderColor?: string;

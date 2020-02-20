@@ -3,4 +3,6 @@ export interface GameBadgeType {
   title?: string;
   name?: string;
   logo: any;
+  style?: {[t: string]: any};
+
 }

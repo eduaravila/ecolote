@@ -18,3 +18,6 @@ export const ECOLOTE_DASHBOARD: string = 'ecolote.dashboard';
 export const ECOLOTE_COMING_SOON: string = 'ecolote.coming.soon';
 export const ECOLOTE_GAME: string = 'ecolote.game';
 export const ECOLOTE_GAME_DESCRIPTION: string = 'ecolote.game.description';
+export const ECOLOTE_GAME_COMENTARY: string = 'ecolote.game.comentary';
+export const ECOLOTE_GAME_CHECK: string = 'ecolote.game.check';
+export const ECOLOTE_GAME_GALLERY: string = 'ecolote.game.gallery';

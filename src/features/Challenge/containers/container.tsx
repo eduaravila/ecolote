@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, Dimensions} from 'react-native';
 
 import Body from '../components/body/index';
 import Head from '../components/header';
@@ -18,7 +17,7 @@ const Challenge: React.FC = () => {
 
   const _toggle_searching = (e: boolean) => {
     setsearching(i => !i);
-    setVisibilityBottom({show: !show});
+    setVisibilityBottom({show: false});
     goGame()
   };
 

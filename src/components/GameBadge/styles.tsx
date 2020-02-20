@@ -13,10 +13,11 @@ export const styles = StyleSheet.create({
     fontFamily: 'Rubik-Bold',
   },
   logo: {
-    width: normalize(50),
-    height: normalize(50),
+    width: '90%',
+    height: '90%',
+    alignSelf: 'center',
     resizeMode: 'contain',
     position: 'absolute',
-    top: normalize(12),
+    top: '10%',
   },
 });
