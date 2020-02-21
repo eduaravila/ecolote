@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {normalize} from 'react-native-elements';
+import {getColumn} from '../../../../style/UTILS';
 
 export const styles = StyleSheet.create({
   constainer: {
@@ -21,6 +22,7 @@ export const styles = StyleSheet.create({
   descriptionLabel: {
     width: '100%',
     textAlign: 'left',
+    marginHorizontal: getColumn(0.5),
     marginVertical: normalize(20),
   },
 });

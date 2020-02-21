@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {normalize} from '../../../../style/UTILS';
+import {normalize, getColumn} from '../../../../style/UTILS';
 
 export const styles = StyleSheet.create({
   title: {marginVertical: normalize(30), textAlign: 'center'},
@@ -27,9 +27,11 @@ export const styles = StyleSheet.create({
   },
   container: {
     marginVertical: normalize(30),
-    width: '100%',
+    
+    
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginHorizontal: getColumn(0.5),
   },
   takePhoto: {
     width: '100%',

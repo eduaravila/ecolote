@@ -11,6 +11,8 @@ import {
   REPLACE_COLOR,
   BATHROOM_COLOR,
   PRIMARY_DARK_COLOR,
+  NEXT_COLOR,
+  NEXT_COLOR_DARK,
 } from '../../../../style/COLOR';
 import {GameBadge} from '../../../../components/GameBadge/GameBadge';
 import {Subtitle2} from '../../../../components/Subtitle2/Subtitle2';
@@ -54,7 +56,10 @@ const Body: React.FC<BodyType> = ({toggle_visibility, loading}) => {
         <Subtitle2 style={styles.currentGameContainerTitle}>
           Reto actual:
         </Subtitle2>
-        <TouchableScale tension={100} friction={1} onPress={() => goGameCheck()}>
+        <TouchableScale
+          tension={100}
+          friction={1}
+          onPress={() => goGameCheck()}>
           <StatContainer
             style={styles.gameCardContainer}
             contentStyle={styles.gameCardContainerContent}
@@ -102,6 +107,8 @@ const Body: React.FC<BodyType> = ({toggle_visibility, loading}) => {
         />
       </TouchableScale>
       <ColorButton
+        topColor={NEXT_COLOR}
+        middleColor={NEXT_COLOR_DARK}
         onPress={() => toggle_visibility(true)}
         cancel={loading}
         style={loading ? styles.cancelButton : styles.playButton}>

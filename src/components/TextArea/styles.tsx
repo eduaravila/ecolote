@@ -5,7 +5,7 @@ import {normalize} from '../../style/UTILS';
 export const styles = StyleSheet.create({
   input: {
     width: '100%',
-    height: '100%',
+    height: '90%',
     fontFamily: 'Rubik-Bold',
     fontSize: normalize(14),
     color: 'white',
@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     paddingHorizontal: normalize(20),
     left: 0,
-    top: 0,
+    top: "5%",
     flex: 1,
   },
   container: {

@@ -18,6 +18,7 @@ import {InputCustom} from '../../../../components/Input/Input';
 import {normalize} from '../../../../style/UTILS';
 import {Subtitle1} from '../../../../components/Subtitle1/Subtitle1';
 import {Subtitle2} from '../../../../components/Subtitle2/Subtitle2';
+import {TextArea} from '../../../../components/TextArea/TextArea';
 
 const replace_icon = require('../../../../assets/img/replace.png');
 const bathroom_icon = require('../../../../assets/img/bathroom.png');
@@ -40,14 +41,13 @@ const Header: React.FC<HeaderType> = ({componentId}) => {
         <H5Title>Di adios a las toallitas humedas</H5Title>
       </Navigation.Element>
       <H6Title style={styles.descriptionLabel}>Una cosa mas.</H6Title>
-      <InputCustom
+      <TextArea
         multiline
         numberOfLines={5}
-        borderColor={'transparent'}
         placeholder={'Cuentanos tu asombrosa historia aqui...'}
         onSubmitEditing={() => null}
         style={{
-          height: normalize(150),
+          height: normalize(180),
         }}
       />
       <Subtitle2>

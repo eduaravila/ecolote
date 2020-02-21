@@ -21,6 +21,7 @@ import {
   ECOLOTE_GAME_COMENTARY,
   ECOLOTE_GAME_CHECK,
   ECOLOTE_GAME_GALLERY,
+  ECOLOTE_GAME_STADISTICS,
 } from './screen_names';
 //* features
 import Access from '../features/access/containers/index';
@@ -42,6 +43,7 @@ import GameDescrption from '../features/GameDescription/containers/container';
 import GameComentary from '../features/GameComentary/containers/container';
 import GameCheck from '../features/GameCheck/containers/container';
 import GameGallery from '../features/GameGallery/containers/container';
+import GameStadistics from '../features/GameStadistics/containers/container';
 
 const registryComponents = () => {
   Navigation.registerComponent(ECOLOTE_ACCESS_WELCOME, () =>
@@ -97,6 +99,9 @@ const registryComponents = () => {
   );
   Navigation.registerComponent(ECOLOTE_GAME_GALLERY, () =>
     gestureHandlerRootHOC(Grapper(GameGallery)()),
+  );
+  Navigation.registerComponent(ECOLOTE_GAME_STADISTICS, () =>
+    gestureHandlerRootHOC(Grapper(GameStadistics)()),
   );
 };
 

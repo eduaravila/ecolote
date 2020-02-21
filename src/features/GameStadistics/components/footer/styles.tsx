@@ -4,13 +4,12 @@ import {normalize, getColumn} from '../../../../style/UTILS';
 
 export const styles = StyleSheet.create({
   container: {
+    width: '100%',
+    marginVertical: normalize(20),
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
     flexWrap: 'nowrap',
-    marginVertical: normalize(20),
-
-    marginHorizontal: getColumn(0.5),
   },
   go: {
     flex: 1,
