@@ -24,5 +24,5 @@ Navigation.events().registerAppLaunchedListener(() => {
       orientation: ['portrait'],
     },
   });
-  goDashboard();
+  goAccess();
 });

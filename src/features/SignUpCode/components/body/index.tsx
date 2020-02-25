@@ -144,7 +144,7 @@ const Body: React.FC<bodyType> = ({
       <Subtitle1
         style={[styles.textBold, styles.textUnderline]}
         onPress={_delete_pre_user}>
-        {email} sss
+        {email}
       </Subtitle1>
       <CodeInput
         size={6}

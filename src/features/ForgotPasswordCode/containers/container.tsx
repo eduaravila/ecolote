@@ -4,6 +4,7 @@ import GradientBackground from '../../../components/GradientBackground/GradientB
 import Header from '../components/header';
 import Body from '../components/body/index';
 import {ModalCode} from '../components/modal';
+import {useStoreActions} from '../../../state/store';
 
 interface componentIdType {
   componentId: string;
@@ -15,8 +16,12 @@ const ForgotPasswordCode: React.FC<componentIdType> = props => {
   const [check, setCheck] = useState(true);
   const [codeInterval, setCodeInterval] = useState<number>(10);
   const [token, settoken] = useState(props.token);
+  let {setToken} = useStoreActions(state => state.credentials);
 
-  const _set_token = (e: string) => settoken(e);
+  const _set_token = (e: string) => {
+    setToken({token: e});
+    settoken(e);
+  };
 
   const _setCheck = (e: boolean) => {
     setCheck(e);

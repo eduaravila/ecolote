@@ -45,7 +45,7 @@ const Body: React.FC<bodyType> = ({componentId}) => {
     {data, loading, error, networkStatus},
   ] = useLazyQuery(CHECK_USER_EMAIL_IS_AVAILABLE_GQL, {
     notifyOnNetworkStatusChange: true,
-    fetchPolicy: 'network-only',
+    fetchPolicy: 'no-cache',
     onCompleted: () => {
       let {email} = getValues();
       reset();

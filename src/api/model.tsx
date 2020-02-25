@@ -5,11 +5,29 @@ interface setErrorType {
   show: boolean;
 }
 
+interface setTokenType {
+  token: string;
+}
+
 export interface errorModelType {
   msg: string;
   show: boolean;
   setStatus: Action<errorModelType, setErrorType>;
 }
+
+export interface tokenModelType {
+  token: string;
+  setToken: Action<tokenModelType, setTokenType>;
+}
+
+export const tokenModel: tokenModelType = {
+  token: '',
+  setToken: action((state, pl) => {
+    console.log(pl);
+    
+    state.token = pl.token;
+  }),
+};
 
 export const errorModel: errorModelType = {
   msg: '',

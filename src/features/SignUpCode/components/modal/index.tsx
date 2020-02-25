@@ -66,7 +66,7 @@ const ModalCode: React.FC<modalType> = ({
   useEffect(() => {
     let intervalInactivity = setInterval(
       () => setinacativity(inacativity - 1),
-      1000,
+      10000,
     );
 
     return () => clearTimeout(intervalInactivity);

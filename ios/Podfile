@@ -52,6 +52,8 @@ target 'ecolote' do
 
   pod 'react-native-viewpager', :path => '../node_modules/@react-native-community/viewpager'
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
   target 'ecoloteTests' do
     inherit! :search_paths
     # Pods for testing

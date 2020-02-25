@@ -20,6 +20,7 @@ import {MiniButton} from '../../../../components/MiniButton/MiniButton';
 import {Subtitle1} from '../../../../components/Subtitle1/Subtitle1';
 import goForgotPasswordCode from '../../../../navigation/navigators/ForgotPasswordCode';
 import {Stepper} from '../../../../components/Stepper/Stepper';
+import {useStoreActions} from '../../../../state/store';
 
 interface formType {
   email: string;
@@ -43,6 +44,7 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
     getValues,
     reset,
   } = useForm();
+  let {setToken} = useStoreActions(state => state.credentials);
 
   let [
     restorePasswordCode,
@@ -53,6 +55,7 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
     onCompleted: ({RestorePasswordCode}) => {
       let {email} = getValues();
       reset();
+      setToken({token: RestorePasswordCode.msg});
       goForgotPasswordCode({
         token: RestorePasswordCode.msg,
         email,

@@ -2,11 +2,15 @@ import React, {ReactNode} from 'react';
 import Orientation from 'react-native-orientation';
 import {ApolloProvider} from '@apollo/react-hooks';
 import {StoreProvider} from 'easy-peasy';
+import {PersistGate} from 'redux-persist/integration/react';
+import {persistStore} from 'redux-persist';
+import {Text} from 'react-native';
 
 import {StatusBarCustom} from '../../components/StatusBar/StatusBarCustom';
 import {client} from '../../api';
 import store from '../../state/store';
 
+const persistor = persistStore(store);
 export function Grapper(MyComponent: React.FunctionComponent<any>) {
   return () => {
     return class StoreWrapper extends React.Component<any, any> {
@@ -20,10 +24,12 @@ export function Grapper(MyComponent: React.FunctionComponent<any>) {
       render() {
         return (
           <ApolloProvider client={client}>
-            <StoreProvider store={store}>
-              <StatusBarCustom />
-              <MyComponent {...this.props} />
-            </StoreProvider>
+            <PersistGate loading={<Text>Loading</Text>} persistor={persistor}>
+              <StoreProvider store={store}>
+                <StatusBarCustom />
+                <MyComponent {...this.props} />
+              </StoreProvider>
+            </PersistGate>
           </ApolloProvider>
         );
       }

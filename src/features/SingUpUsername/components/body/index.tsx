@@ -4,7 +4,7 @@ import {useForm} from 'react-hook-form';
 import {gql} from 'apollo-boost';
 import {useLazyQuery, useMutation} from '@apollo/react-hooks';
 import validator from 'validator';
-
+import {useStoreActions} from '../../../../state/store';
 import {styles} from './styles';
 import {Subtitle1} from '../../../../components/Subtitle1/Subtitle1';
 import {InputCustom} from '../../../../components/Input/Input';
@@ -58,6 +58,8 @@ const Body: React.FC<bodyType> = ({componentId, email}) => {
   const passwordRef = useRef<any>();
   const passwordRRef = useRef<any>();
 
+  let {setToken} = useStoreActions(state => state.credentials);
+
   let [registerUser, {data: dataRegisterUser}] = useMutation(
     REGISTER_USER_GQL,
     {
@@ -66,6 +68,7 @@ const Body: React.FC<bodyType> = ({componentId, email}) => {
       onCompleted: ({RegisterUser}) => {
         let {username} = getValues();
         reset();
+        setToken({token: RegisterUser.msg});
         goSignUpCode({
           token: RegisterUser.msg,
           email,

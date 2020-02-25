@@ -3,6 +3,11 @@ import {ErrorLink} from 'apollo-link-error';
 import {HttpLink} from 'apollo-link-http';
 import {ApolloClient} from 'apollo-client';
 import {API} from 'react-native-dotenv';
+import {setContext} from 'apollo-link-context';
+
+console.log('====================================');
+console.log(API);
+console.log('====================================');
 import store from '../state/store';
 
 const errorLink = new ErrorLink(({graphQLErrors, networkError}: any) => {
@@ -12,6 +17,9 @@ const errorLink = new ErrorLink(({graphQLErrors, networkError}: any) => {
     );
 
   if (networkError) {
+    console.log('====================================');
+    console.log(networkError);
+    console.log('====================================');
     if (store.getState().networkStatus.show) return;
 
     let timer = setTimeout(() => {
@@ -28,11 +36,23 @@ const errorLink = new ErrorLink(({graphQLErrors, networkError}: any) => {
   }
 });
 
+const authLink = setContext((_, {headers}) => {
+  // get the authentication token from local storage if it exists
+  const token = store.getState().credentials.token;
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      token: token ? `${token}` : '',
+    },
+  };
+});
+
 const httpLink = new HttpLink({
   uri: API,
 });
 
 export const client = new ApolloClient({
-  link: ApolloLink.from([errorLink, httpLink]),
+  link: ApolloLink.from([authLink, errorLink, httpLink]),
   cache: new InMemoryCache(),
 });
