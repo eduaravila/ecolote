@@ -22,3 +22,6 @@ export const ECOLOTE_GAME_COMENTARY: string = 'ecolote.game.comentary';
 export const ECOLOTE_GAME_CHECK: string = 'ecolote.game.check';
 export const ECOLOTE_GAME_GALLERY: string = 'ecolote.game.gallery';
 export const ECOLOTE_GAME_STADISTICS: string = 'ecolote.game.stadistics';
+
+export const ECOLOTE_TUTORIAL: string = 'ecolote.tutorial';
+

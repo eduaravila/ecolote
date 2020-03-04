@@ -5,9 +5,6 @@ import {ApolloClient} from 'apollo-client';
 import {API} from 'react-native-dotenv';
 import {setContext} from 'apollo-link-context';
 
-console.log('====================================');
-console.log(API);
-console.log('====================================');
 import store from '../state/store';
 
 const errorLink = new ErrorLink(({graphQLErrors, networkError}: any) => {
@@ -48,6 +45,9 @@ const authLink = setContext((_, {headers}) => {
   };
 });
 
+console.log('====================================');
+console.log(API);
+console.log('====================================');
 const httpLink = new HttpLink({
   uri: API,
 });

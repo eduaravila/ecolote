@@ -6,8 +6,10 @@ import changeNavigationBarColor from 'react-native-navigation-bar-color';
 import {registryComponents} from './src/navigation/registry_routes';
 import SplashScreen from 'react-native-splash-screen';
 import {PRIMARY_DARK_COLOR, PRIMARY_COLOR} from './src/style/COLOR';
-import goAccess from './src/navigation/navigators/Access';
-import goDashboard from './src/navigation/navigators/Dashboard';
+
+import goTutorial from './src/navigation/navigators/Tutorial';
+
+console.log(API);
 
 registryComponents();
 
@@ -24,5 +26,6 @@ Navigation.events().registerAppLaunchedListener(() => {
       orientation: ['portrait'],
     },
   });
-  goAccess();
+  // goAccess();
+  goTutorial();
 });
