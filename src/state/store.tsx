@@ -13,10 +13,13 @@ import {
   BottomNavigationType,
 } from '../features/Dashboard/reducers';
 
+import {TutorialModel, TutorialModelType} from '../features/Tutorial/reducers';
+
 interface StoreModel {
   networkStatus: errorModelType;
   BottomNavigation: BottomNavigationType;
   credentials: tokenModelType;
+  tutorial: TutorialModelType;
 }
 const typedHooks = createTypedHooks<StoreModel>();
 
@@ -29,6 +32,7 @@ const storeModel: StoreModel = {
   networkStatus: errorModel,
   BottomNavigation: BottomNavigationModel,
   credentials: tokenModel,
+  tutorial: TutorialModel,
 };
 
 const store = createStore(storeModel, {

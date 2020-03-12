@@ -1,7 +1,7 @@
 import {Navigation} from 'react-native-navigation';
 
 import {PRIMARY_DARK_COLOR, PRIMARY_LIGHT_COLOR} from '../../style/COLOR';
-import {ECOLOTE_TUTORIAL_1} from '../screen_names';
+import {ECOLOTE_TUTORIAL} from '../screen_names';
 
 const goTutorial = async () => {
   try {
@@ -20,7 +20,7 @@ const goTutorial = async () => {
           children: [
             {
               component: {
-                name: ECOLOTE_TUTORIAL_1,
+                name: ECOLOTE_TUTORIAL,
               },
             },
           ],

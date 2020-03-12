@@ -14,9 +14,6 @@ const errorLink = new ErrorLink(({graphQLErrors, networkError}: any) => {
     );
 
   if (networkError) {
-    console.log('====================================');
-    console.log(networkError);
-    console.log('====================================');
     if (store.getState().networkStatus.show) return;
 
     let timer = setTimeout(() => {

@@ -5,7 +5,7 @@ import {normalize, getColumn} from '../../../../style/UTILS';
 export const styles = StyleSheet.create({
   container: {
     width: '100%',
-    marginTop: normalize(25),
+    // marginTop: normalize(25),
   },
   captionBold: {
     fontFamily: 'Rubik-Bold',

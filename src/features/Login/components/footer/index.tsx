@@ -14,18 +14,18 @@ const Footer: React.FC<footerTypes> = ({componentId}) => {
       <Caption
         style={[styles.boldText, styles.forgotPasswordText]}
         onPress={() => pushStack(componentId, ECOLOTE_FORGOT_PASSWORD_EMAIL)}>
-        Forgot Your Password?
+        Olvidaste tu contraseña?
       </Caption>
       <Caption style={styles.captionTop}>
-        Still not have an Ecolote account?
+        Aun no tienes una cuenta en Ecolote?
         {'\n'}
         <Caption style={styles.captionBold} onPress={goAccess}>
-          Sign Up
+          Registrate!{' '}
         </Caption>
       </Caption>
       <Caption>
-        By using Ecolote you agree to our{' '}
-        <Caption style={styles.captionUndeline}>Terms & conditions</Caption>
+        Al utilizar Ecolote aceptas nuestros{' '}
+        <Caption style={styles.captionUndeline}>Terminos & condiciones</Caption>
       </Caption>
     </View>
   );

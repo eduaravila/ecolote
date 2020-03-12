@@ -4,6 +4,7 @@ import Carousel, {
   Pagination,
   getInputRangeFromIndexes,
 } from 'react-native-snap-carousel';
+import {useStoreActions} from '../../../../state/store';
 
 import {styles} from './styles';
 import {bodyTypes} from './types';
@@ -25,6 +26,10 @@ import {ButtonCustom} from '../../../../components/Button/Button';
 import goAccess from '../../../../navigation/navigators/Access';
 
 const Body: React.FC<bodyTypes> = ({componentId}) => {
+  const setTutorialDone = useStoreActions(
+    state => state.tutorial.TutorialSetDone,
+  );
+
   let ref = useRef(null);
   const _scrollInterpolator = (index: any, carouselProps: any) => {
     const range = [3, 2, 1, 0, -1];
@@ -105,6 +110,7 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
             buttom: (
               <ButtonCustom
                 onPress={() => {
+                  setTutorialDone({show: false});
                   goAccess();
                 }}
                 textColor={PRIMARY_DARK_COLOR}

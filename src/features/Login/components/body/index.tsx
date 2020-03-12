@@ -5,6 +5,7 @@ import {gql} from 'apollo-boost';
 import {useLazyQuery} from '@apollo/react-hooks';
 import validator from 'validator';
 
+import {useStoreActions} from '../../../../state/store';
 import {H5Title} from '../../../../components/H5Title/H5Title';
 import {ButtonCustom} from '../../../../components/Button/Button';
 import {styles} from './styles';
@@ -13,11 +14,13 @@ import {bodyTypes} from './types';
 import {ECOLOTE_SIGN_UP_CODE} from '../../../../navigation/screen_names';
 import {PRIMARY_DARK_COLOR} from '../../../../style/COLOR';
 import {InputCustom} from '../../../../components/Input/Input';
+import goDashboard from '../../../../navigation/navigators/Dashboard';
 
 const LOGIN_GQL = gql`
   query Login($user: String!, $password: String!) {
     Login(accessInfo: {user: $user, password: $password}) {
-      msg
+      token
+      media
       code
     }
   }
@@ -29,6 +32,8 @@ interface loginForm {
 
 const Body: React.FC<bodyTypes> = ({componentId}) => {
   const passwordRef = useRef<any>();
+
+  let {setMediaToken, setToken} = useStoreActions(state => state.credentials);
 
   const {
     register,
@@ -43,9 +48,10 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'network-only',
     onCompleted: e => {
-      console.log('====================================');
-      console.log(e);
-      console.log('====================================');
+      let {Login} = e;
+      setMediaToken({token: Login.media});
+      setToken({token: Login.token});
+      goDashboard();
     },
   });
 
@@ -66,9 +72,9 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
 
   return (
     <View>
-      <H5Title style={styles.title}>{'Welcome Back'}</H5Title>
+      <H5Title style={styles.title}>{'Hola, bienvenido de nuevo.'}</H5Title>
       <InputCustom
-        placeholder={'Email / Username'}
+        placeholder={'Correo / Usuario'}
         keyboardType="email-address"
         style={styles.userInput}
         error={!!errors.email || !!error?.graphQLErrors}
@@ -91,7 +97,7 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
       />
 
       <InputCustom
-        placeholder={'Password'}
+        placeholder={'Contraseña'}
         keyboardType="default"
         textContentType="newPassword"
         secureTextEntry={true}

@@ -9,8 +9,22 @@ import {Text} from 'react-native';
 import {StatusBarCustom} from '../../components/StatusBar/StatusBarCustom';
 import {client} from '../../api';
 import store from '../../state/store';
+import goTutorial from './Tutorial';
+import goAccess from './Access';
+import goDashboard from './Dashboard';
+import {LoadingLogo} from '../../components/LoadingLogo/LoadingLogo';
 
-const persistor = persistStore(store);
+const persistor = persistStore(store, null, () => {
+  let {show} = store.getState().tutorial;
+  let {token, mediaToken} = store.getState().credentials;
+
+  if (token && mediaToken) {
+    return goDashboard();
+  }
+
+  show ? goTutorial() : goAccess();
+});
+
 export function Grapper(MyComponent: React.FunctionComponent<any>) {
   return () => {
     return class StoreWrapper extends React.Component<any, any> {
@@ -24,7 +38,7 @@ export function Grapper(MyComponent: React.FunctionComponent<any>) {
       render() {
         return (
           <ApolloProvider client={client}>
-            <PersistGate loading={<Text>Loading</Text>} persistor={persistor}>
+            <PersistGate loading={<LoadingLogo />} persistor={persistor}>
               <StoreProvider store={store}>
                 <StatusBarCustom />
                 <MyComponent {...this.props} />

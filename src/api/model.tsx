@@ -17,15 +17,21 @@ export interface errorModelType {
 
 export interface tokenModelType {
   token: string;
+  mediaToken: string;
   setToken: Action<tokenModelType, setTokenType>;
+  setMediaToken: Action<tokenModelType, setTokenType>;
 }
 
 export const tokenModel: tokenModelType = {
   token: '',
+  mediaToken: '',
   setToken: action((state, pl) => {
     console.log(pl);
-    
     state.token = pl.token;
+  }),
+  setMediaToken: action((state, pl) => {
+    console.log(pl);
+    state.mediaToken = pl.token;
   }),
 };
 

@@ -9,6 +9,11 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: normalize(5),
   },
+  noChallengeSubtitle: {
+    marginVertical: normalize(10),
+    textAlign: 'left',
+    width: '90%',
+  },
   arena: {
     width: normalize(250),
     height: normalize(250),
@@ -17,8 +22,13 @@ export const styles = StyleSheet.create({
   arenaContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+    marginVertical: normalize(10),
     width: normalize(300),
     height: normalize(300),
+  },
+  arenaTitle: {
+    textAlign: 'center',
+    textDecorationLine: 'underline',
   },
   playButton: {
     marginTop: normalize(10),

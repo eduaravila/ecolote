@@ -68,22 +68,22 @@ const Dashboard: React.FC<DashboardType> = ({bottomRef = useRef(null)}) => {
   const [routes] = React.useState([
     {
       key: 'inventory',
-      title: 'Inventory',
+      title: 'Inventario',
       icon: LogoImage(inventory_logo),
     },
     {
       key: 'store',
-      title: 'Store',
+      title: 'Tienda',
       icon: LogoImage(store_logo),
     },
     {
       key: 'challenge',
-      title: 'Challenge',
+      title: 'Reto',
       icon: LogoImage(challenge_logo),
     },
     {
       key: 'community',
-      title: 'Community',
+      title: 'Comunidad',
       icon: LogoImage(community_logo),
     },
   ]);

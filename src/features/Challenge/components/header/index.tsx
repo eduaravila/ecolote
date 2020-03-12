@@ -1,6 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {View, Animated} from 'react-native';
 import * as Animatable from 'react-native-animatable';
+import {useQuery} from '@apollo/react-hooks';
+import {gql} from 'apollo-boost';
 
 import {StatContainer} from '../../../../components/StatContainer/StatContainer';
 import {MiniStateContainer} from '../../../../components/MiniStatContainer/MiniStatContainer';
@@ -18,6 +20,26 @@ const config_image = require('../../../../assets/img/cog.png');
 const news_image = require('../../../../assets/img/newspaper.png');
 const zoom_image = require('../../../../assets/img/zoom.gif');
 
+const MY_WALLET_GQL = gql`
+  query MyWallet {
+    MyWallet {
+      _id
+      Coins {
+        total
+      }
+      Level {
+        total
+      }
+      Trophys {
+        total
+      }
+      User {
+        username
+      }
+    }
+  }
+`;
+
 interface HeadType {
   show: boolean;
   ref?: any;
@@ -30,6 +52,14 @@ const Head: React.FC<HeadType> = ({
   refLoading = useRef(null),
 }) => {
   let [loadingSize] = useState(new Animated.Value(0));
+
+  let {loading, error, data} = useQuery(MY_WALLET_GQL, {
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'network-only',
+    onCompleted: e => {
+      // console.log(e);
+    },
+  });
 
   const goUpLoading = () => {
     if (refLoading?.current) {
@@ -101,10 +131,14 @@ const Head: React.FC<HeadType> = ({
       <Animatable.View ref={ref}>
         <View style={styles.walletContainer}>
           <StatContainer icon={level_image} iconText={'10'}>
-            <Subtitle2 style={styles.textBold}>100/299</Subtitle2>
+            <Subtitle2 style={styles.textBold}>
+              {data && data.MyWallet.Level.total}
+            </Subtitle2>
           </StatContainer>
           <StatContainer icon={coin_image}>
-            <Subtitle2 style={styles.textBold}>100</Subtitle2>
+            <Subtitle2 style={styles.textBold}>
+              {data && data.MyWallet.Coins.total}
+            </Subtitle2>
           </StatContainer>
         </View>
         <View style={styles.walletContainer}>
@@ -116,7 +150,7 @@ const Head: React.FC<HeadType> = ({
             <Subtitle2
               style={[styles.textBold, styles.textBackground]}
               numberOfLines={1}>
-              TUMATADOR
+              {data && data.MyWallet.User.username}
             </Subtitle2>
             <StatContainer
               icon={trophy_image}
@@ -127,7 +161,7 @@ const Head: React.FC<HeadType> = ({
               <Subtitle2
                 style={[styles.textBold, styles.textRight]}
                 numberOfLines={1}>
-                2121
+                {data && data.MyWallet.Trophys.total}
               </Subtitle2>
             </StatContainer>
           </StatContainer>
@@ -135,18 +169,20 @@ const Head: React.FC<HeadType> = ({
           <MiniStateContainer icon={news_image} />
         </View>
       </Animatable.View>
-      <Animatable.View style={styles.loadingStat} ref={refLoading}>
-        <StatContainer
-          icon={zoom_image}
-          logoStyle={styles.loadingIcon}
-          borderStyle={{backgroundColor: STAT_LABEL_COLOR}}
-          style={styles.loadingContainer}
-          styleJr={styles.loadingContainerJr}
-          logoContainerStyle={styles.loadingIconContainer}
-          contentStyle={styles.loadingContent}>
-          <H6Title style={styles.loadingTitle}>Buscando un reto...</H6Title>
-        </StatContainer>
-      </Animatable.View>
+      {show && (
+        <Animatable.View style={styles.loadingStat} ref={refLoading}>
+          <StatContainer
+            icon={zoom_image}
+            logoStyle={styles.loadingIcon}
+            borderStyle={{backgroundColor: STAT_LABEL_COLOR}}
+            style={styles.loadingContainer}
+            styleJr={styles.loadingContainerJr}
+            logoContainerStyle={styles.loadingIconContainer}
+            contentStyle={styles.loadingContent}>
+            <H6Title style={styles.loadingTitle}>Buscando un reto...</H6Title>
+          </StatContainer>
+        </Animatable.View>
+      )}
     </View>
   );
 };
