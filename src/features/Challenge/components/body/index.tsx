@@ -22,10 +22,8 @@ import {
 import {GameBadge} from '../../../../components/GameBadge/GameBadge';
 import {Subtitle2} from '../../../../components/Subtitle2/Subtitle2';
 import goGameCheck from '../../../../navigation/navigators/GameCheck';
-import {Subtitle1} from '../../../../components/Subtitle1/Subtitle1';
 import {H6Title} from '../../../../components/H6Title/H6Title';
 
-const arena_logo = require('../../../../assets/img/aqua_palace.gif');
 const replace_icon = require('../../../../assets/img/replace.png');
 
 const MY_CURRENT_CHALLENGE_GQL = gql`
@@ -54,6 +52,14 @@ const MY_CURRENT_CHALLENGE_GQL = gql`
   }
 `;
 
+const MY_COMPLETED_CHALLENGES_GQL = gql`
+  query MyCompletedChallenges {
+    MyCompletedChallenges {
+      _id
+    }
+  }
+`;
+
 const ARENA_COINS_GQL = gql`
   query ArenaPoins {
     ArenaPoins {
@@ -71,9 +77,38 @@ const MY_CURRENT_ARENA_GQL = gql`
       }
       currentArena {
         name
+        _id
         portrait
         description
         minPoints
+      }
+    }
+  }
+`;
+
+const GET_CHALLENGE_GQL = gql`
+  query GetChallenge(
+    $currentChallenge: String
+    $completedChallenges: [ChallengeId!]
+    $Arena: ID!
+    $Last: String
+  ) {
+    GetChallenge(
+      RandomChallenge: {
+        currentChallenge: $currentChallenge
+        completedChallenges: $completedChallenges
+        Arena: $Arena
+        Last: $Last
+      }
+    ) {
+      _id
+      title
+      badges {
+        type {
+          _id
+          updated_at
+          name
+        }
       }
     }
   }
@@ -86,8 +121,25 @@ interface BodyType {
 
 const Body: React.FC<BodyType> = ({toggle_visibility, loading}) => {
   const [areanSize] = useState(new Animated.Value(0));
-
+  const [lastRecomended, setLastRecomended] = useState(null);
   let {mediaToken} = useStoreState(state => state.credentials);
+
+  let [
+    GetChallenge,
+    {
+      data: data_GetChallenge,
+      loading: loading_GetChallenge,
+      error: error_GetChallenge,
+      networkStatus: networkStatus_GetChallenge,
+    },
+  ] = useLazyQuery(GET_CHALLENGE_GQL, {
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'network-only',
+    onCompleted: e => {
+      setLastRecomended(e.GetChallenge._id);
+      console.log(e);
+    },
+  });
 
   let [
     MyArena,
@@ -119,6 +171,30 @@ const Body: React.FC<BodyType> = ({toggle_visibility, loading}) => {
       onCompleted: e => {},
     },
   );
+  let [
+    myCompletedChallenges,
+    {
+      data: data_completed_challenges,
+      loading: loading_completed_challenges,
+      error: error_completed_challenges,
+      networkStatus: networkStatus_completed_challenges,
+    },
+  ] = useLazyQuery(MY_COMPLETED_CHALLENGES_GQL, {
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'network-only',
+    onCompleted: e => {
+      GetChallenge({
+        variables: {
+          currentChallenge: data ? data.MyCurrentChallenge.Challenge._id : null,
+          completedChallenges:
+            e.MyCompletedChallenges.length > 0 ? e.MyCompletedChallenges : null,
+          Arena: data_current_arena.MyArena.currentArena._id,
+          Last: lastRecomended,
+        },
+      });
+      console.log(e);
+    },
+  });
 
   let {
     loading: loading_arena_points,
@@ -236,7 +312,17 @@ const Body: React.FC<BodyType> = ({toggle_visibility, loading}) => {
       <ColorButton
         topColor={NEXT_COLOR}
         middleColor={NEXT_COLOR_DARK}
-        onPress={() => toggle_visibility(true)}
+        disabled={
+          loading_arena_points ||
+          loading_current_challenge ||
+          loading_GetChallenge ||
+          loading_current_arena ||
+          loading
+        }
+        onPress={() => {
+          myCompletedChallenges();
+          // toggle_visibility(true)
+        }}
         cancel={loading}
         style={loading ? styles.cancelButton : styles.playButton}>
         {loading ? 'Cancelar ' : 'Jugar!'}

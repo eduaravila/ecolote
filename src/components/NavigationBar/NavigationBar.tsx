@@ -1,7 +1,7 @@
 import React, {useState, useRef} from 'react';
 import {styles} from './styles';
 import {SceneRendererProps, TabBar} from 'react-native-tab-view';
-import {LABEL_ACTIVE_BACKGROUND_COLOR} from '../../style/COLOR';
+import {LABEL_ACTIVE_BACKGROUND_COLOR, PRIMARY_LIGHT_COLOR} from '../../style/COLOR';
 import {NavigationBarItem} from './NavigationItem';
 import {normalize} from '../../style/UTILS';
 import * as Animatable from 'react-native-animatable';
@@ -20,7 +20,7 @@ const NavigationBar: React.FC<any> = props => {
         />
       )}
       indicatorStyle={{
-        backgroundColor: LABEL_ACTIVE_BACKGROUND_COLOR,
+        backgroundColor: PRIMARY_LIGHT_COLOR,
         height: normalize(55),
         elevation: 20,
         borderTopEndRadius: normalize(10),

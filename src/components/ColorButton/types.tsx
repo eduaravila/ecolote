@@ -9,5 +9,6 @@ export interface ColorButtomType {
   style?: {[t: string]: any};
   topColor?: string;
   middleColor?: string;
+  disabled?: boolean;
   bottomColor?: string;
 }

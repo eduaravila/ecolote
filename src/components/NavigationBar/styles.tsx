@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
     fontFamily: 'Rubik-Bold',
   },
   label: {
-    color: PRIMARY_DARK_COLOR,
+    color: 'white',
     position: 'absolute',
     bottom: 0,
   },
@@ -48,7 +48,7 @@ export const styles = StyleSheet.create({
     left: '-10%',
     top: '20%',
     fontSize: normalize(30),
-    color: PRIMARY_DARK_COLOR,
+    color: 'white',
     zIndex: 10,
   },
   rightArrowIcon: {
@@ -56,7 +56,7 @@ export const styles = StyleSheet.create({
     right: '-10%',
     zIndex: 10,
     top: '20%',
-    color: PRIMARY_DARK_COLOR,
+    color: 'white',
     fontSize: normalize(30),
   },
 });

@@ -9,23 +9,29 @@ import {styles} from './styles';
 import {H3Title} from '../H3Title/H3Title';
 import {ColorButtomType} from './types';
 import Svg, {Defs, LinearGradient, Stop, Path} from 'react-native-svg';
-import {PRIMARY_COLOR, PRIMARY_DARK_COLOR} from '../../style/COLOR';
+import {
+  PRIMARY_COLOR,
+  PRIMARY_DARK_COLOR,
+  INPUT_BORDER_COLOR,
+  INPUT_BORDER_COLOR_DARK,
+} from '../../style/COLOR';
 
 const ColorButton: React.FC<ColorButtomType> = ({
   children,
   onPress,
   cancel = false,
   style,
+  disabled = false,
   topColor = PRIMARY_COLOR,
   bottomColor = '#000',
   middleColor = PRIMARY_DARK_COLOR,
 }) => {
   return (
     <TouchableScale
-      style={[styles.container, style]}
-      tension={300}
-      friction={10}
-      onPress={onPress}>
+      style={[styles.container, style, {opacity: disabled ? 0.5 : 1}]}
+      tension={disabled ? 500 : 300}
+      friction={disabled ? 100 : 10}
+      onPress={!disabled ? onPress : () => {}}>
       <Svg
         width="100%"
         height="86"
@@ -36,7 +42,7 @@ const ColorButton: React.FC<ColorButtomType> = ({
           id="Path_318"
           data-name="Path 318"
           d="M10,0H184c.074.108,9.962,9.857,10,10V76L184,86H10L0,76V10Z"
-          fill={topColor}
+          fill={disabled ? INPUT_BORDER_COLOR : topColor}
         />
       </Svg>
 
@@ -50,7 +56,7 @@ const ColorButton: React.FC<ColorButtomType> = ({
           id="Path_318"
           data-name="Path 318"
           d="M10,0H184c.074.108,9.962,9.857,10,10V76L184,86H10L0,76V10Z"
-          fill={middleColor}
+          fill={disabled ? INPUT_BORDER_COLOR_DARK : middleColor}
         />
       </Svg>
       <Svg
