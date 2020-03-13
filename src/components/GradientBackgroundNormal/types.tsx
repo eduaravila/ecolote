@@ -7,5 +7,5 @@ export interface GradientBackgroundType {
   end?: {x: number; y: number};
   children: ReactNode;
   style?: {[t: string]: any};
-
+  rarity?: string;
 }

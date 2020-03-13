@@ -3,7 +3,7 @@ import {Navigation} from 'react-native-navigation';
 import {PRIMARY_DARK_COLOR} from '../../style/COLOR';
 import {ECOLOTE_GAME} from '../screen_names';
 
-const goGame = async () => {
+const goGame = async (props: any) => {
   try {
     Navigation.setRoot({
       root: {
@@ -22,6 +22,7 @@ const goGame = async () => {
             {
               component: {
                 name: ECOLOTE_GAME,
+                passProps: {...props},
               },
             },
           ],

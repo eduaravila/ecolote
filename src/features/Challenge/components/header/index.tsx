@@ -63,44 +63,12 @@ const Head: React.FC<HeadType> = ({
 
   const goUpLoading = () => {
     if (refLoading?.current) {
-      refLoading.current
-        .animate({
-          0: {
-            width: '100%',
-            height: '100%',
-            opacity: 1,
-            transform: [
-              {
-                scale: 1,
-              },
-            ],
-          },
-          1: {
-            width: '0%',
-            height: '0%',
-            opacity: 0,
-            transform: [
-              {
-                scale: 0,
-              },
-            ],
-          },
-        })
-        .then((e: any) => e);
+      refLoading.current.bounceOutUp(500).then((e: any) => e);
     }
   };
   const goDownLoading = () => {
     if (refLoading?.current) {
-      refLoading.current
-        .animate({
-          0: {width: '0%', height: '0%', opacity: 0},
-          1: {
-            width: '100%',
-            height: '100%',
-            opacity: 1,
-          },
-        })
-        .then((e: any) => e);
+      refLoading.current.bounceInDown(500).then((e: any) => e);
     }
   };
 
@@ -127,7 +95,11 @@ const Head: React.FC<HeadType> = ({
   }, [show]);
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {height: show ? normalize(150) : normalize(100)},
+      ]}>
       <Animatable.View ref={ref}>
         <View style={styles.walletContainer}>
           <StatContainer icon={level_image} iconText={'10'}>
@@ -169,20 +141,19 @@ const Head: React.FC<HeadType> = ({
           <MiniStateContainer icon={news_image} />
         </View>
       </Animatable.View>
-      {show && (
-        <Animatable.View style={styles.loadingStat} ref={refLoading}>
-          <StatContainer
-            icon={zoom_image}
-            logoStyle={styles.loadingIcon}
-            borderStyle={{backgroundColor: STAT_LABEL_COLOR}}
-            style={styles.loadingContainer}
-            styleJr={styles.loadingContainerJr}
-            logoContainerStyle={styles.loadingIconContainer}
-            contentStyle={styles.loadingContent}>
-            <H6Title style={styles.loadingTitle}>Buscando un reto...</H6Title>
-          </StatContainer>
-        </Animatable.View>
-      )}
+
+      <Animatable.View style={styles.loadingStat} ref={refLoading}>
+        <StatContainer
+          icon={zoom_image}
+          logoStyle={styles.loadingIcon}
+          borderStyle={{backgroundColor: STAT_LABEL_COLOR}}
+          style={styles.loadingContainer}
+          styleJr={styles.loadingContainerJr}
+          logoContainerStyle={styles.loadingIconContainer}
+          contentStyle={styles.loadingContent}>
+          <H6Title style={styles.loadingTitle}>Buscando un reto...</H6Title>
+        </StatContainer>
+      </Animatable.View>
     </View>
   );
 };

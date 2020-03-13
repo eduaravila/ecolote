@@ -5,7 +5,8 @@ import {normalize, getColumn} from '../../../../style/UTILS';
 export const styles = StyleSheet.create({
   container: {
     width: '100%',
-    marginTop: normalize(20),
+    position: 'absolute',
+    bottom: normalize(20),
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',

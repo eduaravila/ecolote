@@ -10,5 +10,6 @@ export interface ColorButtomType {
   topColor?: string;
   middleColor?: string;
   disabled?: boolean;
+  loading?: boolean;
   bottomColor?: string;
 }

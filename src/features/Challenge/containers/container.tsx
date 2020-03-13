@@ -17,8 +17,7 @@ const Challenge: React.FC = () => {
 
   const _toggle_searching = (e: boolean) => {
     setsearching(i => !i);
-    setVisibilityBottom({show: false});
-    goGame()
+    setVisibilityBottom({show: e});
   };
 
   return (

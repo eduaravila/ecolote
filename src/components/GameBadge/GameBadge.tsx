@@ -25,7 +25,12 @@ const GameBadge: React.FC<GameBadgeType> = ({
           fill={color}
         />
       </Svg>
-      <Image source={logo} style={styles.logo} />
+      <Image
+        source={{
+          uri: logo,
+        }}
+        style={styles.logo}
+      />
       <Caption>{name}</Caption>
     </View>
   );

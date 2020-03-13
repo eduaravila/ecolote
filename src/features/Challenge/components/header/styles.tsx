@@ -21,6 +21,8 @@ export const styles = StyleSheet.create({
   },
   container: {
     width: '100%',
+    height: normalize(100),
+    marginBottom: normalize(10),
   },
   userInfoContainerJr: {
     height: '100%',
@@ -53,6 +55,7 @@ export const styles = StyleSheet.create({
   },
   loadingStat: {
     width: '100%',
+    height: normalize(50),
   },
   loadingContainer: {
     width: '100%',

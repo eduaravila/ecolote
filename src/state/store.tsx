@@ -42,7 +42,7 @@ const store = createStore(storeModel, {
         timeout: 0, // The code base checks for falsy, so 0 disables
         key: 'easypeasystate',
         storage,
-        blacklist: ['networkStatus'],
+        blacklist: ['networkStatus', 'BottomNavigation'],
       },
       reducer,
     ),

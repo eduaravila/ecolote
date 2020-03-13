@@ -11,6 +11,7 @@ import {normalize} from '../../style/UTILS';
 import * as Animatable from 'react-native-animatable';
 import {useStoreState} from '../../state/store';
 import {BackgroundNormal} from './image';
+import {BackgroundLegendary} from './legendary';
 
 const GradientBackgroundNormal: React.FC<GradientBackgroundType> = ({
   colors = [PRIMARY_COLOR, PRIMARY_LIGHT_COLOR],
@@ -18,6 +19,7 @@ const GradientBackgroundNormal: React.FC<GradientBackgroundType> = ({
   end = {x: 1, y: 0.7},
   children,
   style,
+  rarity = 'normal',
   messageRef = useRef(null),
 }) => {
   const messageScale = new Animated.Value(0);
@@ -76,7 +78,13 @@ const GradientBackgroundNormal: React.FC<GradientBackgroundType> = ({
       keyboardShouldPersistTaps={'handled'}
       onKeyboardDidShow={() => setpaddingBottom(normalize(100))}
       onKeyboardDidHide={() => setpaddingBottom(normalize(0))}>
-      <BackgroundNormal />
+      {rarity == 'normal' ? (
+        <BackgroundNormal />
+      ) : rarity == 'legendary' ? (
+        <BackgroundLegendary />
+      ) : (
+        <BackgroundNormal />
+      )}
       <ScrollView
         keyboardShouldPersistTaps="handled"
         style={[style, {height: '100%', width: '100%'}]}

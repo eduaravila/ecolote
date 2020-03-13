@@ -18,11 +18,15 @@ import {
   NEXT_COLOR,
   NEXT_COLOR_DARK,
   PRIMARY_LIGHT_COLOR,
+  CANCEL_COLOR,
+  CANCEL_COLOR_DARK,
 } from '../../../../style/COLOR';
 import {GameBadge} from '../../../../components/GameBadge/GameBadge';
 import {Subtitle2} from '../../../../components/Subtitle2/Subtitle2';
 import goGameCheck from '../../../../navigation/navigators/GameCheck';
 import {H6Title} from '../../../../components/H6Title/H6Title';
+import {H5Title} from '../../../../components/H5Title/H5Title';
+import goGame from '../../../../navigation/navigators/Game';
 
 const replace_icon = require('../../../../assets/img/replace.png');
 
@@ -103,11 +107,23 @@ const GET_CHALLENGE_GQL = gql`
     ) {
       _id
       title
+      subtitle
+      portrait
       badges {
         type {
           _id
           updated_at
           name
+          image
+        }
+        zone {
+          _id
+          name
+          image
+        }
+        rarity {
+          name
+          image
         }
       }
     }
@@ -137,6 +153,18 @@ const Body: React.FC<BodyType> = ({toggle_visibility, loading}) => {
     fetchPolicy: 'network-only',
     onCompleted: e => {
       setLastRecomended(e.GetChallenge._id);
+      console.log('====================================');
+      console.log(e);
+      console.log('====================================');
+      if (loading) {
+        toggle_visibility(false);
+        goGame({
+          ...e.GetChallenge,
+          currentChallenge: data ? data.MyCurrentChallenge.Challenge._id : null,
+          Arena: data_current_arena.MyArena.currentArena._id,
+          Last: lastRecomended,
+        });
+      }
       console.log(e);
     },
   });
@@ -224,12 +252,16 @@ const Body: React.FC<BodyType> = ({toggle_visibility, loading}) => {
     }).start();
   };
   useEffect(() => {
+    console.log('====================================');
+    console.log(loading);
+    console.log('====================================');
     if (loading) {
       goBig();
     } else {
       goSmall();
     }
   }, [loading]);
+
   return (
     <View style={styles.container}>
       {data && !error ? (
@@ -270,7 +302,13 @@ const Body: React.FC<BodyType> = ({toggle_visibility, loading}) => {
           </TouchableScale>
         </Animated.View>
       ) : (
-        <Subtitle2 style={styles.noChallengeSubtitle}>
+        <Subtitle2
+          style={[
+            styles.noChallengeSubtitle,
+            {
+              display: loading ? 'none' : 'flex',
+            },
+          ]}>
           No tienes reto asignado
         </Subtitle2>
       )}
@@ -301,31 +339,41 @@ const Body: React.FC<BodyType> = ({toggle_visibility, loading}) => {
                 },
               ]}
             />
-            <H6Title style={styles.arenaTitle}>
-              {data_current_arena.MyArena.currentArena.name}
-            </H6Title>
+            <Animated.View
+              style={{
+                opacity: areanSize.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [1, 0],
+                }),
+              }}>
+              <H5Title>{data_current_arena.MyArena.currentArena.name}</H5Title>
+            </Animated.View>
           </Animated.View>
         ) : (
           <ActivityIndicator size="large" color={PRIMARY_LIGHT_COLOR} />
         )}
       </TouchableScale>
       <ColorButton
-        topColor={NEXT_COLOR}
-        middleColor={NEXT_COLOR_DARK}
+        topColor={loading ? CANCEL_COLOR : NEXT_COLOR}
+        middleColor={loading ? CANCEL_COLOR_DARK : NEXT_COLOR_DARK}
+        loading={loading}
         disabled={
-          loading_arena_points ||
+          (!loading && loading_arena_points) ||
           loading_current_challenge ||
           loading_GetChallenge ||
-          loading_current_arena ||
-          loading
+          loading_current_arena
         }
         onPress={() => {
+          if (loading) {
+            toggle_visibility(false);
+            return;
+          }
           myCompletedChallenges();
-          // toggle_visibility(true)
+          toggle_visibility(true);
         }}
         cancel={loading}
         style={loading ? styles.cancelButton : styles.playButton}>
-        {loading ? 'Cancelar ' : 'Jugar!'}
+        {loading ? 'Cancelar' : 'Jugar!'}
       </ColorButton>
     </View>
   );

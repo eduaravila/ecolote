@@ -22,6 +22,7 @@ const ColorButton: React.FC<ColorButtomType> = ({
   cancel = false,
   style,
   disabled = false,
+  loading = false,
   topColor = PRIMARY_COLOR,
   bottomColor = '#000',
   middleColor = PRIMARY_DARK_COLOR,
@@ -31,7 +32,7 @@ const ColorButton: React.FC<ColorButtomType> = ({
       style={[styles.container, style, {opacity: disabled ? 0.5 : 1}]}
       tension={disabled ? 500 : 300}
       friction={disabled ? 100 : 10}
-      onPress={!disabled ? onPress : () => {}}>
+      onPress={disabled && !loading ? () => {} : onPress}>
       <Svg
         width="100%"
         height="86"
@@ -42,7 +43,7 @@ const ColorButton: React.FC<ColorButtomType> = ({
           id="Path_318"
           data-name="Path 318"
           d="M10,0H184c.074.108,9.962,9.857,10,10V76L184,86H10L0,76V10Z"
-          fill={disabled ? INPUT_BORDER_COLOR : topColor}
+          fill={disabled && !loading ? INPUT_BORDER_COLOR : topColor}
         />
       </Svg>
 
@@ -56,7 +57,7 @@ const ColorButton: React.FC<ColorButtomType> = ({
           id="Path_318"
           data-name="Path 318"
           d="M10,0H184c.074.108,9.962,9.857,10,10V76L184,86H10L0,76V10Z"
-          fill={disabled ? INPUT_BORDER_COLOR_DARK : middleColor}
+          fill={disabled && !loading ? INPUT_BORDER_COLOR_DARK : middleColor}
         />
       </Svg>
       <Svg

@@ -14,13 +14,20 @@ import {ECOLOTE_GAME_DESCRIPTION} from '../../../../navigation/screen_names';
 
 interface FooterType {
   componentId: string;
+  _toggle_searching: () => void;
+  loading: boolean;
 }
 
-const Footer: React.FC<FooterType> = ({componentId}) => {
+const Footer: React.FC<FooterType> = ({
+  componentId,
+  _toggle_searching,
+  loading = false,
+}) => {
   return (
     <View style={styles.container}>
       <ColorButton
         style={styles.go}
+        disabled={loading}
         onPress={() =>
           pushStackWithProps(
             componentId,
@@ -46,6 +53,8 @@ const Footer: React.FC<FooterType> = ({componentId}) => {
         Vamos!
       </ColorButton>
       <ColorButton
+        disabled={loading}
+        onPress={() => _toggle_searching()}
         topColor={REPLACE_COLOR}
         middleColor={REPLACE_COLOR_DARK}
         style={styles.another}>
