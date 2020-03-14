@@ -27,6 +27,7 @@ import goGameCheck from '../../../../navigation/navigators/GameCheck';
 import {H6Title} from '../../../../components/H6Title/H6Title';
 import {H5Title} from '../../../../components/H5Title/H5Title';
 import goGame from '../../../../navigation/navigators/Game';
+import {LoadingLogo} from '../../../../components/LoadingLogo/LoadingLogo';
 
 const replace_icon = require('../../../../assets/img/replace.png');
 
@@ -138,6 +139,7 @@ interface BodyType {
 const Body: React.FC<BodyType> = ({toggle_visibility, loading}) => {
   const [areanSize] = useState(new Animated.Value(0));
   const [lastRecomended, setLastRecomended] = useState(null);
+  const [delayLoading, setdelayLoading] = useState(true);
   let {mediaToken} = useStoreState(state => state.credentials);
 
   let [
@@ -162,7 +164,7 @@ const Body: React.FC<BodyType> = ({toggle_visibility, loading}) => {
           ...e.GetChallenge,
           currentChallenge: data ? data.MyCurrentChallenge.Challenge._id : null,
           Arena: data_current_arena.MyArena.currentArena._id,
-          Last: lastRecomended,
+          Last: e.GetChallenge._id,
         });
       }
       console.log(e);
@@ -252,14 +254,15 @@ const Body: React.FC<BodyType> = ({toggle_visibility, loading}) => {
     }).start();
   };
   useEffect(() => {
-    console.log('====================================');
-    console.log(loading);
-    console.log('====================================');
     if (loading) {
       goBig();
     } else {
       goSmall();
     }
+
+    // let intervalInactivity = setInterval(() => setdelayLoading(true), 10000);
+
+    // return () => clearTimeout(intervalInactivity);
   }, [loading]);
 
   return (

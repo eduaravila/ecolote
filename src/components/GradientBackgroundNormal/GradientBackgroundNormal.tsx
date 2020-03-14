@@ -14,9 +14,6 @@ import {BackgroundNormal} from './image';
 import {BackgroundLegendary} from './legendary';
 
 const GradientBackgroundNormal: React.FC<GradientBackgroundType> = ({
-  colors = [PRIMARY_COLOR, PRIMARY_LIGHT_COLOR],
-  start = {x: 1, y: 0.2},
-  end = {x: 1, y: 0.7},
   children,
   style,
   rarity = 'normal',

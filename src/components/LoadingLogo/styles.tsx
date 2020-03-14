@@ -11,6 +11,8 @@ export const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
+    elevation: 5,
+    zIndex: 10,
   },
   image: {
     width: normalize(250),

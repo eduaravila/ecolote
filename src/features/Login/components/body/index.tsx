@@ -69,6 +69,7 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
       });
     }
   };
+  console.log(error);
 
   return (
     <View>

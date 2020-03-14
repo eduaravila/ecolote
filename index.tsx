@@ -13,8 +13,6 @@ import goTutorial from './src/navigation/navigators/Tutorial';
 import goAccess from './src/navigation/navigators/Access';
 import goDashboard from './src/navigation/navigators/Dashboard';
 
-console.log(API);
-
 registryComponents();
 
 Navigation.events().registerAppLaunchedListener(() => {
@@ -32,6 +30,7 @@ Navigation.events().registerAppLaunchedListener(() => {
   });
   let {show} = store.getState().tutorial;
   let {token, mediaToken} = store.getState().credentials;
+  console.log(API);
 
   if (token && mediaToken) {
     return goDashboard();

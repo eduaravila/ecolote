@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {View, Animated} from 'react-native';
+import {View, Animated, ActivityIndicator} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import {useQuery} from '@apollo/react-hooks';
 import {gql} from 'apollo-boost';
@@ -8,10 +8,15 @@ import {StatContainer} from '../../../../components/StatContainer/StatContainer'
 import {MiniStateContainer} from '../../../../components/MiniStatContainer/MiniStatContainer';
 import {Subtitle2} from '../../../../components/Subtitle2/Subtitle2';
 import {styles} from './styles';
-import {STAT_LABEL_COLOR} from '../../../../style/COLOR';
+import {
+  STAT_LABEL_COLOR,
+  PRIMARY_LIGHT_COLOR,
+  PRIMARY_DARK_COLOR,
+} from '../../../../style/COLOR';
 import {H3Title} from '../../../../components/H3Title/H3Title';
 import {H6Title} from '../../../../components/H6Title/H6Title';
 import {normalize} from '../../../../style/UTILS';
+import {LoadingSkeleton} from '../../../../components/LoadingSkeleton/LoadingSkeleton';
 
 const coin_image = require('../../../../assets/img/dinero_es_dinero.png');
 const level_image = require('../../../../assets/img/level.png');
@@ -51,6 +56,7 @@ const Head: React.FC<HeadType> = ({
   ref = useRef(null),
   refLoading = useRef(null),
 }) => {
+  const [initialDelay, setInitialDelay] = useState(true);
   let [loadingSize] = useState(new Animated.Value(0));
 
   let {loading, error, data} = useQuery(MY_WALLET_GQL, {
@@ -143,16 +149,18 @@ const Head: React.FC<HeadType> = ({
       </Animatable.View>
 
       <Animatable.View style={styles.loadingStat} ref={refLoading}>
-        <StatContainer
-          icon={zoom_image}
-          logoStyle={styles.loadingIcon}
-          borderStyle={{backgroundColor: STAT_LABEL_COLOR}}
-          style={styles.loadingContainer}
-          styleJr={styles.loadingContainerJr}
-          logoContainerStyle={styles.loadingIconContainer}
-          contentStyle={styles.loadingContent}>
-          <H6Title style={styles.loadingTitle}>Buscando un reto...</H6Title>
-        </StatContainer>
+        {show && (
+          <StatContainer
+            icon={zoom_image}
+            logoStyle={styles.loadingIcon}
+            borderStyle={{backgroundColor: STAT_LABEL_COLOR}}
+            style={styles.loadingContainer}
+            styleJr={styles.loadingContainerJr}
+            logoContainerStyle={styles.loadingIconContainer}
+            contentStyle={styles.loadingContent}>
+            <H6Title style={styles.loadingTitle}>Buscando un reto...</H6Title>
+          </StatContainer>
+        )}
       </Animatable.View>
     </View>
   );

@@ -4,7 +4,12 @@ import {View} from 'react-native';
 import {styles} from './styles';
 
 import {ColorButton} from '../../../../components/ColorButton/ColorButton';
-import {REPLACE_COLOR, REPLACE_COLOR_DARK} from '../../../../style/COLOR';
+import {
+  REPLACE_COLOR,
+  REPLACE_COLOR_DARK,
+  CANCEL_COLOR,
+  CANCEL_COLOR_DARK,
+} from '../../../../style/COLOR';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   pushStack,
@@ -15,12 +20,14 @@ import {ECOLOTE_GAME_DESCRIPTION} from '../../../../navigation/screen_names';
 interface FooterType {
   componentId: string;
   _toggle_searching: () => void;
+  _cancel_search: () => void;
   loading: boolean;
 }
 
 const Footer: React.FC<FooterType> = ({
   componentId,
   _toggle_searching,
+  _cancel_search,
   loading = false,
 }) => {
   return (
@@ -53,12 +60,15 @@ const Footer: React.FC<FooterType> = ({
         Vamos!
       </ColorButton>
       <ColorButton
-        disabled={loading}
-        onPress={() => _toggle_searching()}
-        topColor={REPLACE_COLOR}
-        middleColor={REPLACE_COLOR_DARK}
+        loading={loading}
+        onPress={loading ? () => _cancel_search() : () => _toggle_searching()}
+        topColor={loading ? CANCEL_COLOR : REPLACE_COLOR}
+        middleColor={loading ? CANCEL_COLOR_DARK : REPLACE_COLOR_DARK}
         style={styles.another}>
-        <Icon name={'refresh'} style={styles.anotherText} />
+        <Icon
+          name={loading ? 'close-circle' : 'refresh'}
+          style={styles.anotherText}
+        />
       </ColorButton>
     </View>
   );

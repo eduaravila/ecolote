@@ -19,6 +19,7 @@ interface GameTypes {
   currentChallenge: string;
   _id: string;
   title: string;
+  description: string;
   portrait: string;
   subtitle: string;
   badges: {
@@ -57,6 +58,7 @@ const GET_CHALLENGE_GQL = gql`
       }
     ) {
       _id
+      description
       title
       subtitle
       portrait
@@ -91,6 +93,9 @@ const MY_COMPLETED_CHALLENGES_GQL = gql`
 `;
 
 const Game: React.FC<GameTypes> = props => {
+  const [canceled, setcanceled] = useState(false);
+  const [lastState, setlastState] = useState<GameTypes>(props);
+
   const [lastRecomended, setLastRecomended] = useState(props.Last);
   const [searching, setsearching] = useState<boolean>(false);
   const [newChallenge, setnewChallenge] = useState<boolean>(false);
@@ -107,11 +112,13 @@ const Game: React.FC<GameTypes> = props => {
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'network-only',
     onCompleted: e => {
-      setLastRecomended(e.GetChallenge._id);
-      setnewChallenge(true);
-      setsearching(false);
-
-      console.log(e);
+      if (!canceled) {
+        setLastRecomended(e.GetChallenge._id);
+        setnewChallenge(true);
+        setsearching(false);
+        setlastState(i => ({...i, ...e.GetChallenge}));
+      }
+      setcanceled(false);
     },
   });
 
@@ -133,11 +140,16 @@ const Game: React.FC<GameTypes> = props => {
           completedChallenges:
             e.MyCompletedChallenges.length > 0 ? e.MyCompletedChallenges : null,
           Arena: props.Arena,
-          Last: lastRecomended,
+          Last: lastRecomended ? lastRecomended : props.Last,
         },
       });
     },
   });
+
+  const _cancel_search = () => {
+    setcanceled(true);
+    setsearching(false);
+  };
   const _toggle_searching = () => {
     setsearching(true);
     myCompletedChallenges();
@@ -146,56 +158,21 @@ const Game: React.FC<GameTypes> = props => {
 
   return (
     <GradientBackgroundNormal
-      rarity={
-        newChallenge && data_GetChallenge
-          ? data_GetChallenge.GetChallenge.badges.rarity.name
-          : props.badges.rarity.name
-      }
+      rarity={lastState.badges.rarity.name}
       style={{paddingLeft: getColumn(0.5), paddingRight: getColumn(0.5)}}>
-      <StatusBar
-        backgroundColor={
-          data_GetChallenge
-            ? data_GetChallenge.GetChallenge.badges.rarity.color
-            : PRIMARY_COLOR
-        }
-      />
+      <StatusBar backgroundColor={lastState.badges.rarity.color} />
 
       {searching ? (
         <LoadingLogo />
       ) : (
         <Fragment>
-          <Header
-            title={
-              newChallenge ? data_GetChallenge.GetChallenge.title : props.title
-            }
-            portrait={
-              newChallenge
-                ? data_GetChallenge.GetChallenge.portrait
-                : props.portrait
-            }
-          />
+          <Header title={lastState.title} portrait={lastState.portrait} />
           <Body
-            subtitle={
-              newChallenge
-                ? data_GetChallenge.GetChallenge.subtitle
-                : props.subtitle
-            }
+            subtitle={lastState.subtitle}
             componentId={props.componentId}
-            type={
-              newChallenge
-                ? data_GetChallenge.GetChallenge.badges.type
-                : props.badges.type
-            }
-            zone={
-              newChallenge
-                ? data_GetChallenge.GetChallenge.badges.zone
-                : props.badges.zone
-            }
-            rarity={
-              newChallenge
-                ? data_GetChallenge.GetChallenge.badges.rarity
-                : props.badges.rarity
-            }
+            type={lastState.badges.type}
+            zone={lastState.badges.zone}
+            rarity={lastState.badges.rarity}
           />
         </Fragment>
       )}
@@ -203,6 +180,7 @@ const Game: React.FC<GameTypes> = props => {
         loading={searching}
         componentId={props.componentId}
         _toggle_searching={_toggle_searching}
+        _cancel_search={_cancel_search}
       />
     </GradientBackgroundNormal>
   );

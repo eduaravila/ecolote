@@ -18,7 +18,7 @@ const LoadingLogo: React.FC = () => {
         iterationCount={'infinite'}
         direction="alternate"
       />
-      <H5Title>Cargando...</H5Title>
+      {/* <H5Title>Cargando...</H5Title> */}
     </View>
   );
 };
