@@ -4,13 +4,32 @@ import {View} from 'react-native';
 import {styles} from './styles';
 
 import {ColorButton} from '../../../../components/ColorButton/ColorButton';
-import {REPLACE_COLOR, REPLACE_COLOR_DARK} from '../../../../style/COLOR';
+import {HEY_COLOR, HEY_COLOR_DARK} from '../../../../style/COLOR';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const Footer: React.FC = () => {
+interface FooterType {
+  ready: boolean;
+  onPressNext: () => void;
+  onPress: () => void;
+  loading: boolean;
+}
+
+const Footer: React.FC<FooterType> = ({
+  ready,
+  onPressNext,
+  onPress,
+  loading,
+}) => {
   return (
     <View style={styles.container}>
-      <ColorButton style={styles.go}>Comenzar</ColorButton>
+      <ColorButton
+        disabled={!ready || loading}
+        topColor={HEY_COLOR}
+        middleColor={HEY_COLOR_DARK}
+        style={styles.go}
+        onPress={ready ? () => onPress() : () => {}}>
+        Comenzar
+      </ColorButton>
     </View>
   );
 };

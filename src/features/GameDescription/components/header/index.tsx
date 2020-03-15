@@ -10,6 +10,7 @@ import {Navigation} from 'react-native-navigation';
 import {BATHROOM_COLOR, REPLACE_COLOR} from '../../../../style/COLOR';
 import {GameBadge} from '../../../../components/GameBadge/GameBadge';
 import {useStoreState} from '../../../../state/store';
+import {normalize} from '../../../../style/UTILS';
 
 const replace_icon = require('../../../../assets/img/replace.png');
 const bathroom_icon = require('../../../../assets/img/bathroom.png');
@@ -51,21 +52,24 @@ const Header: React.FC<HeaderType> = ({
         onPress={() => popStack(componentId)}
         iconName={'arrow-left-drop-circle'}
         style={styles.back}>
-        Back
+        Volver
       </MiniButton>
       <Navigation.Element elementId="headergamedescription">
         <H5Title>{title}</H5Title>
       </Navigation.Element>
       <View style={styles.badgeContainer}>
         <GameBadge
+          style={{width: normalize(40), height: normalize(40)}}
           color={'white'}
           logo={MEDIA_API + 'image/' + type.image + '/' + mediaToken}
         />
         <GameBadge
+          style={{width: normalize(40), height: normalize(40)}}
           color={'white'}
           logo={MEDIA_API + 'image/' + zone.image + '/' + mediaToken}
         />
         <GameBadge
+          style={{width: normalize(40), height: normalize(40)}}
           color={rarity.color}
           logo={MEDIA_API + 'image/' + rarity.image + '/' + mediaToken}
         />

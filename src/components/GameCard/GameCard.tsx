@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, Image, StyleSheet} from 'react-native';
-import Markdown from 'react-native-markdown-renderer';
+import Markdown, {PluginContainer} from 'react-native-markdown-renderer';
 
 import {H6Title} from '../H6Title/H6Title';
 import {styles} from './styles';
@@ -13,24 +13,26 @@ const stylesMD = StyleSheet.create({
   heading: {
     fontFamily: 'Rubik-Medium',
     color: 'white',
+    textAlign: 'center',
   },
   text: {
-    fontFamily: 'Rubik-Regular',
+    fontFamily: 'Times New Roman',
     color: 'white',
     fontSize: normalize(16),
   },
-  blockquote: {},
+  blockquote: {
+    fontFamily: 'Rubik-Bold',
+  },
+  img: {
+    borderRadius: normalize(5),
+  },
 });
 
 const GameCard: React.FC<GameCardType> = ({item}) => {
-  let {mediaToken} = useStoreState(state => state.credentials);
-
   return (
     <View style={styles.constainer}>
-      <ScrollView>
-        <Markdown style={stylesMD}>
-          {item.replace('{{token}}', mediaToken)}
-        </Markdown>
+      <ScrollView alwaysBounceVertical>
+        <Markdown style={stylesMD}>{item.txt}</Markdown>
       </ScrollView>
     </View>
   );

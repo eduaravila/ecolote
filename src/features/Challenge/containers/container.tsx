@@ -267,6 +267,9 @@ const Challenge: React.FC = () => {
   } = useQuery(ARENA_COINS_GQL, {
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'network-only',
+    onError: e => {
+      refetch_my_current_challenge();
+    },
     onCompleted: e => {
       if (e) {
         let {ArenaPoins} = e;
@@ -293,7 +296,8 @@ const Challenge: React.FC = () => {
               loading_current_challenge ||
               loading_GetChallenge ||
               loading_current_arena ||
-              !!error_arena_points
+              !!error_arena_points ||
+              !!error_current_arena
             }
             startSearch={myCompletedChallenges}
           />

@@ -53,6 +53,6 @@ const httpLink = new HttpLink({
 });
 
 export const client = new ApolloClient({
-  link: ApolloLink.from([authLink, errorLink, httpLink, retryLink]),
+  link: ApolloLink.from([authLink, errorLink, httpLink]),
   cache: new InMemoryCache(),
 });

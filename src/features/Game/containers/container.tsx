@@ -180,9 +180,13 @@ const Game: React.FC<GameTypes> = props => {
         iconName={'arrow-left-drop-circle'}
         style={{
           alignSelf: 'flex-end',
-          marginVertical: normalize(15),
+          marginVertical: normalize(10),
+          // marginHorizontal: normalize(10),
+          backgroundColor: PRIMARY_COLOR,
+          borderRadius: normalize(20),
+          padding: normalize(5),
         }}>
-        Back
+        Volver
       </MiniButton>
       {online && refetch ? (
         <Fragment>
@@ -209,7 +213,7 @@ const Game: React.FC<GameTypes> = props => {
               pushStackWithProps(
                 props.componentId,
                 ECOLOTE_GAME_DESCRIPTION,
-                {...props},
+                {...lastState},
                 {
                   customTransition: {
                     animations: [

@@ -22,3 +22,24 @@ export const CANCEL_COLOR_DARK = '#AE1B19';
 export const NEXT_COLOR_DARK = '#A47A0C';
 export const PHOTO_COLOR = '#9EFFEC';
 export const PHOTO_COLOR_DARK = '#65A79A';
+
+export const EPIC_COLOR = '#8EFF00';
+export const EPIC_COLOR_DARK = '#FF6719';
+
+export const LEGENDARY_COLOR = '#CBFDFF';
+export const LEGENDARY_COLOR_DARK = '#EE367B';
+
+export const HEY_COLOR = '#007ACE';
+export const HEY_COLOR_DARK = '#005894';
+export const getRarityColor = (rarity: string) => {
+  switch (rarity.toLowerCase().trim()) {
+    case 'normal':
+      return {first: PRIMARY_LIGHT_COLOR, second: PRIMARY_DARK_COLOR};
+    case 'epic':
+      return {first: EPIC_COLOR, second: EPIC_COLOR_DARK};
+    case 'legendary':
+      return {first: LEGENDARY_COLOR, second: LEGENDARY_COLOR_DARK};
+    default:
+      return {first: PRIMARY_LIGHT_COLOR, second: PRIMARY_DARK_COLOR};
+  }
+};

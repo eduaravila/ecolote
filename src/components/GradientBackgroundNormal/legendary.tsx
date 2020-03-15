@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {G, Rect, Circle, Svg} from 'react-native-svg';
 import {View, StyleSheet} from 'react-native';
+import {LEGENDARY_COLOR} from '../../style/COLOR';
 
 const BackgroundLegendary: React.FC = () => {
   return (
@@ -13,12 +14,10 @@ const BackgroundLegendary: React.FC = () => {
           position: 'absolute',
           top: 0,
           left: 0,
+          backgroundColor: "transparent",
         },
       ]}>
-      <Svg
-        width="459.465"
-        height="902.161"
-        viewBox="0 0 459.465 902.161">
+      <Svg width="459.465" height="902.161" viewBox="0 0 459.465 902.161">
         <G
           id="Dragon-Scales_1_"
           data-name="Dragon-Scales(1)"

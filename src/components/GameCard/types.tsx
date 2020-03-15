@@ -1,4 +1,4 @@
 export interface GameCardType {
-  item: string;
+  item: {name: string; txt: string};
   index: number;
 }

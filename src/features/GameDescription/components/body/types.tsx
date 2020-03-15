@@ -1,5 +1,9 @@
 export interface bodyTypes {
   componentId: string;
+  rarity: string;
   length: number;
-  data: string[];
+  data: {name: string; txt: string}[];
+  loading: boolean;
+  setactiveIndex: (i: number) => void;
+  activeIndex: number;
 }

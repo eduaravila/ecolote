@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   another: {
-    flex: 0.5,
+    flex: 0.5,  
     marginLeft: normalize(10),
   },
   anotherText: {

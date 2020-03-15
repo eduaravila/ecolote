@@ -8,12 +8,12 @@ interface LoadingSkeletonType {
   style?: {[t: string]: any};
 }
 
-const LoadingSkeleton: React.FC<LoadingSkeletonType> = () => {
+const LoadingSkeleton: React.FC<LoadingSkeletonType> = ({style}) => {
   return (
     <ActivityIndicator
       size="large"
       color={PRIMARY_DARK_COLOR}
-      style={styles.container}
+      style={[styles.container, style]}
     />
   );
 };

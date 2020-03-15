@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
     marginVertical: normalize(20),
   },
   container: {
-    marginVertical: normalize(30),
+    marginVertical: normalize(20),
     width: '100%',
     justifyContent: 'space-between',
     alignItems: 'center',

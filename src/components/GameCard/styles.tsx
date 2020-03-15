@@ -1,6 +1,11 @@
 import {StyleSheet} from 'react-native';
 import {normalize} from '../../style/UTILS';
-import {PRIMARY_LIGHT_COLOR, GAME_POINT_INACTIVE} from '../../style/COLOR';
+import {
+  PRIMARY_LIGHT_COLOR,
+  GAME_POINT_INACTIVE,
+  PRIMARY_DARK_COLOR,
+  PRIMARY_COLOR,
+} from '../../style/COLOR';
 export const styles = StyleSheet.create({
   descriptionText: {
     textAlign: 'center',
@@ -22,6 +27,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: normalize(10),
     flex: 1,
+    backgroundColor: PRIMARY_COLOR,
     paddingHorizontal: 5,
     paddingVertical: 18, // needed for shadow    elevation: 5,
     shadowColor: 'black',
