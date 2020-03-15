@@ -18,21 +18,11 @@ interface headerType {
 const Header: React.FC<headerType> = ({title, portrait}) => {
   let {mediaToken} = useStoreState(state => state.credentials);
 
-  const setVisibilityBottom = useStoreActions(
-    state => state.BottomNavigation.BottomNavigationSetVisity,
-  );
+  
 
   return (
     <View style={styles.constainer}>
-      <MiniButton
-        onPress={() => {
-          setVisibilityBottom({show: false});
-          goDashboard();
-        }}
-        iconName={'arrow-left-drop-circle'}
-        style={styles.back}>
-        Back
-      </MiniButton>
+     
       <Navigation.Element elementId="headergame">
         <H5Title>{title}</H5Title>
       </Navigation.Element>

@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {getColumn, normalize} from '../../style/UTILS';
-import {INPUT_BORDER_COLOR_ERROR} from '../../style/COLOR';
+import {INPUT_BORDER_COLOR_ERROR, INPUT_BORDER_COLOR} from '../../style/COLOR';
 import {CAPTION_SIZE} from '../../style/SIZES';
 
 export const styles = StyleSheet.create({
@@ -14,6 +14,11 @@ export const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     backgroundColor: INPUT_BORDER_COLOR_ERROR,
+  },
+  offlineContainer: {
+    width: '100%',
+    justifyContent: 'center',
+    backgroundColor: INPUT_BORDER_COLOR,
   },
   messageText: {
     color: 'white',

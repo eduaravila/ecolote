@@ -8,11 +8,11 @@ import {
   tokenModel,
   tokenModelType,
 } from '../api/model';
+import {networkStatusModel, networkStatusModelType} from '../api/network';
 import {
   BottomNavigationModel,
   BottomNavigationType,
 } from '../features/Dashboard/reducers';
-
 import {TutorialModel, TutorialModelType} from '../features/Tutorial/reducers';
 
 interface StoreModel {
@@ -20,6 +20,7 @@ interface StoreModel {
   BottomNavigation: BottomNavigationType;
   credentials: tokenModelType;
   tutorial: TutorialModelType;
+  network: networkStatusModelType;
 }
 const typedHooks = createTypedHooks<StoreModel>();
 
@@ -33,6 +34,7 @@ const storeModel: StoreModel = {
   BottomNavigation: BottomNavigationModel,
   credentials: tokenModel,
   tutorial: TutorialModel,
+  network: networkStatusModel,
 };
 
 const store = createStore(storeModel, {
@@ -42,7 +44,7 @@ const store = createStore(storeModel, {
         timeout: 0, // The code base checks for falsy, so 0 disables
         key: 'easypeasystate',
         storage,
-        blacklist: ['networkStatus', 'BottomNavigation'],
+        blacklist: ['networkStatus', 'BottomNavigation', 'network'],
       },
       reducer,
     ),

@@ -18,11 +18,13 @@ const GradientBackground: React.FC<GradientBackgroundType> = ({
   children,
   style,
   messageRef = useRef(null),
+  onlineRef = useRef(null),
 }) => {
   const messageScale = new Animated.Value(0);
 
   const [paddingBottom, setpaddingBottom] = useState<number>(normalize(0));
   let {msg, show} = useStoreState(state => state.networkStatus);
+  let {online} = useStoreState(state => state.network);
 
   const bounce = () => {
     if (messageRef?.current) {
@@ -60,13 +62,55 @@ const GradientBackground: React.FC<GradientBackgroundType> = ({
         );
     }
   };
+  const bounceOnline = () => {
+    if (onlineRef?.current) {
+      onlineRef.current
+        .animate({
+          0: {
+            height: 0,
+          },
+          1: {
+            height: normalize(20),
+          },
+        })
+        .then((endState: any) =>
+          console.log(
+            endState.finished ? 'bounce finished' : 'bounce cancelled',
+          ),
+        );
+    }
+  };
+
+  const bounceOffOnline = () => {
+    if (onlineRef?.current) {
+      onlineRef.current
+        .animate({
+          0: {
+            height: normalize(20),
+          },
+          1: {
+            height: normalize(0),
+          },
+        })
+        .then((endState: any) =>
+          console.log(
+            endState.finished ? 'bounce finished' : 'bounce cancelled',
+          ),
+        );
+    }
+  };
   useEffect(() => {
     if (show) {
       bounce();
     } else {
       bounceOff();
     }
-  }, [show]);
+    if (online) {
+      bounceOffOnline();
+    } else {
+      bounceOnline();
+    }
+  }, [show, online]);
 
   return (
     <KeyboardAwareScrollView
@@ -93,6 +137,13 @@ const GradientBackground: React.FC<GradientBackgroundType> = ({
       {show && (
         <Animatable.View style={styles.messageContainer} ref={messageRef}>
           <Animatable.Text style={styles.messageText}>{msg}</Animatable.Text>
+        </Animatable.View>
+      )}
+      {!online && (
+        <Animatable.View style={styles.offlineContainer} ref={onlineRef}>
+          <Animatable.Text style={styles.messageText}>
+            {'Offline, try conecting to the intenet 🎈'}
+          </Animatable.Text>
         </Animatable.View>
       )}
     </KeyboardAwareScrollView>

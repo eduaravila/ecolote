@@ -25,47 +25,21 @@ const config_image = require('../../../../assets/img/cog.png');
 const news_image = require('../../../../assets/img/newspaper.png');
 const zoom_image = require('../../../../assets/img/zoom.gif');
 
-const MY_WALLET_GQL = gql`
-  query MyWallet {
-    MyWallet {
-      _id
-      Coins {
-        total
-      }
-      Level {
-        total
-      }
-      Trophys {
-        total
-      }
-      User {
-        username
-      }
-    }
-  }
-`;
-
 interface HeadType {
   show: boolean;
   ref?: any;
   refLoading?: any;
+  data: any;
 }
 
 const Head: React.FC<HeadType> = ({
   show,
   ref = useRef(null),
   refLoading = useRef(null),
+  data,
 }) => {
   const [initialDelay, setInitialDelay] = useState(true);
   let [loadingSize] = useState(new Animated.Value(0));
-
-  let {loading, error, data} = useQuery(MY_WALLET_GQL, {
-    notifyOnNetworkStatusChange: true,
-    fetchPolicy: 'network-only',
-    onCompleted: e => {
-      // console.log(e);
-    },
-  });
 
   const goUpLoading = () => {
     if (refLoading?.current) {

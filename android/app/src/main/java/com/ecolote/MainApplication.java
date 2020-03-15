@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.netinfo.NetInfoPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.thebylito.navigationbarcolor.NavigationBarColorPackage;
 import com.reactnativecommunity.viewpager.RNCViewPagerPackage;
@@ -28,6 +29,7 @@ import com.horcrux.svg.SvgPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.swmansion.reanimated.ReanimatedPackage;
 import com.thebylito.navigationbarcolor.NavigationBarColorPackage;
+
 public class MainApplication extends NavigationApplication {
 
   @Override
@@ -51,7 +53,7 @@ public class MainApplication extends NavigationApplication {
     // No need to add RnnPackage and MainReactPackage
     return Arrays.<ReactPackage>asList(
         // eg. new VectorIconsPackage()
-        new SplashScreenReactPackage(), new SvgPackage(), new LinearGradientPackage(),new VectorIconsPackage(),new OrientationPackage(),new RNGestureHandlerPackage(), new ReanimatedPackage(), new RNCViewPagerPackage(), new NavigationBarColorPackage(), new AsyncStoragePackage() );
+        new SplashScreenReactPackage(), new SvgPackage(), new LinearGradientPackage(),new VectorIconsPackage(),new OrientationPackage(),new RNGestureHandlerPackage(), new ReanimatedPackage(), new RNCViewPagerPackage(), new NavigationBarColorPackage(), new AsyncStoragePackage(), new NetInfoPackage() );
 
   }
 

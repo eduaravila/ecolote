@@ -22,41 +22,19 @@ interface FooterType {
   _toggle_searching: () => void;
   _cancel_search: () => void;
   loading: boolean;
+  onPress: () => void;
 }
 
 const Footer: React.FC<FooterType> = ({
   componentId,
   _toggle_searching,
   _cancel_search,
+  onPress,
   loading = false,
 }) => {
   return (
     <View style={styles.container}>
-      <ColorButton
-        style={styles.go}
-        disabled={loading}
-        onPress={() =>
-          pushStackWithProps(
-            componentId,
-            ECOLOTE_GAME_DESCRIPTION,
-            {},
-            {
-              customTransition: {
-                animations: [
-                  {
-                    type: 'sharedElement',
-                    fromId: 'headergame',
-                    toId: 'headergamedescription',
-                    startDelay: 0,
-                    springVelocity: 0.2,
-                    duration: 0.5,
-                  },
-                ],
-                duration: 0.8,
-              },
-            },
-          )
-        }>
+      <ColorButton style={styles.go} disabled={loading} onPress={onPress}>
         Vamos!
       </ColorButton>
       <ColorButton

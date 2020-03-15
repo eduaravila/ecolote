@@ -7,10 +7,16 @@ import Header from '../components/header';
 import Body from '../components/body';
 import Footer from '../components/footer';
 import GradientBackgroundNormal from '../../../components/GradientBackgroundNormal/GradientBackgroundNormal';
-import {getColumn} from '../../../style/UTILS';
+import {getColumn, normalize} from '../../../style/UTILS';
 import {StatusBar} from 'react-native';
 import {PRIMARY_COLOR} from '../../../style/COLOR';
 import {LoadingLogo} from '../../../components/LoadingLogo/LoadingLogo';
+import {MiniButton} from '../../../components/MiniButton/MiniButton';
+import {useStoreActions, useStoreState} from '../../../state/store';
+import goDashboard from '../../../navigation/navigators/Dashboard';
+import {OfflineLogo} from '../../../components/OfflineLogo/OfflineLogo';
+import {pushStackWithProps} from '../../../navigation/navigators/stackUtils';
+import {ECOLOTE_GAME_DESCRIPTION} from '../../../navigation/screen_names';
 
 interface GameTypes {
   componentId: string;
@@ -19,7 +25,7 @@ interface GameTypes {
   currentChallenge: string;
   _id: string;
   title: string;
-  description: string;
+  description: string[];
   portrait: string;
   subtitle: string;
   badges: {
@@ -95,6 +101,7 @@ const MY_COMPLETED_CHALLENGES_GQL = gql`
 const Game: React.FC<GameTypes> = props => {
   const [canceled, setcanceled] = useState(false);
   const [lastState, setlastState] = useState<GameTypes>(props);
+  let {online, refetch} = useStoreState(state => state.network);
 
   const [lastRecomended, setLastRecomended] = useState(props.Last);
   const [searching, setsearching] = useState<boolean>(false);
@@ -138,7 +145,9 @@ const Game: React.FC<GameTypes> = props => {
         variables: {
           currentChallenge: props.currentChallenge,
           completedChallenges:
-            e.MyCompletedChallenges.length > 0 ? e.MyCompletedChallenges : null,
+            e && e.MyCompletedChallenges.length > 0
+              ? e.MyCompletedChallenges
+              : null,
           Arena: props.Arena,
           Last: lastRecomended ? lastRecomended : props.Last,
         },
@@ -155,33 +164,78 @@ const Game: React.FC<GameTypes> = props => {
     myCompletedChallenges();
   };
   console.log(data_GetChallenge);
-
+  const setVisibilityBottom = useStoreActions(
+    state => state.BottomNavigation.BottomNavigationSetVisity,
+  );
   return (
     <GradientBackgroundNormal
       rarity={lastState.badges.rarity.name}
       style={{paddingLeft: getColumn(0.5), paddingRight: getColumn(0.5)}}>
       <StatusBar backgroundColor={lastState.badges.rarity.color} />
-
-      {searching ? (
-        <LoadingLogo />
-      ) : (
+      <MiniButton
+        onPress={() => {
+          setVisibilityBottom({show: false});
+          goDashboard();
+        }}
+        iconName={'arrow-left-drop-circle'}
+        style={{
+          alignSelf: 'flex-end',
+          marginVertical: normalize(15),
+        }}>
+        Back
+      </MiniButton>
+      {online && refetch ? (
         <Fragment>
-          <Header title={lastState.title} portrait={lastState.portrait} />
-          <Body
-            subtitle={lastState.subtitle}
+          {searching ? (
+            <LoadingLogo />
+          ) : (
+            <Fragment>
+              <Header title={lastState.title} portrait={lastState.portrait} />
+              <Body
+                subtitle={lastState.subtitle}
+                componentId={props.componentId}
+                type={lastState.badges.type}
+                zone={lastState.badges.zone}
+                rarity={lastState.badges.rarity}
+              />
+            </Fragment>
+          )}
+          <Footer
+            loading={searching}
             componentId={props.componentId}
-            type={lastState.badges.type}
-            zone={lastState.badges.zone}
-            rarity={lastState.badges.rarity}
+            _toggle_searching={_toggle_searching}
+            _cancel_search={_cancel_search}
+            onPress={() =>
+              pushStackWithProps(
+                props.componentId,
+                ECOLOTE_GAME_DESCRIPTION,
+                {...props},
+                {
+                  customTransition: {
+                    animations: [
+                      {
+                        type: 'sharedElement',
+                        fromId: 'headergame',
+                        toId: 'headergamedescription',
+                        startDelay: 0,
+                        springVelocity: 0.2,
+                        duration: 0.5,
+                      },
+                    ],
+                    duration: 0.8,
+                  },
+                },
+              )
+            }
           />
         </Fragment>
+      ) : (
+        <OfflineLogo
+          onPress={() => {
+            _toggle_searching();
+          }}
+        />
       )}
-      <Footer
-        loading={searching}
-        componentId={props.componentId}
-        _toggle_searching={_toggle_searching}
-        _cancel_search={_cancel_search}
-      />
     </GradientBackgroundNormal>
   );
 };

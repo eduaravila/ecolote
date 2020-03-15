@@ -79,6 +79,7 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
         keyboardType="email-address"
         style={styles.userInput}
         error={!!errors.email || !!error?.graphQLErrors}
+        returnKeyType="next"
         onSubmitEditing={() => passwordRef.current!.focus()}
         errorMsg={
           error?.graphQLErrors.length

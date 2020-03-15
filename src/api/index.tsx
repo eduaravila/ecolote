@@ -4,8 +4,11 @@ import {HttpLink} from 'apollo-link-http';
 import {ApolloClient} from 'apollo-client';
 import {API} from 'react-native-dotenv';
 import {setContext} from 'apollo-link-context';
+import {RetryLink} from 'apollo-link-retry';
 
 import store from '../state/store';
+
+const retryLink = new RetryLink();
 
 const errorLink = new ErrorLink(({graphQLErrors, networkError}: any) => {
   if (graphQLErrors)
@@ -50,6 +53,6 @@ const httpLink = new HttpLink({
 });
 
 export const client = new ApolloClient({
-  link: ApolloLink.from([authLink, errorLink, httpLink]),
+  link: ApolloLink.from([authLink, errorLink, httpLink, retryLink]),
   cache: new InMemoryCache(),
 });

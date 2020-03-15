@@ -4,7 +4,7 @@ import {ApolloProvider} from '@apollo/react-hooks';
 import {StoreProvider} from 'easy-peasy';
 import {PersistGate} from 'redux-persist/integration/react';
 import {persistStore} from 'redux-persist';
-import {Text} from 'react-native';
+import NetInfo from '@react-native-community/netinfo';
 
 import {StatusBarCustom} from '../../components/StatusBar/StatusBarCustom';
 import {client} from '../../api';
@@ -15,6 +15,13 @@ import goDashboard from './Dashboard';
 import {LoadingLogo} from '../../components/LoadingLogo/LoadingLogo';
 
 const persistor = persistStore(store, null, () => {
+  // Subscribe
+  const unsubscribe = NetInfo.addEventListener(state => {
+    console.log('Connection type', state.type);
+    console.log('Is connected?', state.isConnected);
+    store.dispatch.network.setOnline({online: state.isConnected});
+  });
+
   let {show} = store.getState().tutorial;
   let {token, mediaToken} = store.getState().credentials;
 

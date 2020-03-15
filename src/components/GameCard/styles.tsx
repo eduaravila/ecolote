@@ -20,14 +20,14 @@ export const styles = StyleSheet.create({
   },
   constainer: {
     justifyContent: 'center',
-    backgroundColor: GAME_POINT_INACTIVE,
     borderRadius: normalize(10),
     flex: 1,
     paddingHorizontal: 5,
-    paddingBottom: 18, // needed for shadow    elevation: 5,
+    paddingVertical: 18, // needed for shadow    elevation: 5,
     shadowColor: 'black',
     shadowOpacity: 0.25,
     shadowOffset: {width: 0, height: 10},
     shadowRadius: 10,
+    maxHeight: normalize(330),
   },
 });

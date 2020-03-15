@@ -1,19 +1,37 @@
 import React, {useState, useEffect} from 'react';
-import {View, Image} from 'react-native';
-import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
+import {View, Image, StyleSheet} from 'react-native';
+import Markdown from 'react-native-markdown-renderer';
+
 import {H6Title} from '../H6Title/H6Title';
 import {styles} from './styles';
 import {GameCardType} from './types';
+import {useStoreState} from '../../state/store';
+import {normalize} from '../../style/UTILS';
+import {ScrollView} from 'react-native-gesture-handler';
+
+const stylesMD = StyleSheet.create({
+  heading: {
+    fontFamily: 'Rubik-Medium',
+    color: 'white',
+  },
+  text: {
+    fontFamily: 'Rubik-Regular',
+    color: 'white',
+    fontSize: normalize(16),
+  },
+  blockquote: {},
+});
 
 const GameCard: React.FC<GameCardType> = ({item}) => {
+  let {mediaToken} = useStoreState(state => state.credentials);
+
   return (
     <View style={styles.constainer}>
-      <H6Title style={styles.descriptionText}>
-        Please put your <H6Title style={styles.textBold}>username</H6Title> or
-        your email and we can send you instructions to recover your{' '}
-        <H6Title style={styles.textBold}>password.</H6Title>
-      </H6Title>
-      <Image source={item.logo} style={styles.logo} />
+      <ScrollView>
+        <Markdown style={stylesMD}>
+          {item.replace('{{token}}', mediaToken)}
+        </Markdown>
+      </ScrollView>
     </View>
   );
 };

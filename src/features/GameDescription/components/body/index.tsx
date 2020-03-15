@@ -1,9 +1,10 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {View, Image} from 'react-native';
 import Carousel, {
   Pagination,
   getInputRangeFromIndexes,
 } from 'react-native-snap-carousel';
+import {MEDIA_API} from 'react-native-dotenv';
 
 import {styles} from './styles';
 import {bodyTypes} from './types';
@@ -14,9 +15,10 @@ import {
   GAME_POINT_INACTIVE,
   PRIMARY_LIGHT_COLOR,
 } from '../../../../style/COLOR';
+import {useStoreState} from '../../../../state/store';
 const game_logo = require('../../../../assets/img/paper.png');
 
-const Body: React.FC<bodyTypes> = ({componentId}) => {
+const Body: React.FC<bodyTypes> = ({componentId, length, data}) => {
   let ref = useRef(null);
   const _scrollInterpolator = (index: any, carouselProps: any) => {
     const range = [3, 2, 1, 0, -1];
@@ -65,15 +67,28 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
       ],
     };
   };
+  let {mediaToken} = useStoreState(state => state.credentials);
+  const [articles, setArticles] = useState<string[]>([]);
+  useEffect(() => {
+    data.map(i =>
+      fetch(MEDIA_API + 'article/' + i, {
+        headers: {
+          token: mediaToken,
+        },
+      })
+        .then(e => e.text())
+        .then((y: string) => {
+          setArticles((e: any) => [...e, y]);
+        }),
+    );
+  }, [data]);
+
   const [activeIndex, setactiveIndex] = useState(0);
   return (
     <View style={styles.container}>
       <Carousel
         ref={ref}
-        data={[
-          {title: 'Example1', logo: game_logo},
-          {title: 'Example2', logo: game_logo},
-        ]}
+        data={articles}
         hasParallaxImages
         renderItem={GameCard}
         onSnapToItem={i => setactiveIndex(i)}
@@ -85,10 +100,9 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
         containerCustomStyle={{flex: 1}}
         scrollInterpolator={_scrollInterpolator}
         itemWidth={normalize(250)}
-       
       />
       <Pagination
-        dotsLength={2}
+        dotsLength={length}
         containerStyle={{
           backgroundColor: PRIMARY_LIGHT_COLOR,
           borderRadius: normalize(50),
