@@ -19,14 +19,14 @@ export const styles = StyleSheet.create({
   textBold: {
     fontFamily: 'Rubik-Bold',
   },
-  badgeContainer: { 
+  badgeContainer: {
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     marginVertical: normalize(20),
   },
   container: {
-    marginVertical: normalize(30),
+    marginVertical: normalize(10),
     width: '100%',
     justifyContent: 'space-between',
     alignItems: 'center',

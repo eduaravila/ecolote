@@ -19,6 +19,8 @@ import {
   PRIMARY_LIGHT_COLOR,
   CANCEL_COLOR,
   CANCEL_COLOR_DARK,
+  HEY_COLOR,
+  HEY_COLOR_DARK,
 } from '../../../../style/COLOR';
 import {GameBadge} from '../../../../components/GameBadge/GameBadge';
 import {Subtitle2} from '../../../../components/Subtitle2/Subtitle2';
@@ -37,6 +39,39 @@ interface BodyType {
   error: boolean;
   data_current_arena: any;
   disabled: boolean;
+  currentChallenge: {
+    MyCurrentChallenge: {
+      _id: string;
+      title: string;
+      subtitle: string;
+      description: string;
+      portrait: string;
+      Challenge: {
+        _id: string;
+        title: string;
+        badges: {
+          type: {
+            _id: string;
+            image: string;
+            name: string;
+            color: string;
+          };
+          zone: {
+            _id: string;
+            image: string;
+            name: string;
+            color: string;
+          };
+          rarity: {
+            _id: string;
+            image: string;
+            name: string;
+            color: string;
+          };
+        };
+      };
+    };
+  };
   startSearch: () => void;
 }
 
@@ -48,6 +83,7 @@ const Body: React.FC<BodyType> = ({
   data_current_arena,
   disabled,
   startSearch,
+  currentChallenge,
 }) => {
   const [areanSize] = useState(new Animated.Value(0));
   let {mediaToken} = useStoreState(state => state.credentials);
@@ -85,29 +121,52 @@ const Body: React.FC<BodyType> = ({
           <TouchableScale
             tension={100}
             friction={1}
-            onPress={() => goGameCheck()}>
+            onPress={() =>
+              goGameCheck({...currentChallenge.MyCurrentChallenge})
+            }>
             <StatContainer
               style={styles.gameCardContainer}
               contentStyle={styles.gameCardContainerContent}
               borderStyle={{backgroundColor: STAT_LABEL_COLOR}}
               styleJr={styles.gameCardContainerJr}>
               <Subtitle2 style={styles.gameCardContainerBadgesTitle}>
-                Di adios a las toallitas humedas
+                {currentChallenge.MyCurrentChallenge.Challenge.title}
               </Subtitle2>
               <View style={styles.gameCardContainerBadgesContainer}>
                 <GameBadge
-                  color={REPLACE_COLOR}
-                  logo={''}
+                  color={'white'}
+                  logo={
+                    MEDIA_API +
+                    'image/' +
+                    currentChallenge.MyCurrentChallenge.Challenge.badges.zone
+                      .image +
+                    '/' +
+                    mediaToken
+                  }
                   style={styles.gameCardContainerBadge}
                 />
                 <GameBadge
-                  color={BATHROOM_COLOR}
-                  logo={''}
+                  color={'white'}
+                  logo={
+                    MEDIA_API +
+                    'image/' +
+                    currentChallenge.MyCurrentChallenge.Challenge.badges.type
+                      .image +
+                    '/' +
+                    mediaToken
+                  }
                   style={styles.gameCardContainerBadge}
                 />
                 <GameBadge
                   color={PRIMARY_DARK_COLOR}
-                  logo={''}
+                  logo={
+                    MEDIA_API +
+                    'image/' +
+                    currentChallenge.MyCurrentChallenge.Challenge.badges.rarity
+                      .image +
+                    '/' +
+                    mediaToken
+                  }
                   style={styles.gameCardContainerBadge}
                 />
               </View>
@@ -166,23 +225,43 @@ const Body: React.FC<BodyType> = ({
           <ActivityIndicator size="large" color={PRIMARY_LIGHT_COLOR} />
         )}
       </TouchableScale>
-      <ColorButton
-        topColor={loading ? CANCEL_COLOR : NEXT_COLOR}
-        middleColor={loading ? CANCEL_COLOR_DARK : NEXT_COLOR_DARK}
-        loading={loading}
-        disabled={disabled}
-        onPress={() => {
-          if (loading) {
-            toggle_visibility(false);
-            return;
-          }
-          startSearch();
-          toggle_visibility(true);
-        }}
-        cancel={loading}
-        style={loading ? styles.cancelButton : styles.playButton}>
-        {loading ? 'Cancelar' : 'Jugar!'}
-      </ColorButton>
+      {data ? (
+        <ColorButton
+          topColor={loading ? CANCEL_COLOR : HEY_COLOR}
+          middleColor={loading ? CANCEL_COLOR_DARK : HEY_COLOR_DARK}
+          loading={loading}
+          disabled={disabled}
+          onPress={() => {
+            if (loading) {
+              toggle_visibility(false);
+              return;
+            }
+            startSearch();
+            toggle_visibility(true);
+          }}
+          cancel={loading}
+          style={loading ? styles.cancelButton : styles.playButton}>
+          Finalizar
+        </ColorButton>
+      ) : (
+        <ColorButton
+          topColor={loading ? CANCEL_COLOR : NEXT_COLOR}
+          middleColor={loading ? CANCEL_COLOR_DARK : NEXT_COLOR_DARK}
+          loading={loading}
+          disabled={disabled}
+          onPress={() => {
+            if (loading) {
+              toggle_visibility(false);
+              return;
+            }
+            startSearch();
+            toggle_visibility(true);
+          }}
+          cancel={loading}
+          style={loading ? styles.cancelButton : styles.playButton}>
+          {loading ? 'Cancelar' : 'Jugar!'}
+        </ColorButton>
+      )}
     </View>
   );
 };

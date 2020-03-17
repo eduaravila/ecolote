@@ -19,18 +19,27 @@ const MY_CURRENT_CHALLENGE_GQL = gql`
       Challenge {
         _id
         title
+        subtitle
+        description
+        portrait
         badges {
           type {
-            name
+            _id
             image
+            name
+            color
           }
           zone {
-            name
+            _id
             image
+            name
+            color
           }
           rarity {
-            name
+            _id
             image
+            name
+            color
           }
         }
       }
@@ -286,8 +295,9 @@ const Challenge: React.FC = () => {
         <Fragment>
           <Head show={searching} data={data_my_wallet} />
           <Body
-            data={!!data && data.MyCompletedChallenges}
+            data={!!data}
             error={!!error}
+            currentChallenge={data}
             data_current_arena={data_current_arena}
             toggle_visibility={_toggle_searching}
             loading={searching}

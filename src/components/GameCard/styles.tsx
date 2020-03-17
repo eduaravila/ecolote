@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: normalize(10),
     flex: 1,
-    backgroundColor: PRIMARY_COLOR,
+    backgroundColor: 'transparent',
     paddingHorizontal: 5,
     paddingVertical: 18, // needed for shadow    elevation: 5,
     shadowColor: 'black',

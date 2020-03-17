@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {normalize} from 'react-native-elements';
+import { PRIMARY_COLOR } from '../../../../style/COLOR';
 
 export const styles = StyleSheet.create({
   constainer: {
@@ -16,5 +17,9 @@ export const styles = StyleSheet.create({
   back: {
     alignSelf: 'flex-end',
     marginVertical: normalize(10),
+    // marginHorizontal: normalize(10),
+    backgroundColor: PRIMARY_COLOR,
+    borderRadius: normalize(20),
+    padding: normalize(5),
   },
 });

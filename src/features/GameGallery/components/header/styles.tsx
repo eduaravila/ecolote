@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {normalize} from 'react-native-elements';
 import {getColumn} from '../../../../style/UTILS';
+import {PRIMARY_COLOR} from '../../../../style/COLOR';
 
 export const styles = StyleSheet.create({
   constainer: {
@@ -11,7 +12,11 @@ export const styles = StyleSheet.create({
 
   back: {
     alignSelf: 'flex-end',
-    marginBottom: normalize(20),
+    marginVertical: normalize(10),
+    marginHorizontal: normalize(10),
+    backgroundColor: PRIMARY_COLOR,
+    borderRadius: normalize(20),
+    padding: normalize(5),
   },
   badgeContainer: {
     width: '100%',

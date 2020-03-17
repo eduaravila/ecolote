@@ -4,31 +4,26 @@ import {View} from 'react-native';
 import {styles} from './styles';
 
 import {ColorButton} from '../../../../components/ColorButton/ColorButton';
-import {REPLACE_COLOR, REPLACE_COLOR_DARK} from '../../../../style/COLOR';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
-  pushStack,
-  pushStackWithProps,
-} from '../../../../navigation/navigators/stackUtils';
-import {
-  ECOLOTE_GAME_DESCRIPTION,
-  ECOLOTE_GAME_COMENTARY,
-} from '../../../../navigation/screen_names';
-import {Overline} from '../../../../components/Overline/Overline';
+  REPLACE_COLOR,
+  REPLACE_COLOR_DARK,
+  HEY_COLOR,
+  HEY_COLOR_DARK,
+} from '../../../../style/COLOR';
 
 interface FooterType {
   componentId: string;
+  onPress: () => void;
 }
 
-const Footer: React.FC<FooterType> = ({componentId}) => {
+const Footer: React.FC<FooterType> = ({componentId, onPress}) => {
   return (
     <View style={styles.container}>
-      
       <ColorButton
         style={styles.go}
-        onPress={() =>
-          pushStackWithProps(componentId, ECOLOTE_GAME_COMENTARY, {})
-        }>
+        topColor={HEY_COLOR}
+        middleColor={HEY_COLOR_DARK}
+        onPress={onPress}>
         Siguiente
       </ColorButton>
     </View>

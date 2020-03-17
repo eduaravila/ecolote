@@ -134,7 +134,10 @@ android {
         versionCode 1
         versionName "1.0"
         missingDimensionStrategy "RNN.reactNativeVersion", "reactNative60"
+        missingDimensionStrategy 'react-native-camera', 'general' // <--- insert this line
+        multiDexEnabled true
     }
+
     splits {
         abi {
             reset()
@@ -198,10 +201,9 @@ configurations.all {
 }
 
 dependencies {
-    implementation project(':@react-native-community_netinfo')
-    implementation project(':@react-native-community_async-storage')
+  
+    implementation project(':react-native-camera')
     implementation project(':react-native-navigation-bar-color')
-    implementation project(':@react-native-community_viewpager')
     implementation project(':react-native-reanimated')
     implementation project(':react-native-gesture-handler')
     implementation project(':react-native-orientation')
@@ -211,7 +213,6 @@ dependencies {
     implementation project(':react-native-splash-screen')
      // For animated GIF support
     implementation 'com.facebook.fresco:animated-gif:2.1.0'
-
     // For WebP support, including animated WebP
     implementation 'com.facebook.fresco:animated-webp:2.1.0'
     implementation 'com.facebook.fresco:webpsupport:2.1.0'

@@ -51,13 +51,13 @@ const Body: React.FC<bodyTypes> = ({
             hasParallaxImages
             renderItem={GameCard}
             onSnapToItem={i => setactiveIndex(i)}
-            sliderWidth={normalize(350)}
-            layout={'stack'}
+            sliderWidth={normalize(390)}
+            // layout={'stack'}
             inactiveSlideScale={0.94}
-            inactiveSlideOpacity={0.3}
+            inactiveSlideOpacity={0.5}
             slideStyle={{flex: 1}}
             containerCustomStyle={{flex: 1}}
-            scrollInterpolator={_scrollInterpolator}
+            // scrollInterpolator={_scrollInterpolator}
             itemWidth={normalize(280)}
           />
           <Pagination

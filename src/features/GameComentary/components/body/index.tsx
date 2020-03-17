@@ -13,12 +13,13 @@ import {
   PRIMARY_DARK_COLOR,
   GAME_POINT_INACTIVE,
   PRIMARY_LIGHT_COLOR,
+  getRarityColor,
 } from '../../../../style/COLOR';
 import {GameStepper} from '../../../../components/GameStepper/GameStepper';
 import {Subtitle1} from '../../../../components/Subtitle1/Subtitle1';
 const game_logo = require('../../../../assets/img/paper.png');
 
-const Body: React.FC<bodyTypes> = ({componentId}) => {
+const Body: React.FC<bodyTypes> = ({componentId, rarity}) => {
   let ref = useRef(null);
   const _scrollInterpolator = (index: any, carouselProps: any) => {
     const range = [3, 2, 1, 0, -1];
@@ -32,10 +33,15 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
   return (
     <View style={styles.container}>
       <Subtitle1 style={styles.descriptionText}>
-        ** Esta descripcion se utilizara, para entrenar nuestra red neuronal y asi
-        poder validar los retos en base a las respuesta de los usuarios
+        ** Esta descripcion se utilizara, para entrenar nuestra red neuronal y
+        asi poder validar los retos en base a las respuesta de los usuarios
       </Subtitle1>
-      <GameStepper size={3} active={2} />
+      <GameStepper
+        size={3}
+        active={2}
+        activePointColor={getRarityColor(rarity.name).second}
+        background={getRarityColor(rarity.name).first}
+      />
     </View>
   );
 };

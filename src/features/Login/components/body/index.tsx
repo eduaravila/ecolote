@@ -97,7 +97,6 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
         }
         onChangeText={e => _set_value('user', e)}
       />
-
       <InputCustom
         placeholder={'Contraseña'}
         keyboardType="default"

@@ -26,6 +26,7 @@ interface GameDescrptionTypes {
   componentId: string;
   Last: string;
   Arena: string;
+  justRead?: boolean;
   currentChallenge: string;
   _id: string;
   title: string;
@@ -116,7 +117,9 @@ const GameDescrption: React.FC<GameDescrptionTypes> = props => {
       />
       <View style={{paddingLeft: getColumn(0.5), paddingRight: getColumn(0.5)}}>
         <Footer
+          componentId={props.componentId}
           loading={loading}
+          justRead={!!props.justRead}
           ready={activeIndex == props.description.length - 1}
           onPress={() => {
             AddCurrentChallenge({variables: {Challenge: props._id}});

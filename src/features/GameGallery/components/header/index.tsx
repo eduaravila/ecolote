@@ -15,6 +15,7 @@ const photo_logo = require('../../../../assets/img/Asset4-8.png');
 
 interface HeaderType {
   componentId: string;
+  title: string;
 }
 
 const CarouselItem: any = (_: any, props: any) => (
@@ -43,18 +44,20 @@ const CarouselItem: any = (_: any, props: any) => (
   </View>
 );
 
-const Header: React.FC<HeaderType> = ({componentId}) => {
+const Header: React.FC<HeaderType> = ({componentId, title}) => {
   let ref = useRef(null);
   return (
     <View style={styles.constainer}>
       <MiniButton
-        onPress={() => popStack(componentId)}
+        onPress={() => {
+          popStack(componentId);
+        }}
         iconName={'arrow-left-drop-circle'}
         style={styles.back}>
-        Back
+        Volver
       </MiniButton>
       <Navigation.Element elementId="headergamedescription">
-        <H5Title>Di adios a las toallitas humedas</H5Title>
+        <H5Title>{title}</H5Title>
       </Navigation.Element>
       <H6Title style={styles.descriptionLabel}>Algunas fotos.</H6Title>
 

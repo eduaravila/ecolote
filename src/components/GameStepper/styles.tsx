@@ -25,8 +25,8 @@ export const styles = StyleSheet.create({
     width: normalize(15),
   },
   point: {
-    height: normalize(15),
-    width: normalize(15),
+    height: normalize(13),
+    width: normalize(13),
     backgroundColor: GAME_POINT_INACTIVE,
     borderRadius: normalize(50),
   },

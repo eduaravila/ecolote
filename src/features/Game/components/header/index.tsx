@@ -22,7 +22,6 @@ const Header: React.FC<headerType> = ({title, portrait}) => {
 
   return (
     <View style={styles.constainer}>
-     
       <Navigation.Element elementId="headergame">
         <H5Title>{title}</H5Title>
       </Navigation.Element>

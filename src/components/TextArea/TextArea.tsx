@@ -72,6 +72,7 @@ const TextArea = React.forwardRef<any, TextAreaType>(
           style={[styles.input, {color: textColor}]}
           onChangeText={onChangeText}
           ref={ref}
+          value=""
           textContentType={textContentType}
           placeholder={placeholder}
           placeholderTextColor={placeHolderColor}

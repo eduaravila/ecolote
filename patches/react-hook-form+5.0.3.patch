@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-hook-form/dist/react-hook-form.js b/node_modules/react-hook-form/dist/react-hook-form.js
+index 484f60a..72c28e4 100644
+--- a/node_modules/react-hook-form/dist/react-hook-form.js
++++ b/node_modules/react-hook-form/dist/react-hook-form.js
+@@ -667,7 +667,7 @@ function getIsFieldsDifferent(referenceArray, differenceArray) {
+ const isMatchFieldArrayName = (name, searchName) => name.startsWith(`${searchName}[`);
+ var isNameInFieldArray = (names, name) => [...names].reduce((prev, current) => (isMatchFieldArrayName(name, current) ? true : prev), false);
+ 
+-var isFileListObject = (data) => typeof FileList !== UNDEFINED && data instanceof FileList;
++var isFileListObject = (data) => true;
+ 
+ function onDomRemove(element, onDetachCallback) {
+     const observer = new MutationObserver(() => {

@@ -56,6 +56,8 @@ target 'ecolote' do
 
   pod 'react-native-netinfo', :path => '../node_modules/@react-native-community/netinfo'
 
+  pod 'react-native-camera', :path => '../node_modules/react-native-camera'
+
   target 'ecoloteTests' do
     inherit! :search_paths
     # Pods for testing
