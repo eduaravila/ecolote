@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     height: '100%',
     paddingLeft: getColumn(0.5),
+    backgroundColor: 'transparent',
     paddingRight: getColumn(0.5),
   },
   messageContainer: {

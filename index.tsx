@@ -1,6 +1,5 @@
 import {Navigation} from 'react-native-navigation';
 import Orientation from 'react-native-orientation';
-import {API} from 'react-native-dotenv';
 import {persistStore} from 'redux-persist';
 import changeNavigationBarColor from 'react-native-navigation-bar-color';
 
@@ -22,7 +21,7 @@ Navigation.events().registerAppLaunchedListener(() => {
   Navigation.setDefaultOptions({
     statusBar: {
       style: 'light',
-      backgroundColor: PRIMARY_DARK_COLOR,
+      backgroundColor: PRIMARY_COLOR,
     },
     layout: {
       orientation: ['portrait'],
@@ -30,7 +29,6 @@ Navigation.events().registerAppLaunchedListener(() => {
   });
   let {show} = store.getState().tutorial;
   let {token, mediaToken} = store.getState().credentials;
-  console.log(API);
 
   if (token && mediaToken) {
     return goDashboard();

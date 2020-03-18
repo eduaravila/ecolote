@@ -1,6 +1,6 @@
 import {Navigation} from 'react-native-navigation';
 
-import {PRIMARY_DARK_COLOR} from '../../style/COLOR';
+import {PRIMARY_DARK_COLOR, PRIMARY_COLOR} from '../../style/COLOR';
 import {ECOLOTE_ACCESS_WELCOME, ECOLOTE_LOG_IN} from '../screen_names';
 
 const goLogin = async () => {
@@ -11,7 +11,7 @@ const goLogin = async () => {
           options: {
             statusBar: {
               style: 'light',
-              backgroundColor: PRIMARY_DARK_COLOR,
+              backgroundColor: PRIMARY_COLOR,
             },
             topBar: {
               visible: false,

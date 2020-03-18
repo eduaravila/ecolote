@@ -53,6 +53,9 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
       setToken({token: Login.token});
       goDashboard();
     },
+    onError: e => {
+      console.log(e);
+    },
   });
 
   const _set_value = (
@@ -69,7 +72,6 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
       });
     }
   };
-  console.log(error);
 
   return (
     <View>

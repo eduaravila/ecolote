@@ -17,12 +17,16 @@ import {Subtitle1} from '../../../../components/Subtitle1/Subtitle1';
 import {ColorButton} from '../../../../components/ColorButton/ColorButton';
 import {H3Title} from '../../../../components/H3Title/H3Title';
 import {normalize} from '../../../../style/UTILS';
+import goCamera from '../../../../navigation/navigators/Camera';
+import {pushStackWithProps} from '../../../../navigation/navigators/stackUtils';
+import {ECOLOTE_CAMERA} from '../../../../navigation/screen_names';
 const photo_logo = require('../../../../assets/img/camera.png');
 
 const Body: React.FC<bodyTypes> = ({componentId, rarity}) => {
   return (
     <View style={styles.container}>
       <ColorButton
+        onPress={() => pushStackWithProps(componentId, ECOLOTE_CAMERA, {})}
         topColor={PHOTO_COLOR}
         middleColor={PHOTO_COLOR_DARK}
         style={styles.takePhoto}>

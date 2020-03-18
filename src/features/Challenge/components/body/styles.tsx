@@ -30,9 +30,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     textDecorationLine: 'underline',
   },
-  playButton: {
-    marginTop: normalize(10),
-  },
+  playButton: {},
   cancelButton: {
     marginTop: normalize(20),
   },

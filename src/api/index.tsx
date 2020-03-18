@@ -40,16 +40,13 @@ const authLink = setContext((_, {headers}) => {
   return {
     headers: {
       ...headers,
-      token: token ? `${token}` : null,
+      token: token,
     },
   };
 });
 
-console.log('====================================');
-console.log(API);
-console.log('====================================');
 const httpLink = new HttpLink({
-  uri: API,
+  uri: API.trim(),
 });
 
 export const client = new ApolloClient({

@@ -2,6 +2,7 @@ import React, {ReactNode} from 'react';
 import Orientation from 'react-native-orientation';
 import {ApolloProvider} from '@apollo/react-hooks';
 import {StoreProvider} from 'easy-peasy';
+import {API} from 'react-native-dotenv';
 import {PersistGate} from 'redux-persist/integration/react';
 import {persistStore} from 'redux-persist';
 import NetInfo from '@react-native-community/netinfo';
@@ -16,6 +17,8 @@ import {LoadingLogo} from '../../components/LoadingLogo/LoadingLogo';
 
 const persistor = persistStore(store, null, () => {
   // Subscribe
+  console.log('api', API);
+
   const unsubscribe = NetInfo.addEventListener(state => {
     console.log('Connection type', state.type);
     console.log('Is connected?', state.isConnected);

@@ -1,9 +1,9 @@
 import {Navigation} from 'react-native-navigation';
 
 import {PRIMARY_DARK_COLOR, PRIMARY_COLOR} from '../../style/COLOR';
-import {ECOLOTE_ACCESS_WELCOME, ECOLOTE_SIGN_UP_CODE} from '../screen_names';
+import {ECOLOTE_CAMERA} from '../screen_names';
 
-const goAccess = async () => {
+const goCamera = async () => {
   try {
     Navigation.setRoot({
       root: {
@@ -20,7 +20,7 @@ const goAccess = async () => {
           children: [
             {
               component: {
-                name: ECOLOTE_ACCESS_WELCOME,
+                name: ECOLOTE_CAMERA,
               },
             },
           ],
@@ -34,4 +34,4 @@ const goAccess = async () => {
   }
 };
 
-export default goAccess;
+export default goCamera;

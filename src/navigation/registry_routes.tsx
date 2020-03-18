@@ -23,6 +23,7 @@ import {
   ECOLOTE_GAME_GALLERY,
   ECOLOTE_GAME_STADISTICS,
   ECOLOTE_TUTORIAL,
+  ECOLOTE_CAMERA,
 } from './screen_names';
 //* features
 import Access from '../features/access/containers/index';
@@ -46,6 +47,7 @@ import GameCheck from '../features/GameCheck/containers/container';
 import GameGallery from '../features/GameGallery/containers/container';
 import GameStadistics from '../features/GameStadistics/containers/container';
 import Tutorial from '../features/Tutorial/containers/container';
+import Camera from '../features/Camera/containers/container';
 
 const registryComponents = () => {
   Navigation.registerComponent(ECOLOTE_ACCESS_WELCOME, () =>
@@ -108,6 +110,9 @@ const registryComponents = () => {
 
   Navigation.registerComponent(ECOLOTE_TUTORIAL, () =>
     gestureHandlerRootHOC(Grapper(Tutorial)()),
+  );
+  Navigation.registerComponent(ECOLOTE_CAMERA, () =>
+    gestureHandlerRootHOC(Grapper(Camera)()),
   );
 };
 

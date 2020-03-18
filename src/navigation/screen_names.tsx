@@ -24,4 +24,5 @@ export const ECOLOTE_GAME_GALLERY: string = 'ecolote.game.gallery';
 export const ECOLOTE_GAME_STADISTICS: string = 'ecolote.game.stadistics';
 
 export const ECOLOTE_TUTORIAL: string = 'ecolote.tutorial';
+export const ECOLOTE_CAMERA: string = 'ecolote.camera';
 
