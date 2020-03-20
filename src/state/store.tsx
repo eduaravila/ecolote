@@ -14,6 +14,7 @@ import {
   BottomNavigationType,
 } from '../features/Dashboard/reducers';
 import {TutorialModel, TutorialModelType} from '../features/Tutorial/reducers';
+import {GameGalleryType, photoModel} from '../features/Camera/reducers';
 
 interface StoreModel {
   networkStatus: errorModelType;
@@ -21,6 +22,7 @@ interface StoreModel {
   credentials: tokenModelType;
   tutorial: TutorialModelType;
   network: networkStatusModelType;
+  photos: GameGalleryType;
 }
 const typedHooks = createTypedHooks<StoreModel>();
 
@@ -35,6 +37,7 @@ const storeModel: StoreModel = {
   credentials: tokenModel,
   tutorial: TutorialModel,
   network: networkStatusModel,
+  photos: photoModel,
 };
 
 const store = createStore(storeModel, {
@@ -44,7 +47,7 @@ const store = createStore(storeModel, {
         timeout: 0, // The code base checks for falsy, so 0 disables
         key: 'easypeasystate',
         storage,
-        blacklist: ['networkStatus', 'BottomNavigation', 'network'],
+        blacklist: ['networkStatus', 'BottomNavigation', 'network', 'photos'],
       },
       reducer,
     ),

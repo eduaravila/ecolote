@@ -110,10 +110,12 @@ const Body: React.FC<BodyType> = ({
       goSmall();
     }
   }, [loading]);
-
+  console.log('====================================');
+  console.log(currentChallenge);
+  console.log('====================================');
   return (
     <View style={styles.container}>
-      {data && !error ? (
+      {!!currentChallenge && currentChallenge.MyCurrentChallenge && !error ? (
         <Animated.View style={styles.currentGameContainer}>
           <Subtitle2 style={styles.currentGameContainerTitle}>
             Reto actual:
@@ -225,20 +227,13 @@ const Body: React.FC<BodyType> = ({
           <ActivityIndicator size="large" color={PRIMARY_LIGHT_COLOR} />
         )}
       </TouchableScale>
-      {data ? (
+      {currentChallenge && currentChallenge.MyCurrentChallenge ? (
         <ColorButton
           topColor={loading ? CANCEL_COLOR : HEY_COLOR}
           middleColor={loading ? CANCEL_COLOR_DARK : HEY_COLOR_DARK}
           loading={loading}
           disabled={disabled}
-          onPress={() => {
-            if (loading) {
-              toggle_visibility(false);
-              return;
-            }
-            startSearch();
-            toggle_visibility(true);
-          }}
+          onPress={() => goGameCheck({...currentChallenge.MyCurrentChallenge})}
           cancel={loading}
           style={loading ? styles.cancelButton : styles.playButton}>
           Finalizar

@@ -44,7 +44,7 @@ interface DashboardType {
 const Dashboard: React.FC<DashboardType> = ({bottomRef = useRef(null)}) => {
   const [index, setIndex] = React.useState(2);
   const {show} = useStoreState(store => store.BottomNavigation);
- 
+
   const goDown = () => {
     if (bottomRef?.current) {
       bottomRef.current.bounceOutDown(500).then((e: any) => e);
@@ -104,7 +104,7 @@ const Dashboard: React.FC<DashboardType> = ({bottomRef = useRef(null)}) => {
   return (
     <GradientBackgroundNormal>
       <TabView
-        swipeEnabled={!show}
+        swipeEnabled={true}
         lazy={false}
         swipeVelocityImpact={0}
         renderTabBar={(props: any) => (

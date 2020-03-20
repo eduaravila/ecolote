@@ -21,12 +21,23 @@ interface formType {
   email: string;
 }
 
-const Body: React.FC<bodyTypes> = ({componentId}) => {
+const Body: React.FC<bodyTypes> = ({
+  componentId,
+  title,
+  completed,
+  after24,
+  rarity,
+  rarityName,
+  photos,
+  commentary,
+  total,
+  grade,
+}) => {
   return (
     <View style={styles.container}>
       <View style={styles.descriptionText}>
         <H6Title style={styles.left}>Reto:</H6Title>
-        <H6Title style={styles.right}>Di adios a las toallitas humedas</H6Title>
+        <H6Title style={styles.right}>{title}</H6Title>
       </View>
       <View style={styles.descriptionText}>
         <H6Title style={styles.left}>Puntaje mas alto:</H6Title>
@@ -35,21 +46,21 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
       <HairLine />
       <View style={styles.descriptionText}>
         <H6Title style={styles.left}>Completado:</H6Title>
-        <H6Title style={styles.right}>1000</H6Title>
+        <H6Title style={styles.right}>{completed}</H6Title>
       </View>
       <View style={styles.descriptionText}>
         <H6Title style={styles.left}>Antes de 24h:</H6Title>
-        <H6Title style={styles.right}>1000</H6Title>
+        <H6Title style={styles.right}>{after24}</H6Title>
       </View>
       <View style={styles.descriptionText}>
-        <H6Title style={styles.left}>Normal:</H6Title>
-        <H6Title style={styles.right}>1000</H6Title>
+        <H6Title style={styles.left}>{rarityName}:</H6Title>
+        <H6Title style={styles.right}>{rarity}</H6Title>
       </View>
-      <H6Title style={styles.bonus}>X2 foto</H6Title>
-      <H6Title style={styles.bonus}>X3 Experiencia</H6Title>
+      <H6Title style={styles.bonus}>X{photos} foto</H6Title>
+      <H6Title style={styles.bonus}>X{commentary} Experiencia</H6Title>
       <HairLine />
-      <H6Title style={styles.total}>6600</H6Title>
-      <H6Title style={styles.grade}>Grade +A</H6Title>
+      <H6Title style={styles.total}>{total}</H6Title>
+      <H6Title style={styles.grade}>Grado {grade}</H6Title>
     </View>
   );
 };

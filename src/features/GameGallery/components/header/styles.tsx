@@ -9,7 +9,10 @@ export const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     marginVertical: normalize(10),
   },
-
+  noPhotosTitle: {
+    width: '100%',
+    textAlign: 'center',
+  },
   back: {
     alignSelf: 'flex-end',
     marginVertical: normalize(10),
@@ -29,5 +32,11 @@ export const styles = StyleSheet.create({
     textAlign: 'left',
     marginHorizontal: getColumn(0.5),
     marginVertical: normalize(20),
+  },
+  noPhotosImage: {
+    width: normalize(100),
+    height: normalize(100),
+    alignSelf: 'center',
+    resizeMode: 'contain',
   },
 });

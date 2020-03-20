@@ -1,3 +1,4 @@
+import 'react-native-get-random-values';
 import {Navigation} from 'react-native-navigation';
 import Orientation from 'react-native-orientation';
 import {persistStore} from 'redux-persist';

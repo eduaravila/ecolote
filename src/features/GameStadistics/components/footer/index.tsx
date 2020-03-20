@@ -4,7 +4,12 @@ import {View} from 'react-native';
 import {styles} from './styles';
 
 import {ColorButton} from '../../../../components/ColorButton/ColorButton';
-import {REPLACE_COLOR, REPLACE_COLOR_DARK} from '../../../../style/COLOR';
+import {
+  REPLACE_COLOR,
+  REPLACE_COLOR_DARK,
+  HEY_COLOR,
+  HEY_COLOR_DARK,
+} from '../../../../style/COLOR';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   pushStack,
@@ -20,8 +25,12 @@ interface FooterType {
 const Footer: React.FC<FooterType> = ({componentId}) => {
   return (
     <View style={styles.container}>
-      <ColorButton style={styles.go} onPress={() => goDashboard()}>
-        Ok!
+      <ColorButton
+        topColor={HEY_COLOR}
+        middleColor={HEY_COLOR_DARK}
+        style={styles.go}
+        onPress={() => goDashboard()}>
+        Genial!
       </ColorButton>
     </View>
   );

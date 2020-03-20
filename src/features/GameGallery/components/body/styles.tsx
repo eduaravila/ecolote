@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
     marginVertical: normalize(20),
   },
   container: {
-    marginVertical: normalize(30),
+    marginVertical: normalize(10),
     
     
     justifyContent: 'space-between',

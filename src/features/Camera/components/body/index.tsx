@@ -2,7 +2,7 @@ import React, {useRef, useState, useEffect} from 'react';
 import {View, Animated} from 'react-native';
 import {RNCamera} from 'react-native-camera';
 import TouchableScale from 'react-native-touchable-scale';
-
+import nanoid from 'nanoid/non-secure';
 import {styles} from './styles';
 import {bodyTypes} from './types';
 import {H6Title} from '../../../../components/H6Title/H6Title';
@@ -11,11 +11,14 @@ import {
   HEY_COLOR_DARK,
   PRIMARY_COLOR,
   PRIMARY_LIGHT_COLOR,
+  INPUT_BORDER_COLOR,
+  INPUT_BORDER_COLOR_DARK,
 } from '../../../../style/COLOR';
 import {normalize} from '../../../../style/UTILS';
 import {PinchGestureHandler, State} from 'react-native-gesture-handler';
 import {fix_limit} from '../../../../utils/random';
 import {Focus} from '../../../../components/Focus/Focus';
+import {useStoreActions} from '../../../../state/store';
 
 let timeout: any;
 
@@ -24,7 +27,10 @@ const Body: React.FC<bodyTypes> = ({componentId, cameraRef = useRef(null)}) => {
   const [xFocus, setxFocus] = useState(0);
   const [cameraWidth, setCameraWidth] = useState(0);
   const [cameraHeight, setCameraHeight] = useState(0);
+  const [capturing, setCapturing] = useState(false);
+
   const [showFocus, setshowFocus] = useState(false);
+  const {addPhoto} = useStoreActions(state => state.photos);
 
   const [yFocus, setyFocus] = useState(0);
   const _pinchScale = new Animated.Value(1);
@@ -33,6 +39,18 @@ const Body: React.FC<bodyTypes> = ({componentId, cameraRef = useRef(null)}) => {
     [{nativeEvent: {scale: _pinchScale}}],
     {useNativeDriver: true},
   );
+
+  const takePicture = async () => {
+    if (cameraRef) {
+      setCapturing(true);
+
+      const options = {quality: 0.5, base64: true, pauseAfterCapture: true};
+      const data = await cameraRef.current.takePictureAsync(options);
+      addPhoto({name: nanoid(), uri: data.uri});
+      cameraRef.current.resumePreview();
+      setCapturing(false);
+    }
+  };
 
   const _focusTiming = () => {
     setshowFocus(true);
@@ -85,9 +103,6 @@ const Body: React.FC<bodyTypes> = ({componentId, cameraRef = useRef(null)}) => {
               buttonPositive: 'Ok',
               buttonNegative: 'Cancelar',
             }}
-            onGoogleVisionBarcodesDetected={({barcodes}) => {
-              console.log(barcodes);
-            }}
           />
         </Animated.View>
       </PinchGestureHandler>
@@ -95,10 +110,15 @@ const Body: React.FC<bodyTypes> = ({componentId, cameraRef = useRef(null)}) => {
         <H6Title style={styles.description}>
           Captura tu experiencia. Producto nuevo, alternativa, nueva idea
         </H6Title>
-        <TouchableScale tension={100} friction={10} onPress={() => {}}>
+        <TouchableScale
+          tension={100}
+          friction={10}
+          onPress={capturing ? () => {} : () => takePicture()}>
           <View
             style={{
-              backgroundColor: PRIMARY_LIGHT_COLOR,
+              backgroundColor: capturing
+                ? INPUT_BORDER_COLOR
+                : PRIMARY_LIGHT_COLOR,
               width: normalize(70),
               height: normalize(70),
               justifyContent: 'center',
@@ -107,7 +127,9 @@ const Body: React.FC<bodyTypes> = ({componentId, cameraRef = useRef(null)}) => {
             }}>
             <View
               style={{
-                backgroundColor: PRIMARY_COLOR,
+                backgroundColor: capturing
+                  ? INPUT_BORDER_COLOR_DARK
+                  : PRIMARY_COLOR,
                 width: normalize(55),
                 height: normalize(55),
                 borderRadius: normalize(50),

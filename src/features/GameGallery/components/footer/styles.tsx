@@ -8,8 +8,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     flexWrap: 'nowrap',
-    marginVertical: normalize(20),
-
     marginHorizontal: getColumn(0.5),
   },
   go: {

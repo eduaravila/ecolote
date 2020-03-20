@@ -6,15 +6,22 @@ import {styles} from './styles';
 
 interface LoadingSkeletonType {
   style?: {[t: string]: any};
+  loading?: boolean;
 }
 
-const LoadingSkeleton: React.FC<LoadingSkeletonType> = ({style}) => {
-  return (
+const LoadingSkeleton: React.FC<LoadingSkeletonType> = ({
+  style,
+  loading = true,
+  children,
+}) => {
+  return loading ? (
     <ActivityIndicator
       size="large"
       color={PRIMARY_DARK_COLOR}
       style={[styles.container, style]}
     />
+  ) : (
+    <View style={[styles.container, style]}>{children}</View>
   );
 };
 

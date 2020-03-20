@@ -1,5 +1,5 @@
-import React, {useRef} from 'react';
-import {View, StyleSheet, Platform} from 'react-native';
+import React, {useRef, Fragment} from 'react';
+import {View, Image} from 'react-native';
 import Carousel, {ParallaxImage} from 'react-native-snap-carousel';
 import {Navigation} from 'react-native-navigation';
 
@@ -10,41 +10,19 @@ import {popStack} from '../../../../navigation/navigators/stackUtils';
 import {H6Title} from '../../../../components/H6Title/H6Title';
 import {normalize} from '../../../../style/UTILS';
 import {Subtitle2} from '../../../../components/Subtitle2/Subtitle2';
+import {useStoreState} from '../../../../state/store';
+import {Photo} from '../../../../components/Photo/Photo';
+import {LoadingSkeleton} from '../../../../components/LoadingSkeleton/LoadingSkeleton';
 
-const photo_logo = require('../../../../assets/img/Asset4-8.png');
-
+const supriseLogo = require('../../../../assets/img/logo_suprise.png');
 interface HeaderType {
   componentId: string;
   title: string;
 }
 
-const CarouselItem: any = (_: any, props: any) => (
-  <View
-    style={{
-      width: normalize(210),
-      height: normalize(160),
-      borderRadius: normalize(10),
-      backgroundColor: 'red',
-    }}>
-    <ParallaxImage
-      source={photo_logo}
-      parallaxFactor={0.4}
-      containerStyle={{
-        flex: 1,
-        marginBottom: Platform.select({ios: 0, android: 1}), // Prevent a random Android rendering issue
-        backgroundColor: 'white',
-        borderRadius: 8,
-      }}
-      style={{
-        ...StyleSheet.absoluteFillObject,
-        resizeMode: 'contain',
-      }}
-      {...props}
-    />
-  </View>
-);
-
 const Header: React.FC<HeaderType> = ({componentId, title}) => {
+  const {photos} = useStoreState(state => state.photos);
+
   let ref = useRef(null);
   return (
     <View style={styles.constainer}>
@@ -61,22 +39,36 @@ const Header: React.FC<HeaderType> = ({componentId, title}) => {
       </Navigation.Element>
       <H6Title style={styles.descriptionLabel}>Algunas fotos.</H6Title>
 
-      <Carousel
-        ref={ref}
-        data={[
-          {title: 'Example1', logo: photo_logo},
-          {title: 'Example2', logo: photo_logo},
-          {title: 'Example2', logo: photo_logo},
-        ]}
-        renderItem={CarouselItem}
-        sliderWidth={normalize(320)}
-        sliderHeight={normalize(160)}
-        hasParallaxImages
-        containerCustomStyle={{flex: 1}}
-        itemWidth={normalize(210)}
-      />
+      {photos.length > 0 ? (
+        <Carousel
+          ref={ref}
+          data={photos}
+          renderItem={Photo}
+          sliderWidth={normalize(320)}
+          sliderHeight={normalize(160)}
+          hasParallaxImages
+          containerCustomStyle={{flex: 1}}
+          itemWidth={normalize(210)}
+        />
+      ) : (
+        <LoadingSkeleton
+          loading={false}
+          style={{
+            width: normalize(210),
+            height: normalize(160),
+            alignSelf: 'center',
+          }}>
+          <Fragment>
+            <H6Title style={styles.noPhotosTitle}>
+              No se encontro ninguna foto
+            </H6Title>
+            <Image source={supriseLogo} style={styles.noPhotosImage} />
+          </Fragment>
+        </LoadingSkeleton>
+      )}
       <Subtitle2>
-        Esto es opcional, pero te ayudara a obtener mas monedas
+        Esto es opcional, pero te ayudara a obtener mas monedas al finalizar el
+        reto.
       </Subtitle2>
     </View>
   );

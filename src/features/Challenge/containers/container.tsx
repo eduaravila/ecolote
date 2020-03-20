@@ -169,7 +169,7 @@ const Challenge: React.FC = () => {
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'network-only',
     onCompleted: e => {
-      // console.log(e);
+      console.log(e);
     },
   });
 
