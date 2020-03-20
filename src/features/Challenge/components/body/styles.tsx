@@ -76,4 +76,9 @@ export const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
   },
+  retry: {
+    textDecorationLine: 'underline',
+    marginVertical: normalize(15),
+    fontFamily: 'Rubik-Bold',
+  },
 });

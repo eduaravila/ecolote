@@ -5,4 +5,5 @@ export interface MiniStateContainerType {
   icon: ImageSourcePropType;
   style?: {[t: string]: any};
   logoStyle?: {[t: string]: any};
+  onPress: () => void;
 }

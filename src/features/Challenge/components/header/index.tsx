@@ -21,7 +21,7 @@ import {LoadingSkeleton} from '../../../../components/LoadingSkeleton/LoadingSke
 const coin_image = require('../../../../assets/img/dinero_es_dinero.png');
 const level_image = require('../../../../assets/img/level.png');
 const trophy_image = require('../../../../assets/img/trophy.png');
-const config_image = require('../../../../assets/img/cog.png');
+const config_image = require('../../../../assets/img/more.png');
 const news_image = require('../../../../assets/img/newspaper.png');
 const zoom_image = require('../../../../assets/img/zoom.gif');
 
@@ -30,6 +30,7 @@ interface HeadType {
   ref?: any;
   refLoading?: any;
   data: any;
+  toggleShow: (e: boolean) => void;
 }
 
 const Head: React.FC<HeadType> = ({
@@ -37,6 +38,7 @@ const Head: React.FC<HeadType> = ({
   ref = useRef(null),
   refLoading = useRef(null),
   data,
+  toggleShow,
 }) => {
   const [initialDelay, setInitialDelay] = useState(true);
   let [loadingSize] = useState(new Animated.Value(0));
@@ -117,8 +119,11 @@ const Head: React.FC<HeadType> = ({
               </Subtitle2>
             </StatContainer>
           </StatContainer>
-          <MiniStateContainer icon={config_image} />
-          <MiniStateContainer icon={news_image} />
+          <MiniStateContainer
+            icon={config_image}
+            onPress={() => toggleShow(true)}
+          />
+          <MiniStateContainer icon={news_image} onPress={() => {}} />
         </View>
       </Animatable.View>
 

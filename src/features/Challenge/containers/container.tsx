@@ -11,6 +11,7 @@ import {useStoreActions, useStoreState} from '../../../state/store';
 import Footer from '../components/footer';
 import goGame from '../../../navigation/navigators/Game';
 import {OfflineLogo} from '../../../components/OfflineLogo/OfflineLogo';
+import {OptionsModal} from '../components/optionsModal';
 
 const MY_CURRENT_CHALLENGE_GQL = gql`
   query MyCurrentChallenge {
@@ -209,6 +210,7 @@ const Challenge: React.FC = () => {
       loading: loading_current_arena,
       error: error_current_arena,
       networkStatus,
+      refetch: refetch_current_arena,
     },
   ] = useLazyQuery(MY_CURRENT_ARENA_GQL, {
     notifyOnNetworkStatusChange: true,
@@ -287,16 +289,29 @@ const Challenge: React.FC = () => {
     },
   });
 
+  const [showOptions, setshowOptions] = useState(false);
+  const _toggleShowOptions = (show: boolean) => {
+    setshowOptions(show);
+  };
+
   return (
     <GradientBackground
       colors={['transparent', 'transparent']}
       style={{paddingLeft: getColumn(0.1), paddingRight: getColumn(0.1)}}>
       {online && refetch ? (
         <Fragment>
-          <Head show={searching} data={data_my_wallet} />
+          <Head
+            show={searching}
+            data={data_my_wallet}
+            toggleShow={_toggleShowOptions}
+          />
+          <OptionsModal show={showOptions} toggleShow={_toggleShowOptions} />
           <Body
+            retry={() => {
+              refetch_current_arena();
+            }}
             data={!!data}
-            error={!!error}
+            error={!!error || !!error_current_arena}
             currentChallenge={data}
             data_current_arena={data_current_arena}
             toggle_visibility={_toggle_searching}

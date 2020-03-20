@@ -29,6 +29,7 @@ import {H6Title} from '../../../../components/H6Title/H6Title';
 import {H5Title} from '../../../../components/H5Title/H5Title';
 import goGame from '../../../../navigation/navigators/Game';
 import {LoadingLogo} from '../../../../components/LoadingLogo/LoadingLogo';
+import {Subtitle1} from '../../../../components/Subtitle1/Subtitle1';
 
 const replace_icon = require('../../../../assets/img/replace.png');
 
@@ -73,6 +74,7 @@ interface BodyType {
     };
   };
   startSearch: () => void;
+  retry: () => void;
 }
 
 const Body: React.FC<BodyType> = ({
@@ -84,6 +86,7 @@ const Body: React.FC<BodyType> = ({
   disabled,
   startSearch,
   currentChallenge,
+  retry,
 }) => {
   const [areanSize] = useState(new Animated.Value(0));
   let {mediaToken} = useStoreState(state => state.credentials);
@@ -186,7 +189,11 @@ const Body: React.FC<BodyType> = ({
           No tienes reto asignado
         </Subtitle2>
       )}
-
+      {error && (
+        <Subtitle1 onPress={retry} style={styles.retry}>
+          Reintentar
+        </Subtitle1>
+      )}
       <TouchableScale style={styles.arenaContainer} tension={100} friction={1}>
         {data_current_arena ? (
           <Animated.View>
@@ -243,7 +250,7 @@ const Body: React.FC<BodyType> = ({
           topColor={loading ? CANCEL_COLOR : NEXT_COLOR}
           middleColor={loading ? CANCEL_COLOR_DARK : NEXT_COLOR_DARK}
           loading={loading}
-          disabled={disabled}
+          disabled={disabled || error}
           onPress={() => {
             if (loading) {
               toggle_visibility(false);

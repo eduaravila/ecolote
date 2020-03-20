@@ -23,11 +23,15 @@ export const styles = StyleSheet.create({
     overflow: 'visible',
     alignSelf: 'center',
     resizeMode: 'contain',
+    
   },
   logoContainer: {
-    width: normalize(46),
-    height: normalize(46),
+    width: '100%',
+    height: '100%',
     resizeMode: 'contain',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
+           
