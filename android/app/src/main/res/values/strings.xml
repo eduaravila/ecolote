@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Ecolote</string>
+    <string name="facebook_app_id">2405092006448269</string>
+    <string name="fb_login_protocol_scheme">fb2405092006448269</string>
+
 </resources>

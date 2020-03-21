@@ -201,6 +201,7 @@ configurations.all {
 }
 
 dependencies {
+    implementation project(':react-native-fbsdk')
   
     implementation project(':react-native-camera')
     implementation project(':react-native-navigation-bar-color')
@@ -216,7 +217,7 @@ dependencies {
     // For WebP support, including animated WebP
     implementation 'com.facebook.fresco:animated-webp:2.1.0'
     implementation 'com.facebook.fresco:webpsupport:2.1.0'
-
+    implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
     // For WebP support, without animations
     implementation 'com.facebook.fresco:webpsupport:2.1.0'
 
@@ -245,3 +246,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+apply plugin: 'com.google.gms.google-services'

@@ -3,6 +3,7 @@ import {Navigation} from 'react-native-navigation';
 import Orientation from 'react-native-orientation';
 import {persistStore} from 'redux-persist';
 import changeNavigationBarColor from 'react-native-navigation-bar-color';
+import {GoogleSignin} from '@react-native-community/google-signin';
 
 import {registryComponents} from './src/navigation/registry_routes';
 import SplashScreen from 'react-native-splash-screen';
@@ -13,6 +14,12 @@ import goTutorial from './src/navigation/navigators/Tutorial';
 import goAccess from './src/navigation/navigators/Access';
 import goDashboard from './src/navigation/navigators/Dashboard';
 
+// ? configure google services
+GoogleSignin.configure({
+  webClientId:
+    '94995227686-ffd09t86hk3dffciis0qp0adf180r1t4.apps.googleusercontent.com',
+  offlineAccess: true,
+});
 registryComponents();
 
 Navigation.events().registerAppLaunchedListener(() => {

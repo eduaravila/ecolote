@@ -58,6 +58,10 @@ target 'ecolote' do
 
   pod 'react-native-camera', :path => '../node_modules/react-native-camera'
 
+  pod 'RNGoogleSignin', :path => '../node_modules/@react-native-community/google-signin'
+
+  pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
+
   target 'ecoloteTests' do
     inherit! :search_paths
     # Pods for testing

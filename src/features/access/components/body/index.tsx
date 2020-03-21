@@ -1,5 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {View} from 'react-native';
+import {View, Alert} from 'react-native';
+import {GoogleSignin, statusCodes} from '@react-native-community/google-signin';
+import {gql} from 'apollo-boost';
+import {useLazyQuery} from '@apollo/react-hooks';
+import {LoginManager, AccessToken} from 'react-native-fbsdk';
 
 import {H5Title} from '../../../../components/H5Title/H5Title';
 import {ButtonCustom} from '../../../../components/Button/Button';
@@ -8,13 +12,74 @@ import {styles} from './styles';
 import {pushStack} from '../../../../navigation/navigators/stackUtils';
 import {bodyTypes} from './types';
 import {ECOLOTE_SIGN_UP_EMAIL} from '../../../../navigation/screen_names';
+import {useStoreActions} from '../../../../state/store';
+import goDashboard from '../../../../navigation/navigators/Dashboard';
+
+const LOGIN_GOOGLE_GQL = gql`
+  query LoginGoogle($token: String!) {
+    LoginGoogle(token: $token) {
+      token
+      media
+      code
+    }
+  }
+`;
 
 const Body: React.FC<bodyTypes> = ({componentId}) => {
   console.log(componentId);
+  let {setMediaToken, setToken} = useStoreActions(state => state.credentials);
+
+  let [LoginGoogle, {data, loading, error, networkStatus}] = useLazyQuery(
+    LOGIN_GOOGLE_GQL,
+    {
+      notifyOnNetworkStatusChange: true,
+      fetchPolicy: 'network-only',
+      onCompleted: e => {
+        let {LoginGoogle} = e;
+        setMediaToken({token: LoginGoogle.media});
+        setToken({token: LoginGoogle.token});
+        goDashboard();
+      },
+      onError: e => {
+        console.log(e);
+      },
+    },
+  );
+  // Somewhere in your code
+  const signInGoogle = async () => {
+    try {
+      await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
+      const userInfo = await GoogleSignin.signIn();
+      LoginGoogle({variables: {token: userInfo.idToken}});
+    } catch (error) {
+      if (error.code === statusCodes.IN_PROGRESS) {
+        Alert.alert('Ya estas intentando ingresar 🤧');
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        await GoogleSignin.hasPlayServices({
+          showPlayServicesUpdateDialog: true,
+        });
+      } else {
+        Alert.alert('Algo no funciono de acuerdo a los planes 🤧');
+      }
+    }
+  };
+
+  const signInFacebook = async () => {
+    try {
+      let result = await LoginManager.logInWithPermissions(['public_profile']);
+      AccessToken.getCurrentAccessToken().then((data: any) => {
+        console.log(data.accessToken.toString());
+      });
+    } catch (error) {
+      console.log('====================================');
+      console.log(error);
+      console.log('====================================');
+    }
+  };
 
   return (
     <View>
-      <H5Title style={styles.title}>{'Welcome to\nEcolote'}</H5Title>
+      <H5Title style={styles.title}>{'Bievenido a\nEcolote'}</H5Title>
       <ButtonCustom
         borderColor={'transparent'}
         iconName="google"
@@ -22,6 +87,7 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
         fillColor={GOOGLE_SIGN_UP_COLOR}
         textColor={'black'}
         style={styles.button}
+        onPress={signInGoogle}
         iconStyle={styles.google_icon}>
         Continue with Google
       </ButtonCustom>
@@ -29,6 +95,7 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
         iconName="facebook"
         fillColor={FACEBOOK_COLOR}
         style={styles.button}
+        onPress={signInFacebook}
         borderColor={'transparent'}>
         Continue with Facebook
       </ButtonCustom>

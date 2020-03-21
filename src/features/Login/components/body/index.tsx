@@ -11,7 +11,6 @@ import {ButtonCustom} from '../../../../components/Button/Button';
 import {styles} from './styles';
 import {pushStack} from '../../../../navigation/navigators/stackUtils';
 import {bodyTypes} from './types';
-import {ECOLOTE_SIGN_UP_CODE} from '../../../../navigation/screen_names';
 import {PRIMARY_DARK_COLOR} from '../../../../style/COLOR';
 import {InputCustom} from '../../../../components/Input/Input';
 import goDashboard from '../../../../navigation/navigators/Dashboard';

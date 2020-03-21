@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
+import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import org.reactnative.camera.RNCameraPackage;
 import com.reactnativecommunity.netinfo.NetInfoPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
@@ -56,7 +58,8 @@ public class MainApplication extends NavigationApplication {
         // eg. new VectorIconsPackage()
         new SplashScreenReactPackage(), new SvgPackage(), new LinearGradientPackage(), new VectorIconsPackage(),
         new OrientationPackage(), new RNGestureHandlerPackage(), new ReanimatedPackage(), new RNCViewPagerPackage(),
-        new NavigationBarColorPackage(), new AsyncStoragePackage(), new NetInfoPackage(), new RNCameraPackage());
+        new NavigationBarColorPackage(), new AsyncStoragePackage(), new NetInfoPackage(), new RNCameraPackage(),
+        new RNGoogleSigninPackage(), new FBSDKPackage());
 
   }
 

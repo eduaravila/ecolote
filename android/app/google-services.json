@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "94995227686",
+    "firebase_url": "https://ecolote-1584734686967.firebaseio.com",
+    "project_id": "ecolote-1584734686967",
+    "storage_bucket": "ecolote-1584734686967.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:94995227686:android:12c54d46ad3c7cc81bf2e7",
+        "android_client_info": {
+          "package_name": "com.google.samples.quickstart.signin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "94995227686-84g78vobtmsvfgv7ilnmgtb3gltqea3r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.google.samples.quickstart.signin",
+            "certificate_hash": "3bbb488c10e41e05f596b127de06f5e17592697b"
+          }
+        },
+        {
+          "client_id": "94995227686-sdcup1rm7fcdlud33efved9qidcp3n6a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0nX1JwamusHN9Xd48o9_W7XuvaGEiBQo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "94995227686-sdcup1rm7fcdlud33efved9qidcp3n6a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
