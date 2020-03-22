@@ -12,7 +12,9 @@ const Header: React.FC = () => {
     <View style={styles.constainer}>
       <StatusBarCustom />
       <HeaderPhrase
-        content={'Make a big impact with little changes in your daily life'}
+        content={
+          'Crea un gran impacto, con pequeños cambios en tu estilo de vida.'
+        }
         image={logo_image}
       />
     </View>

@@ -70,20 +70,20 @@ const Body: React.FC<bodyTypes> = ({componentId, code, token}) => {
   };
   return (
     <View>
-      <H6Title style={styles.title}>{'Now set your new password'}</H6Title>
+      <H6Title style={styles.title}>{'Escribe tu nueva contraseña'}</H6Title>
       <Subtitle1 style={styles.descriptionText}>
-        Please put a password with at least{'\n'}
-        <Subtitle1 style={styles.textBold}>* 8 characters</Subtitle1>
+        Por favor ingresa una contraseña con al menos:{'\n'}
+        <Subtitle1 style={styles.textBold}>* 8 caracteres</Subtitle1>
         {'\n'}
-        <Subtitle1 style={styles.textBold}>* 1 Uppercase letter</Subtitle1>
+        <Subtitle1 style={styles.textBold}>* 1 Letra mayuscula</Subtitle1>
         {'\n'}
-        <Subtitle1 style={styles.textBold}>* 1 Lowercase letter</Subtitle1>
+        <Subtitle1 style={styles.textBold}>* 1 Letra minuscula</Subtitle1>
         {'\n'}
-        <Subtitle1 style={styles.textBold}>* 1 Numeric character</Subtitle1>
+        <Subtitle1 style={styles.textBold}>* 1 Caracter numerico</Subtitle1>
         {'\n'}
       </Subtitle1>
       <InputCustom
-        placeholder={'Enter your new password'}
+        placeholder={'Ingresa tu nueva contraseña'}
         keyboardType="default"
         textContentType="newPassword"
         secureTextEntry={true}
@@ -113,7 +113,7 @@ const Body: React.FC<bodyTypes> = ({componentId, code, token}) => {
         error={!!errors.passwordR}
         errorMsg={'Invalid password'}
         onSubmitEditing={handleSubmit(validate_inputs)}
-        placeholder={'Repeat your password'}
+        placeholder={'Repite tu contraseña'}
         secureTextEntry={true}
         keyboardType="default"
         textContentType="newPassword"
@@ -136,9 +136,10 @@ const Body: React.FC<bodyTypes> = ({componentId, code, token}) => {
         borderColor={'transparent'}
         fillColor={PRIMARY_DARK_COLOR}
         textColor={'white'}
+        disabled={loading}
         style={styles.sendButton}
         onPress={handleSubmit(validate_inputs)}>
-        Change password
+        Cambiar contraseña
       </ButtonCustom>
     </View>
   );

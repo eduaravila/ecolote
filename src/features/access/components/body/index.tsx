@@ -25,6 +25,16 @@ const LOGIN_GOOGLE_GQL = gql`
   }
 `;
 
+const LOGIN_FACEBOOK_GQL = gql`
+  query LoginFacebook($token: String!) {
+    LoginFacebook(token: $token) {
+      token
+      media
+      code
+    }
+  }
+`;
+
 const Body: React.FC<bodyTypes> = ({componentId}) => {
   console.log(componentId);
   let {setMediaToken, setToken} = useStoreActions(state => state.credentials);
@@ -45,6 +55,28 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
       },
     },
   );
+
+  let [
+    LoginFacebook,
+    {
+      data: data_facebook,
+      loading: loading_facebook,
+      error: error_facebook,
+      networkStatus: networkStatus_facebook,
+    },
+  ] = useLazyQuery(LOGIN_FACEBOOK_GQL, {
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'network-only',
+    onCompleted: e => {
+      let {LoginFacebook} = e;
+      setMediaToken({token: LoginFacebook.media});
+      setToken({token: LoginFacebook.token});
+      goDashboard();
+    },
+    onError: e => {
+      console.log(e);
+    },
+  });
   // Somewhere in your code
   const signInGoogle = async () => {
     try {
@@ -58,8 +90,6 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
         await GoogleSignin.hasPlayServices({
           showPlayServicesUpdateDialog: true,
         });
-      } else {
-        Alert.alert('Algo no funciono de acuerdo a los planes 🤧');
       }
     }
   };
@@ -68,12 +98,10 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
     try {
       let result = await LoginManager.logInWithPermissions(['public_profile']);
       AccessToken.getCurrentAccessToken().then((data: any) => {
-        console.log(data.accessToken.toString());
+        LoginFacebook({variables: {token: data.accessToken.toString()}});
       });
     } catch (error) {
-      console.log('====================================');
-      console.log(error);
-      console.log('====================================');
+      Alert.alert('Algo no funciono de acuerdo a los planes 🤧');
     }
   };
 
@@ -89,7 +117,7 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
         style={styles.button}
         onPress={signInGoogle}
         iconStyle={styles.google_icon}>
-        Continue with Google
+        Continuar con Google
       </ButtonCustom>
       <ButtonCustom
         iconName="facebook"
@@ -97,12 +125,12 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
         style={styles.button}
         onPress={signInFacebook}
         borderColor={'transparent'}>
-        Continue with Facebook
+        Continuar con Facebook
       </ButtonCustom>
       <ButtonCustom
         style={styles.button}
         onPress={() => pushStack(componentId!, ECOLOTE_SIGN_UP_EMAIL)}>
-        Sign up FREE
+        Registrate GRATIS!
       </ButtonCustom>
     </View>
   );

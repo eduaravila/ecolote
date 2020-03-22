@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: 'transparent',
     height: '20%',
-    marginBottom: normalize(40),
+    marginVertical: normalize(40),
   },
   logo: {
     width: '50%',

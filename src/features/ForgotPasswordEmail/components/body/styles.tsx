@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 import {normalize} from '../../../../style/UTILS';
 
 export const styles = StyleSheet.create({
-  title: {marginVertical: normalize(30), textAlign: 'center'},
+  title: {marginVertical: normalize(20), textAlign: 'center'},
   sendButton: {
     marginVertical: normalize(10),
     width: '100%',

@@ -139,7 +139,7 @@ const Body: React.FC<bodyType> = ({
   return (
     <View style={styles.constainer}>
       <Subtitle1 style={styles.textLabel}>
-        {username} This is not your email? {'  '}
+        {username} Este no es tu correo? {'  '}
       </Subtitle1>
       <Subtitle1
         style={[styles.textBold, styles.textUnderline]}
@@ -162,10 +162,10 @@ const Body: React.FC<bodyType> = ({
           {opacity: codeInterval > 0 ? 0.5 : 1},
         ]}>
         {codeInterval > 0
-          ? `Wait to resend the code ${Math.trunc(
+          ? `Espera para reenviar el codigo. ${Math.trunc(
               codeInterval / 60,
             )} : ${codeInterval % 60} ⏱`
-          : 'I did not receive the code'}
+          : 'No recibi el codigo'}
       </Subtitle1>
       <ButtonCustom
         disabled={loading || resendVerifyCodeLoading}
@@ -174,7 +174,7 @@ const Body: React.FC<bodyType> = ({
         textColor={'white'}
         style={styles.continuebutton}
         onPress={handleSubmit(validate_inputs)}>
-        Continue
+        Continuar
       </ButtonCustom>
     </View>
   );

@@ -9,14 +9,14 @@ const Footer: React.FC = () => {
   return (
     <View style={styles.container}>
       <Caption style={styles.captionTop}>
-        Already have an Ecolote account?{'\n'}
+        Ya estas registrado?{'\n'}
         <Caption style={styles.captionBold} onPress={goLogin}>
-          Log in
+          Ingresa
         </Caption>
       </Caption>
       <Caption>
-        By using Ecolote you agree to our{' '}
-        <Caption style={styles.captionUndeline}>Terms & contitions</Caption>
+        Al utilizar Ecolote aceptas nuestros{' '}
+        <Caption style={styles.captionUndeline}>Terminos & condiciones</Caption>
       </Caption>
     </View>
   );

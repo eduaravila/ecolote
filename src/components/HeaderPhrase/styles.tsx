@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
   },
   textRight: {
     alignSelf: 'flex-end',
+    width: '100%',
   },
   textLeft: {
     alignSelf: 'flex-start',

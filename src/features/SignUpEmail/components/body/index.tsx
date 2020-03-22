@@ -74,12 +74,11 @@ const Body: React.FC<bodyType> = ({componentId}) => {
   return (
     <View style={styles.constainer}>
       <Subtitle1 style={styles.textLabel}>
-        Let's start with your{' '}
-        <Subtitle1 style={styles.textBold}>Email</Subtitle1>
+        Comenzemos con tu <Subtitle1 style={styles.textBold}>Correo</Subtitle1>
       </Subtitle1>
       <InputCustom
         error={!!errors.email || !!error?.graphQLErrors}
-        placeholder={'Enter your email'}
+        placeholder={'Ingresa tu correo'}
         onSubmitEditing={handleSubmit(validate_inputs)}
         errorMsg={
           error?.graphQLErrors.length
@@ -105,10 +104,9 @@ const Body: React.FC<bodyType> = ({componentId}) => {
         fillColor={PRIMARY_DARK_COLOR}
         textColor={'white'}
         onPress={handleSubmit(validate_inputs)}>
-        Continue
+        Continuar
       </ButtonCustom>
       <HairLine style={styles.hairLine} />
-      <Caption style={styles.otherLoginCaption}>Other login options</Caption>
     </View>
   );
 };

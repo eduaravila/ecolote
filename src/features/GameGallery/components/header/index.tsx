@@ -1,4 +1,4 @@
-import React, {useRef, Fragment} from 'react';
+import React, {useRef, Fragment, useState} from 'react';
 import {View, Image} from 'react-native';
 import Carousel, {ParallaxImage} from 'react-native-snap-carousel';
 import {Navigation} from 'react-native-navigation';
@@ -10,7 +10,7 @@ import {popStack} from '../../../../navigation/navigators/stackUtils';
 import {H6Title} from '../../../../components/H6Title/H6Title';
 import {normalize} from '../../../../style/UTILS';
 import {Subtitle2} from '../../../../components/Subtitle2/Subtitle2';
-import {useStoreState} from '../../../../state/store';
+import {useStoreState, useStoreActions} from '../../../../state/store';
 import {Photo} from '../../../../components/Photo/Photo';
 import {LoadingSkeleton} from '../../../../components/LoadingSkeleton/LoadingSkeleton';
 
@@ -22,6 +22,15 @@ interface HeaderType {
 
 const Header: React.FC<HeaderType> = ({componentId, title}) => {
   const {photos} = useStoreState(state => state.photos);
+  let {deletePhoto, showPhotoMenu} = useStoreActions(i => i.photos);
+
+  const _onPressDelete = (index: number) => {
+    deletePhoto({index});
+  };
+  const _onLongPress = (index: number, show: boolean) => {
+    showPhotoMenu({index, show});
+  };
+  console.log(photos, '.....');
 
   let ref = useRef(null);
   return (
@@ -43,7 +52,9 @@ const Header: React.FC<HeaderType> = ({componentId, title}) => {
         <Carousel
           ref={ref}
           data={photos}
-          renderItem={Photo}
+          renderItem={(item, props) => {
+            return Photo(item, props, _onPressDelete, _onLongPress);
+          }}
           sliderWidth={normalize(320)}
           sliderHeight={normalize(160)}
           hasParallaxImages
@@ -68,7 +79,7 @@ const Header: React.FC<HeaderType> = ({componentId, title}) => {
       )}
       <Subtitle2>
         Esto es opcional, pero te ayudara a obtener mas monedas al finalizar el
-        reto.
+        reto. (Max 10 fotos)
       </Subtitle2>
     </View>
   );

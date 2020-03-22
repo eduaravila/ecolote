@@ -15,7 +15,7 @@ const Status: React.FC<StatusTypes> = ({componentId}) => {
         style={styles.backButton}
         iconName={'arrow-left-drop-circle'}
         iconStyle={styles.iconBack}>
-        Back
+        Volver
       </MiniButton>
       <Stepper size={3} active={2} />
     </View>

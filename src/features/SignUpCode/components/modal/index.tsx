@@ -85,7 +85,7 @@ const ModalCode: React.FC<modalType> = ({
         <HeaderPhrase
           style={styles.alertContainer}
           textStyle={styles.alertText}
-          content={"You haven't received your code yet?"}
+          content={'Aun no recibes el codigo?'}
           image={logo_image}
           imageStyle={styles.alertImage}
         />
@@ -96,7 +96,7 @@ const ModalCode: React.FC<modalType> = ({
           disabled={loading}
           style={styles.sendcodeButton}
           onPress={_resend_verify_code}>
-          Resend code to {email}
+          Reenviar el codigo a {email}
         </ButtonCustom>
       </View>
     </Modal>

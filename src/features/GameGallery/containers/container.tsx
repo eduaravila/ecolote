@@ -9,11 +9,13 @@ import Header from '../components/header';
 import Body from '../components/body';
 import Footer from '../components/footer';
 import GradientBackgroundNormal from '../../../components/GradientBackgroundNormal/GradientBackgroundNormal';
-import {getColumn} from '../../../style/UTILS';
+import {getColumn, normalize} from '../../../style/UTILS';
 import {StatusBar} from 'react-native';
-import store, {useStoreState} from '../../../state/store';
+import store, {useStoreState, useStoreActions} from '../../../state/store';
 import goGameStadistics from '../../../navigation/navigators/GameStadistics';
 import {LoadingLogo} from '../../../components/LoadingLogo/LoadingLogo';
+import {Subtitle1} from '../../../components/Subtitle1/Subtitle1';
+import {Subtitle2} from '../../../components/Subtitle2/Subtitle2';
 
 interface GameGalleryTypes {
   componentId: string;
@@ -149,6 +151,7 @@ const ADD_HISTORY_GQL = gql`
 
 const GameGallery: React.FC<GameGalleryTypes> = props => {
   let {photos} = useStoreState(i => i.photos);
+  let {cleanPhotos} = useStoreActions(i => i.photos);
   const [points, setpoints] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -208,6 +211,7 @@ const GameGallery: React.FC<GameGalleryTypes> = props => {
     },
     onCompleted: e => {
       setLoading(false);
+      cleanPhotos(null);
       goGameStadistics({...props, points});
     },
   });
@@ -327,7 +331,30 @@ const GameGallery: React.FC<GameGalleryTypes> = props => {
       style={{paddingLeft: getColumn(0.0), paddingRight: getColumn(0.0)}}>
       <StatusBar backgroundColor={props.Challenge.badges.rarity.color} />
       {loading ? (
-        <LoadingLogo />
+        <LoadingLogo>
+          {error_new_commentary ||
+          error_upload_images ||
+          error_challenge_points ||
+          error_close_challenge ||
+          error_complete_challenge ? (
+            <Fragment>
+              <Subtitle2>Algo salio mal 🎭</Subtitle2>
+              <Subtitle1
+                onPress={() => {
+                  close_challenge();
+                }}
+                style={{
+                  textDecorationLine: 'underline',
+                  marginVertical: normalize(15),
+                  fontFamily: 'Rubik-Bold',
+                }}>
+                Reintentar
+              </Subtitle1>
+            </Fragment>
+          ) : (
+            <></>
+          )}
+        </LoadingLogo>
       ) : (
         <Fragment>
           <Header

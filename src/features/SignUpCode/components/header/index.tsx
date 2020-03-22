@@ -10,7 +10,7 @@ const Header: React.FC<HeaderTypes> = ({componentId}) => {
   return (
     <View style={styles.constainer}>
       <H6Title style={styles.title}>
-        Enter the code that you receive in you mail
+        Ingresa el codigo que te enviamos a tu correo
       </H6Title>
 
       <Stepper size={3} active={3} />

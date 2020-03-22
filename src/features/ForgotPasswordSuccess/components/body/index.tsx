@@ -18,7 +18,7 @@ const Body: React.FC = () => {
     <View style={styles.constainer}>
       <Image source={images[random_limit(1, 0)]} style={[styles.logo]} />
       <H6Title style={styles.message}>
-        Nice, you have a new password now you can login
+        Nice, ya tienes una nueva contraseña, ahora puedes ingresar
       </H6Title>
       <ButtonCustom
         borderColor={'transparent'}

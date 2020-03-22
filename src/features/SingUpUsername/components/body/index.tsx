@@ -105,11 +105,11 @@ const Body: React.FC<bodyType> = ({componentId, email}) => {
   return (
     <View style={styles.constainer}>
       <Subtitle1 style={styles.textLabel}>
-        Now select an <Subtitle1 style={styles.textBold}>username</Subtitle1>{' '}
-        and your <Subtitle1 style={styles.textBold}>password</Subtitle1>
+        Ahora elige un <Subtitle1 style={styles.textBold}>usuario</Subtitle1> y
+        tu <Subtitle1 style={styles.textBold}>contraseña</Subtitle1>.
       </Subtitle1>
       <InputCustom
-        placeholder={'Enter your username'}
+        placeholder={'Ingresa tu nuevo usuario'}
         keyboardType="default"
         returnKeyType="next"
         onSubmitEditing={() => passwordRef.current!.focus()}
@@ -132,7 +132,7 @@ const Body: React.FC<bodyType> = ({componentId, email}) => {
         style={styles.usernameInput}
       />
       <InputCustom
-        placeholder={'Enter your password'}
+        placeholder={'Ingresa tu contraseña'}
         keyboardType="default"
         textContentType="newPassword"
         secureTextEntry={true}
@@ -162,7 +162,7 @@ const Body: React.FC<bodyType> = ({componentId, email}) => {
         error={!!errors.passwordR}
         errorMsg={'Invalid password'}
         onSubmitEditing={handleSubmit(validate_inputs)}
-        placeholder={'Repeat your password'}
+        placeholder={'Repite tu contraseña'}
         secureTextEntry={true}
         keyboardType="default"
         textContentType="newPassword"
@@ -187,7 +187,7 @@ const Body: React.FC<bodyType> = ({componentId, email}) => {
         textColor={'white'}
         style={styles.getcodeButton}
         onPress={handleSubmit(validate_inputs)}>
-        Get a code in my email
+        Enviar el codigo a mi correo
       </ButtonCustom>
     </View>
   );

@@ -4,7 +4,6 @@ import {HttpLink} from 'apollo-link-http';
 import {ApolloClient} from 'apollo-client';
 import {API} from 'react-native-dotenv';
 import {setContext} from 'apollo-link-context';
-import {RetryLink} from 'apollo-link-retry';
 import {createUploadLink} from 'apollo-upload-client';
 import {MEDIA_UPLOAD_API} from 'react-native-dotenv';
 
@@ -12,8 +11,9 @@ import store from '../state/store';
 import {Alert} from 'react-native';
 import goLogin from '../navigation/navigators/Login';
 
-const retryLink = new RetryLink();
-
+console.log('====================================');
+console.log(API);
+console.log('====================================');
 const errorLink = new ErrorLink(({graphQLErrors, networkError}: any) => {
   console.log('====================================');
   console.log(graphQLErrors, networkError);

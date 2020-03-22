@@ -14,7 +14,7 @@ const Body: React.FC = () => {
     <View style={styles.constainer}>
       <Image source={image} style={[styles.logo]} />
       <H6Title style={styles.message}>
-        Nice, now you have your Ecolote account!
+        Nice, ya tienes tu cuenta en Ecolote!
       </H6Title>
       <ButtonCustom
         borderColor={'transparent'}

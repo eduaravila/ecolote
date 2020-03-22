@@ -12,7 +12,7 @@ const Header: React.FC = () => {
     <View style={styles.constainer}>
       <StatusBarCustom />
       <HeaderPhrase
-        content={'Help to save the planet\nwith Ecolote'}
+        content={'Ayuda a nuestro planeta con\n Ecolote'}
         image={logo_image}
       />
     </View>

@@ -4,15 +4,19 @@ import {View} from 'react-native';
 import {styles} from './styles';
 import {HairLine} from '../../../../components/HairLine/HairLine';
 import {Caption} from '../../../../components/Caption/Caption';
+import goAccess from '../../../../navigation/navigators/Access';
 
 const Footer: React.FC = () => {
   return (
     <View style={styles.container}>
       <HairLine style={styles.hairLine} />
       <Caption style={styles.registerText}>
-        Do you don't have already an account?{' '}
-        <Caption style={[styles.registerText, styles.textUnderline]}>
-          Register here!
+        Aun no tienes una cuenta en Ecolote?
+        {'\n'}
+        <Caption
+          style={[styles.registerText, styles.textUnderline]}
+          onPress={goAccess}>
+          Registrate!{' '}
         </Caption>
       </Caption>
     </View>

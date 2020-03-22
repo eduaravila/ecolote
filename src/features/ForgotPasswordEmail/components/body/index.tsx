@@ -84,24 +84,24 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
       <MiniButton
         onPress={() => popStack(componentId)}
         iconName={'arrow-left-drop-circle'}>
-        Back
+        Volver
       </MiniButton>
       <Stepper size={3} active={1} />
-      <H6Title style={styles.title}>{'You forgot your password?'}</H6Title>
+      <H6Title style={styles.title}>{'Olvidaste tu contraseña?'}</H6Title>
 
       <Subtitle1 style={styles.descriptionText}>
-        Please put your <Subtitle1 style={styles.textBold}>username</Subtitle1>{' '}
-        or your email and we can send you instructions to recover your{' '}
-        <Subtitle1 style={styles.textBold}>password.</Subtitle1>
+        Ingresa tu <Subtitle1 style={styles.textBold}>usuario</Subtitle1> o tu{' '}
+        <Subtitle1 style={styles.textBold}>email</Subtitle1> y podremos enviarte
+        las instrucciones para que establescas una nueva{' '}
+        <Subtitle1 style={styles.textBold}>contraseña.</Subtitle1>
       </Subtitle1>
       <InputCustom
         ref={() => {
-          register(
-            {name: 'email'},
-            {required: true, validate: (val: string) => validator.isEmail(val)},
-          );
+          register({name: 'email'}, {required: true});
         }}
-        placeholder={'Enter your Email / Username'}
+        error={!!error}
+        errorMsg={'Invalid username or email'}
+        placeholder={'Ingresa tu usuario / email'}
         keyboardType="email-address"
         onSubmitEditing={handleSubmit(validate_inputs)}
         onChangeText={(e: string) => _set_email('email', e)}
@@ -109,12 +109,13 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
       />
 
       <ButtonCustom
+        disabled={loading}
         borderColor={'transparent'}
         fillColor={PRIMARY_DARK_COLOR}
         textColor={'white'}
         style={styles.sendButton}
         onPress={handleSubmit(validate_inputs)}>
-        Send
+        Enviar
       </ButtonCustom>
     </View>
   );
