@@ -1,16 +1,19 @@
 import React, {useState, useRef} from 'react';
 import {styles} from './styles';
 import {SceneRendererProps, TabBar} from 'react-native-tab-view';
-import {LABEL_ACTIVE_BACKGROUND_COLOR, PRIMARY_LIGHT_COLOR} from '../../style/COLOR';
+import {
+  LABEL_ACTIVE_BACKGROUND_COLOR,
+  PRIMARY_LIGHT_COLOR,
+  STAT_LABEL_COLOR,
+  PRIMARY_COLOR,
+} from '../../style/COLOR';
 import {NavigationBarItem} from './NavigationItem';
 import {normalize} from '../../style/UTILS';
-import * as Animatable from 'react-native-animatable';
-import {useStoreState} from '../../state/store';
 
 const NavigationBar: React.FC<any> = props => {
   return (
     <TabBar
-      pressColor={LABEL_ACTIVE_BACKGROUND_COLOR}
+      pressColor={STAT_LABEL_COLOR}
       pressOpacity={1}
       {...props}
       renderLabel={({route, focused}) => (
@@ -20,9 +23,10 @@ const NavigationBar: React.FC<any> = props => {
         />
       )}
       indicatorStyle={{
-        backgroundColor: PRIMARY_LIGHT_COLOR,
+        backgroundColor: STAT_LABEL_COLOR,
         height: normalize(55),
         elevation: 20,
+        paddingHorizontal: 20,
         borderTopEndRadius: normalize(10),
         borderTopStartRadius: normalize(10),
       }}
@@ -39,12 +43,14 @@ const NavigationBar: React.FC<any> = props => {
         alignContent: 'stretch',
         alignItems: 'stretch',
       }}
-      bounces
+      
       contentContainerStyle={{
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         height: normalize(50),
+        zIndex: 10,
+        elevation: 1,
       }}
       style={[styles.container, {height: normalize(50)}]}
     />

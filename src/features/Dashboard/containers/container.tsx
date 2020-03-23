@@ -40,8 +40,12 @@ const initialLayout = {width: Dimensions.get('window').width};
 
 interface DashboardType {
   bottomRef?: any;
+  componentId: string;
 }
-const Dashboard: React.FC<DashboardType> = ({bottomRef = useRef(null)}) => {
+const Dashboard: React.FC<DashboardType> = ({
+  bottomRef = useRef(null),
+  componentId,
+}) => {
   const [index, setIndex] = React.useState(2);
   const {show} = useStoreState(store => store.BottomNavigation);
 
@@ -91,7 +95,7 @@ const Dashboard: React.FC<DashboardType> = ({bottomRef = useRef(null)}) => {
   const renderScene = ({route}: any) => {
     switch (route.key) {
       case 'challenge':
-        return <Challenge />;
+        return <Challenge componentId={componentId} />;
       case 'store':
         return <ComingSoon />;
       case 'community':
@@ -108,7 +112,9 @@ const Dashboard: React.FC<DashboardType> = ({bottomRef = useRef(null)}) => {
         lazy={false}
         swipeVelocityImpact={0}
         renderTabBar={(props: any) => (
-          <Animatable.View ref={bottomRef}>
+          <Animatable.View
+            ref={bottomRef}
+            style={{display: show ? 'none' : 'flex'}}>
             <NavigationBar {...props} />
           </Animatable.View>
         )}

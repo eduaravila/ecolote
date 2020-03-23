@@ -5,6 +5,7 @@ export const styles = StyleSheet.create({
   container: {
     // width: normalize(60),
     // height: normalize(16),
-    alignItems: 'flex-start',
+    // alignItems: 'stretch',
+    // justifyContent:"center"
   },
 });

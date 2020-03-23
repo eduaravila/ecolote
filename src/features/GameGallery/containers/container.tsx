@@ -207,6 +207,8 @@ const GameGallery: React.FC<GameGalleryTypes> = props => {
   ] = useMutation(ADD_HISTORY_GQL, {
     notifyOnNetworkStatusChange: true,
     onError: e => {
+      setLoading(false);
+
       console.log(e);
     },
     onCompleted: e => {
@@ -227,6 +229,7 @@ const GameGallery: React.FC<GameGalleryTypes> = props => {
     notifyOnNetworkStatusChange: true,
     onError: e => {
       console.log(e);
+      setLoading(false);
     },
     onCompleted: e => {
       setpoints(e.CompleteChallenge.stats.Points);
@@ -254,6 +257,8 @@ const GameGallery: React.FC<GameGalleryTypes> = props => {
   ] = useMutation(GET_CHALLENGE_POINTS_GQL, {
     notifyOnNetworkStatusChange: true,
     onError: e => {
+      setLoading(false);
+
       console.log(e);
     },
     onCompleted: e => {
@@ -282,6 +287,8 @@ const GameGallery: React.FC<GameGalleryTypes> = props => {
   ] = useMutation(CLOSE_CHALLENGE_GQL, {
     notifyOnNetworkStatusChange: true,
     onError: e => {
+      setLoading(false);
+
       console.log(e);
     },
     onCompleted: e => {

@@ -16,9 +16,14 @@ const history_image = require('../../../../assets/img/history.png');
 interface optionsType {
   show: boolean;
   toggleShow: (e: boolean) => void;
+  onPressHistory: (e: boolean) => void;
 }
 
-const OptionsModal: React.FC<optionsType> = ({show, toggleShow}) => {
+const OptionsModal: React.FC<optionsType> = ({
+  show,
+  toggleShow,
+  onPressHistory,
+}) => {
   return (
     <View>
       <Modal
@@ -30,7 +35,9 @@ const OptionsModal: React.FC<optionsType> = ({show, toggleShow}) => {
         onBackdropPress={() => toggleShow(false)}>
         <View style={{backgroundColor: PRIMARY_COLOR}}>
           <MiniStateContainer
-            onPress={() => {}}
+            onPress={() => {
+              onPressHistory(true);
+            }}
             icon={history_image}
             style={styles.buttomContainer}>
             <Overline style={styles.buttomText}>Historial</Overline>

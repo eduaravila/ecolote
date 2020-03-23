@@ -12,6 +12,7 @@ import Footer from '../components/footer';
 import goGame from '../../../navigation/navigators/Game';
 import {OfflineLogo} from '../../../components/OfflineLogo/OfflineLogo';
 import {OptionsModal} from '../components/optionsModal';
+import {HistoryModal} from '../components/historyModal';
 
 const MY_CURRENT_CHALLENGE_GQL = gql`
   query MyCurrentChallenge {
@@ -52,6 +53,63 @@ const MY_COMPLETED_CHALLENGES_GQL = gql`
   query MyCompletedChallenges {
     MyCompletedChallenges {
       _id
+    }
+  }
+`;
+
+const MY_HISTORY_GQL = gql`
+  query MyCompletedChallenges($page: Int, $size: Int) {
+    MyCompletedChallenges(findInput: {page: $page, size: $size}) {
+      _id
+      media
+      Commentary {
+        commentary
+      }
+      Points {
+        total
+        after24
+        rarity
+        completed
+        trophys
+        experience
+        grade
+        photos
+        commentary
+      }
+      Challenge {
+        _id
+        title
+        points
+        description
+        portrait
+
+        arena {
+          name
+          portrait
+          description
+        }
+        subtitle
+        badges {
+          type {
+            _id
+            name
+            image
+            color
+          }
+          zone {
+            _id
+            name
+            image
+            color
+          }
+          rarity {
+            _id
+            name
+            image
+            color
+          }
+        }
+      }
     }
   }
 `;
@@ -142,8 +200,13 @@ const MY_WALLET_GQL = gql`
     }
   }
 `;
+interface ChallengeType {
+  componentId: string;
+}
 
-const Challenge: React.FC = () => {
+const Challenge: React.FC<ChallengeType> = ({componentId}) => {
+  console.log(componentId, 'sssss');
+
   const [searching, setsearching] = useState<boolean>(false);
   const [lastRecomended, setLastRecomended] = useState(null);
   const [delayLoading, setdelayLoading] = useState(true);
@@ -160,6 +223,24 @@ const Challenge: React.FC = () => {
     setsearching(i => !i);
     setVisibilityBottom({show: e});
   };
+
+  let [
+    MyHistory,
+    {
+      data: data_my_history,
+      loading: loading_my_history,
+      error: error_my_history,
+      networkStatus: networkStatus_my_history,
+      refetch: refetch_my_history,
+      fetchMore,
+    },
+  ] = useLazyQuery(MY_HISTORY_GQL, {
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'network-only',
+    onCompleted: e => {
+      console.log(e);
+    },
+  });
 
   let {
     loading,
@@ -294,6 +375,25 @@ const Challenge: React.FC = () => {
     setshowOptions(show);
   };
 
+  const [showZoom, setshowZoom] = useState(false);
+  const _toggleshowZoom = (show: boolean) => {
+    setshowZoom(show);
+  };
+
+  const [showHistory, setshowHistory] = useState(false);
+  const _toggleshowHistory = (show: boolean) => {
+    if (show) {
+      MyHistory({
+        variables: {
+          page: 0,
+          size: 1,
+        },
+      });
+      setshowOptions(false);
+    }
+    setshowHistory(show);
+  };
+
   return (
     <GradientBackground
       colors={['transparent', 'transparent']}
@@ -305,7 +405,24 @@ const Challenge: React.FC = () => {
             data={data_my_wallet}
             toggleShow={_toggleShowOptions}
           />
-          <OptionsModal show={showOptions} toggleShow={_toggleShowOptions} />
+          <OptionsModal
+            show={showOptions}
+            toggleShow={_toggleShowOptions}
+            onPressHistory={_toggleshowHistory}
+          />
+          <HistoryModal
+            showZoom={showZoom}
+            _toggleshowZoom={_toggleshowZoom}
+            componentId={componentId}
+            show={showHistory}
+            toggleShow={_toggleshowHistory}
+            data={
+              data_my_history && data_my_history.MyCompletedChallenges
+                ? data_my_history.MyCompletedChallenges
+                : []
+            }
+            loading={loading_my_history}
+          />
           <Body
             retry={() => {
               refetch_current_arena();

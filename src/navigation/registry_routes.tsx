@@ -24,6 +24,7 @@ import {
   ECOLOTE_GAME_STADISTICS,
   ECOLOTE_TUTORIAL,
   ECOLOTE_CAMERA,
+  ECOLOTE_PHOTO_ZOOM,
 } from './screen_names';
 //* features
 import Access from '../features/access/containers/index';
@@ -48,7 +49,6 @@ import GameGallery from '../features/GameGallery/containers/container';
 import GameStadistics from '../features/GameStadistics/containers/container';
 import Tutorial from '../features/Tutorial/containers/container';
 import Camera from '../features/Camera/containers/container';
-
 const registryComponents = () => {
   Navigation.registerComponent(ECOLOTE_ACCESS_WELCOME, () =>
     gestureHandlerRootHOC(Grapper(Access)()),

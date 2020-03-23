@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
   },
   buttomText: {
     fontFamily: 'Rubik-Bold',
-    fontSize: normalize(12),
+    fontSize: normalize(11),
     width: '50%',
   },
 });

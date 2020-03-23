@@ -4,16 +4,18 @@ import {
   PRIMARY_DARK_COLOR,
   PRIMARY_LIGHT_COLOR,
   LABEL_ACTIVE_BACKGROUND_COLOR,
+  STAT_LABEL_COLOR,
+  PRIMARY_COLOR,
 } from '../../style/COLOR';
 
 export const styles = StyleSheet.create({
   container: {
     height: normalize(50),
     width: '100%',
-    position: 'absolute',
+    // position: 'absolute',
     bottom: 0,
     left: 0,
-    backgroundColor: PRIMARY_DARK_COLOR,
+    backgroundColor: PRIMARY_COLOR,
     borderTopEndRadius: normalize(10),
     borderTopStartRadius: normalize(10),
   },
