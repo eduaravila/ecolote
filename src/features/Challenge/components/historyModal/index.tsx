@@ -13,67 +13,77 @@ import {useStoreState} from '../../../../state/store';
 import {pushStackWithProps} from '../../../../navigation/navigators/stackUtils';
 
 import ImageViewer from 'react-native-image-zoom-viewer';
-import {STAT_LABEL_COLOR} from '../../../../style/COLOR';
+import {STAT_LABEL_COLOR, PRIMARY_COLOR} from '../../../../style/COLOR';
 import {Subtitle2} from '../../../../components/Subtitle2/Subtitle2';
-import {H5Title} from '../../../../components/H5Title/H5Title';
+import {HistoryDetailsModal} from '../historyDetailsModal';
+
+interface dataType {
+  total_time: string;
+  end_date: string;
+  _id: string;
+  start_date: string;
+  media: string[];
+  Commentary: {
+    commentary: string;
+  };
+  Points: {
+    total: string;
+    after24: string;
+    rarity: string;
+    completed: string;
+    trophys: string;
+    experience: string;
+    grade: string;
+    photos: string;
+    commentary: string;
+  };
+  Challenge: {
+    _id: string;
+    title: string;
+    points: string;
+    description: string;
+    portrait: string;
+    arena: {
+      name: string;
+      portrait: string;
+      description: string;
+    };
+    subtitle: string;
+    badges: {
+      type: {
+        _id: string;
+        name: string;
+        image: string;
+        color: string;
+      };
+      zone: {
+        _id: string;
+        name: string;
+        image: string;
+        color: string;
+      };
+      rarity: {
+        _id: string;
+        name: string;
+        image: string;
+        color: string;
+      };
+    };
+  };
+}
+
 interface optionsType {
   show?: boolean;
   showZoom: boolean;
+  showDetails: boolean;
   componentId: string;
   toggleShow: (e: boolean) => void;
   _toggleshowZoom: (e: boolean) => void;
+  _toggleshowDetails: (e: boolean) => void;
+  _refresh_history: () => void;
+  get_more: () => void;
   loading: boolean;
-  data: {
-    _id: string;
-    media: string[];
-    Commentary: {
-      commentary: string;
-    };
-    Points: {
-      total: string;
-      after24: string;
-      rarity: string;
-      completed: string;
-      trophys: string;
-      experience: string;
-      grade: string;
-      photos: string;
-      commentary: string;
-    };
-    Challenge: {
-      _id: string;
-      title: string;
-      points: string;
-      description: string;
-      portrait: string;
-      arena: {
-        name: string;
-        portrait: string;
-        description: string;
-      };
-      subtitle: string;
-      badges: {
-        type: {
-          _id: string;
-          name: string;
-          image: string;
-          color: string;
-        };
-        zone: {
-          _id: string;
-          name: string;
-          image: string;
-          color: string;
-        };
-        rarity: {
-          _id: string;
-          name: string;
-          image: string;
-          color: string;
-        };
-      };
-    };
-  }[];
+  data: dataType[];
 }
 
 const HistoryModal: React.FC<optionsType> = ({
@@ -84,10 +94,17 @@ const HistoryModal: React.FC<optionsType> = ({
   componentId,
   showZoom,
   _toggleshowZoom,
+  showDetails,
+  _toggleshowDetails,
+  _refresh_history,
+  get_more,
 }) => {
   let {mediaToken} = useStoreState(state => state.credentials);
   const [images, setImages] = useState<{url: string}[]>([]);
+  const [currentDatailsData, setcurrentDatailsData] = useState<dataType>({});
+
   const [indexPhoto, setindexPhoto] = useState(0);
+
   const _onPressMedia = (index: number, indexPhoto: number) => {
     setindexPhoto(indexPhoto);
     setImages([
@@ -98,11 +115,15 @@ const HistoryModal: React.FC<optionsType> = ({
     _toggleshowZoom(true);
   };
 
+  const _onPressDatails = (index: number) => {
+    setcurrentDatailsData({...data[index]});
+    _toggleshowDetails(true);
+  };
+
   return (
     <View style={styles.container}>
       <Modal
         isVisible={show}
-        // backdropOpacity={0}
         onBackButtonPress={() => {
           toggleShow(false);
         }}
@@ -112,11 +133,15 @@ const HistoryModal: React.FC<optionsType> = ({
         animationIn={'bounceIn'}
         animationOut={'zoomOut'}
         style={styles.modalContainer}>
+        <HistoryDetailsModal
+          show={showDetails}
+          toggleShow={_toggleshowDetails}
+          data={currentDatailsData}
+        />
         <Modal
           isVisible={showZoom}
           backdropOpacity={0}
           style={styles.modalContainer}
-          // backdropOpacity={0}
           onBackButtonPress={() => {
             _toggleshowZoom(false);
           }}
@@ -167,30 +192,31 @@ const HistoryModal: React.FC<optionsType> = ({
           />
         </Modal>
         <View style={styles.insideModalContainer}>
-          <MiniButton
-            onPress={() => {
-              toggleShow(false);
-            }}
-            iconName={'close-circle'}
-            style={styles.back}>
-            Salir
-          </MiniButton>
-          <H6Title style={styles.title}>Historial</H6Title>
-
+          <View style={styles.titleContainer}>
+            <H6Title style={styles.title}>Historial</H6Title>
+            <MiniButton
+              onPress={() => {
+                toggleShow(false);
+              }}
+              iconName={'close-circle'}
+              style={styles.back}>
+              Salir
+            </MiniButton>
+          </View>
           <View style={styles.historyContainer}>
+            <View style={styles.historyContainerBackDrop} />
+
             <FlatList
               refreshControl={
                 <RefreshControl
-                  // onRefresh={get_maintenances_and_reset}
+                  onRefresh={_refresh_history}
                   refreshing={loading}
+                  colors={[PRIMARY_COLOR]}
                 />
               }
-              onEndReachedThreshold={0.001}
+              onEndReachedThreshold={0.7}
               onEndReached={() => {
-                // if (!this.onEndReachedCalledDuringMomentum) {
-                //   get_maintenances();
-                //   this.onEndReachedCalledDuringMomentum = true;
-                // }
+                get_more();
               }}
               data={data}
               keyExtractor={(item, index) => index.toString()}
@@ -200,6 +226,7 @@ const HistoryModal: React.FC<optionsType> = ({
                     {...item}
                     mediaToken={mediaToken}
                     _onPressMedia={(e: number) => _onPressMedia(index, e)}
+                    _onPressDetails={() => _onPressDatails(index)}
                   />
                 );
               }}

@@ -113,9 +113,7 @@ const Body: React.FC<BodyType> = ({
       goSmall();
     }
   }, [loading]);
-  console.log('====================================');
-  console.log(currentChallenge);
-  console.log('====================================');
+
   return (
     <View style={styles.container}>
       {!!currentChallenge && currentChallenge.MyCurrentChallenge && !error ? (

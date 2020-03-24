@@ -16,6 +16,7 @@ import goGameStadistics from '../../../navigation/navigators/GameStadistics';
 import {LoadingLogo} from '../../../components/LoadingLogo/LoadingLogo';
 import {Subtitle1} from '../../../components/Subtitle1/Subtitle1';
 import {Subtitle2} from '../../../components/Subtitle2/Subtitle2';
+import {H6Title} from '../../../components/H6Title/H6Title';
 
 interface GameGalleryTypes {
   componentId: string;
@@ -339,28 +340,7 @@ const GameGallery: React.FC<GameGalleryTypes> = props => {
       <StatusBar backgroundColor={props.Challenge.badges.rarity.color} />
       {loading ? (
         <LoadingLogo>
-          {error_new_commentary ||
-          error_upload_images ||
-          error_challenge_points ||
-          error_close_challenge ||
-          error_complete_challenge ? (
-            <Fragment>
-              <Subtitle2>Algo salio mal 🎭</Subtitle2>
-              <Subtitle1
-                onPress={() => {
-                  close_challenge();
-                }}
-                style={{
-                  textDecorationLine: 'underline',
-                  marginVertical: normalize(15),
-                  fontFamily: 'Rubik-Bold',
-                }}>
-                Reintentar
-              </Subtitle1>
-            </Fragment>
-          ) : (
-            <></>
-          )}
+          <H6Title>Cargando...</H6Title>
         </LoadingLogo>
       ) : (
         <Fragment>

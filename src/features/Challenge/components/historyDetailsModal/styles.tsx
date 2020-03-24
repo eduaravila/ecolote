@@ -23,6 +23,34 @@ export const styles = StyleSheet.create({
     borderRadius: normalize(10),
     flexDirection: 'column',
   },
+  challengeTitle: {
+    width: '100%',
+    fontFamily: 'Rubik-Bold',
+  },
+  bonus: {
+    textAlign: 'right',
+    textDecorationLine: 'underline',
+    marginVertical: normalize(10),
+  },
+  total: {
+    textAlign: 'right',
+    marginVertical: normalize(10),
+    fontSize: normalize(46),
+  },
+  grade: {
+    textAlign: 'center',
+    marginVertical: normalize(10),
+    fontSize: normalize(46),
+    textDecorationLine: 'underline',
+  },
+  right: {
+    flex: 1,
+    textAlign: 'right',
+  },
+  left: {
+    flex: 1,
+    textAlign: 'left',
+  },
   buttomContainer: {
     width: '100%',
     height: normalize(40),
@@ -76,47 +104,29 @@ export const styles = StyleSheet.create({
     elevation: 5,
   },
 
-  backArena: {
-    marginHorizontal: normalize(10),
-    backgroundColor: HEY_COLOR,
-    textAlign: 'center',
-    borderRadius: normalize(10),
-    paddingLeft: normalize(8),
-    paddingVertical: normalize(8),
-    // width: normalize(50),
-    elevation: 5,
+  descriptionText: {
+    width: '100%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginVertical: normalize(10),
   },
-  nextArena: {
-    // marginVertical: normalize(10),
-    marginHorizontal: normalize(10),
-    backgroundColor: HEY_COLOR,
-    borderRadius: normalize(10),
-    paddingLeft: normalize(8),
-    textAlign: 'center',
-    elevation: 5,
-
-    paddingVertical: normalize(8),
-  },
-  titleArena: {
-    width: '50%',
-    textAlign: 'center',
-    height: '100%',
-    paddingVertical: normalize(10),
-  },
-  historyContainer: {
+  bodyContainer: {
     width: '93%',
     height: '90%',
     alignSelf: 'center',
+    borderBottomEndRadius: normalize(10),
+    borderBottomStartRadius: normalize(10),
+    padding: normalize(10),
   },
-  zoomModal: {
-    borderRadius: normalize(10),
-  },
-  historyContainerBackDrop: {
-    width: '100%',
+  backdrop: {
+    width: '93%',
     height: '100%',
-    backgroundColor: PRIMARY_LIGHT_COLOR,
-    opacity: 0.4,
+    backgroundColor: PRIMARY_COLOR,
+    opacity: 0.8,
     position: 'absolute',
+    alignSelf: 'center',
+    bottom: 0,
     borderBottomEndRadius: normalize(10),
     borderBottomStartRadius: normalize(10),
   },

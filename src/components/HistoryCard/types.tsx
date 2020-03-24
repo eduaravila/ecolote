@@ -1,8 +1,11 @@
 export interface HistoryCardTypes {
   _id: string;
-  _onPressMedia: (item:number) => void;
+  _onPressMedia: (item: number) => void;
+  _onPressDetails: () => void;
   ref?: any;
   mediaToken: string;
+  total_time: string;
+  end_date: string;
   media: string[];
   Commentary: {
     commentary: string;

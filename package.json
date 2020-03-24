@@ -37,6 +37,7 @@
     "graphql": "^14.6.0",
     "markdown-it": "^10.0.0",
     "markdown-it-emoji": "^1.4.0",
+    "moment": "^2.24.0",
     "nanoid": "^2.1.11",
     "native-base": "^2.13.8",
     "patch-package": "^6.2.1",

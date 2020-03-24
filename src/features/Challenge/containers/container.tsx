@@ -62,6 +62,9 @@ const MY_HISTORY_GQL = gql`
     MyCompletedChallenges(findInput: {page: $page, size: $size}) {
       _id
       media
+      total_time
+      end_date
+      start_date
       Commentary {
         commentary
       }
@@ -205,8 +208,6 @@ interface ChallengeType {
 }
 
 const Challenge: React.FC<ChallengeType> = ({componentId}) => {
-  console.log(componentId, 'sssss');
-
   const [searching, setsearching] = useState<boolean>(false);
   const [lastRecomended, setLastRecomended] = useState(null);
   const [delayLoading, setdelayLoading] = useState(true);
@@ -218,6 +219,7 @@ const Challenge: React.FC<ChallengeType> = ({componentId}) => {
     state => state.BottomNavigation.BottomNavigationSetVisity,
   );
   const {show} = useStoreState(state => state.BottomNavigation);
+  const [history, setHistory] = useState<any>([]);
 
   const _toggle_searching = (e: boolean) => {
     setsearching(i => !i);
@@ -238,7 +240,13 @@ const Challenge: React.FC<ChallengeType> = ({componentId}) => {
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'network-only',
     onCompleted: e => {
-      console.log(e);
+      let new_page = page + 1;
+      setpage(new_page);
+      if (!e || !e.MyCompletedChallenges.length) {
+        return;
+      }
+      if (e && e.MyCompletedChallenges)
+        setHistory((i: any) => [...i, ...e.MyCompletedChallenges]);
     },
   });
 
@@ -250,9 +258,6 @@ const Challenge: React.FC<ChallengeType> = ({componentId}) => {
   } = useQuery(MY_WALLET_GQL, {
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'network-only',
-    onCompleted: e => {
-      console.log(e);
-    },
   });
 
   let [
@@ -280,7 +285,6 @@ const Challenge: React.FC<ChallengeType> = ({componentId}) => {
           Last: e.GetChallenge._id,
         });
       }
-      console.log(e);
     },
   });
 
@@ -296,15 +300,6 @@ const Challenge: React.FC<ChallengeType> = ({componentId}) => {
   ] = useLazyQuery(MY_CURRENT_ARENA_GQL, {
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'network-only',
-    onCompleted: e => {
-      console.log(
-        e,
-        MEDIA_API +
-          data_current_arena.MyArena.currentArena.portrait +
-          '/image/' +
-          mediaToken,
-      );
-    },
   });
 
   let {
@@ -315,9 +310,6 @@ const Challenge: React.FC<ChallengeType> = ({componentId}) => {
   } = useQuery(MY_CURRENT_CHALLENGE_GQL, {
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'network-only',
-    onCompleted: e => {
-      console.log(e);
-    },
   });
   let [
     myCompletedChallenges,
@@ -347,7 +339,6 @@ const Challenge: React.FC<ChallengeType> = ({componentId}) => {
           },
         });
       }
-      console.log(e);
     },
   });
 
@@ -369,6 +360,7 @@ const Challenge: React.FC<ChallengeType> = ({componentId}) => {
       }
     },
   });
+  const [page, setpage] = useState(1);
 
   const [showOptions, setshowOptions] = useState(false);
   const _toggleShowOptions = (show: boolean) => {
@@ -380,18 +372,43 @@ const Challenge: React.FC<ChallengeType> = ({componentId}) => {
     setshowZoom(show);
   };
 
+  const [showDetails, setshowDetails] = useState(false);
+  const _toggleshowDetails = (show: boolean) => {
+    setshowDetails(show);
+  };
   const [showHistory, setshowHistory] = useState(false);
   const _toggleshowHistory = (show: boolean) => {
     if (show) {
       MyHistory({
         variables: {
           page: 0,
-          size: 1,
+          size: 2,
         },
       });
+      setpage(1);
+      setHistory([]);
       setshowOptions(false);
     }
     setshowHistory(show);
+  };
+  const _refresh_history = () => {
+    setpage(1);
+    setHistory([]);
+    MyHistory({
+      variables: {
+        page: 0,
+        size: 2,
+      },
+    });
+  };
+
+  const _more_history = () => {
+    MyHistory({
+      variables: {
+        page: page,
+        size: 1,
+      },
+    });
   };
 
   return (
@@ -411,17 +428,17 @@ const Challenge: React.FC<ChallengeType> = ({componentId}) => {
             onPressHistory={_toggleshowHistory}
           />
           <HistoryModal
+            get_more={_more_history}
+            _refresh_history={_refresh_history}
+            showDetails={showDetails}
+            _toggleshowDetails={_toggleshowDetails}
             showZoom={showZoom}
             _toggleshowZoom={_toggleshowZoom}
             componentId={componentId}
             show={showHistory}
             toggleShow={_toggleshowHistory}
-            data={
-              data_my_history && data_my_history.MyCompletedChallenges
-                ? data_my_history.MyCompletedChallenges
-                : []
-            }
-            loading={loading_my_history}
+            data={history ? history : []}
+            loading={loading_my_history }
           />
           <Body
             retry={() => {
