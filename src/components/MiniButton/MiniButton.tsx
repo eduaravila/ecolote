@@ -26,12 +26,13 @@ const MiniButton: React.FC<MiniButtonType> = ({
   onPress,
   style,
   textColor = 'white',
+  textStyle,
 }) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={[styles.container, style]}>
         {iconName ? (
-          <Subtitle2 style={[{color: textColor}]}>
+          <Subtitle2 style={[{color: textColor}, textStyle]}>
             {
               <ButtonIcon
                 name={iconName}
@@ -44,7 +45,9 @@ const MiniButton: React.FC<MiniButtonType> = ({
             {children}
           </Subtitle2>
         ) : (
-          <Subtitle2 style={[{color: textColor}]}>{children}</Subtitle2>
+          <Subtitle2 style={[{color: textColor}, textStyle]}>
+            {children}
+          </Subtitle2>
         )}
       </View>
     </TouchableOpacity>

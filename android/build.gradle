@@ -44,9 +44,11 @@ subprojects { subproject ->
     afterEvaluate {
         if ((subproject.plugins.hasPlugin('android') || subproject.plugins.hasPlugin('android-library'))) {
             android {
+                compileSdkVersion 28        // version of compile sdk used for project
+                buildToolsVersion '28.0.3'    // version of build tool used for project
                 variantFilter { variant ->
                     def names = variant.flavors*.name
-                    if (names.contains("reactNative51") ||names.contains("reactNative55") || names.contains("reactNative56") ||names.contains("reactNative57") || names.contains("reactNative57_5")) {
+                    if (names.contains("reactNative51") ||names.contains("reactNative55") || names.contains("reactNative56") ||names.contains("reactNative57") || names.contains("reactNative57_5") || names.contains("reactNative62")) {
                         setIgnore(true)
                     }
                 }

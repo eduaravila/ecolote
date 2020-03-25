@@ -25,6 +25,8 @@ export const PHOTO_COLOR_DARK = '#65A79A';
 
 export const EPIC_COLOR = '#8EFF00';
 export const EPIC_COLOR_DARK = '#FF6719';
+export const DISCORD_COLOR = '#7289D9';
+export const LINKEDLN_COLOR = '#0275B4';
 
 export const LEGENDARY_COLOR = '#CBFDFF';
 export const LEGENDARY_COLOR_DARK = '#EE367B';

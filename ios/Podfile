@@ -62,6 +62,10 @@ target 'ecolote' do
 
   pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
 
+  pod 'ReactNativeAdsFacebook', :path => '../node_modules/react-native-fbads'
+
+  pod 'RNInAppBrowser', :path => '../node_modules/react-native-inappbrowser-reborn'
+
   target 'ecoloteTests' do
     inherit! :search_paths
     # Pods for testing

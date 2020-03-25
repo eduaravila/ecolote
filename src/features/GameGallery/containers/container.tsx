@@ -17,6 +17,7 @@ import {LoadingLogo} from '../../../components/LoadingLogo/LoadingLogo';
 import {Subtitle1} from '../../../components/Subtitle1/Subtitle1';
 import {Subtitle2} from '../../../components/Subtitle2/Subtitle2';
 import {H6Title} from '../../../components/H6Title/H6Title';
+import {getFact} from '../../../utils/phrases';
 
 interface GameGalleryTypes {
   componentId: string;
@@ -155,6 +156,7 @@ const GameGallery: React.FC<GameGalleryTypes> = props => {
   let {cleanPhotos} = useStoreActions(i => i.photos);
   const [points, setpoints] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [fact, setfact] = useState(getFact());
 
   let [
     UploadImage,
@@ -303,6 +305,7 @@ const GameGallery: React.FC<GameGalleryTypes> = props => {
   });
 
   const close_challenge = () => {
+    setfact(getFact());
     setLoading(true);
     if (!!props.commentary) {
       NewCommentary({
@@ -340,7 +343,10 @@ const GameGallery: React.FC<GameGalleryTypes> = props => {
       <StatusBar backgroundColor={props.Challenge.badges.rarity.color} />
       {loading ? (
         <LoadingLogo>
-          <H6Title>Cargando...</H6Title>
+          <H6Title
+            style={{width: '90%', textAlign: 'center', alignSelf: 'center'}}>
+            {fact}
+          </H6Title>
         </LoadingLogo>
       ) : (
         <Fragment>

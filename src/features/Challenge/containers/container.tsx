@@ -13,6 +13,7 @@ import goGame from '../../../navigation/navigators/Game';
 import {OfflineLogo} from '../../../components/OfflineLogo/OfflineLogo';
 import {OptionsModal} from '../components/optionsModal';
 import {HistoryModal} from '../components/historyModal';
+import {ConfigurationModal} from '../components/configurationModal';
 
 const MY_CURRENT_CHALLENGE_GQL = gql`
   query MyCurrentChallenge {
@@ -286,6 +287,9 @@ const Challenge: React.FC<ChallengeType> = ({componentId}) => {
         });
       }
     },
+    onError: e => {
+      _toggle_searching(false);
+    },
   });
 
   let [
@@ -367,6 +371,16 @@ const Challenge: React.FC<ChallengeType> = ({componentId}) => {
     setshowOptions(show);
   };
 
+  const [showCredits, setshowCredits] = useState(false);
+  const _toggleshowCredits = (show: boolean) => {
+    setshowCredits(show);
+  };
+  const [showConfigurations, setshowConfigurations] = useState(false);
+  const _toggleshowConfigurations = (show: boolean) => {
+    if (show) setshowOptions(false);
+    setshowConfigurations(show);
+  };
+
   const [showZoom, setshowZoom] = useState(false);
   const _toggleshowZoom = (show: boolean) => {
     setshowZoom(show);
@@ -418,6 +432,10 @@ const Challenge: React.FC<ChallengeType> = ({componentId}) => {
       {online && refetch ? (
         <Fragment>
           <Head
+            retry={() => {
+              refetch_current_arena();
+            }}
+            error={!!error || !!error_my_wallet}
             show={searching}
             data={data_my_wallet}
             toggleShow={_toggleShowOptions}
@@ -426,6 +444,13 @@ const Challenge: React.FC<ChallengeType> = ({componentId}) => {
             show={showOptions}
             toggleShow={_toggleShowOptions}
             onPressHistory={_toggleshowHistory}
+            onPressConfiguration={_toggleshowConfigurations}
+          />
+          <ConfigurationModal
+            showCredits={showCredits}
+            toggleShowCredits={_toggleshowCredits}
+            show={showConfigurations}
+            toggleShow={_toggleshowConfigurations}
           />
           <HistoryModal
             get_more={_more_history}
@@ -438,7 +463,7 @@ const Challenge: React.FC<ChallengeType> = ({componentId}) => {
             show={showHistory}
             toggleShow={_toggleshowHistory}
             data={history ? history : []}
-            loading={loading_my_history }
+            loading={loading_my_history}
           />
           <Body
             retry={() => {

@@ -17,7 +17,6 @@ import {LoadingLogo} from '../../components/LoadingLogo/LoadingLogo';
 
 const persistor = persistStore(store, null, () => {
   // Subscribe
-  console.log('api', API);
 
   const unsubscribe = NetInfo.addEventListener(state => {
     console.log('Connection type', state.type);

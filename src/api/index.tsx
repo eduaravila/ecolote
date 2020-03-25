@@ -11,13 +11,7 @@ import store from '../state/store';
 import {Alert} from 'react-native';
 import goLogin from '../navigation/navigators/Login';
 
-console.log('====================================');
-console.log(API);
-console.log('====================================');
 const errorLink = new ErrorLink(({graphQLErrors, networkError}: any) => {
-  console.log('====================================');
-  console.log(graphQLErrors, networkError);
-  console.log('====================================');
   if (graphQLErrors)
     graphQLErrors.map(({message, locations, path, extensions}: any) => {
       console.log('gql error', message, extensions.code);

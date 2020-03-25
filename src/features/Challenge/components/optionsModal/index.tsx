@@ -17,12 +17,14 @@ interface optionsType {
   show: boolean;
   toggleShow: (e: boolean) => void;
   onPressHistory: (e: boolean) => void;
+  onPressConfiguration: (e: boolean) => void;
 }
 
 const OptionsModal: React.FC<optionsType> = ({
   show,
   toggleShow,
   onPressHistory,
+  onPressConfiguration,
 }) => {
   return (
     <View>
@@ -43,7 +45,9 @@ const OptionsModal: React.FC<optionsType> = ({
             <Overline style={styles.buttomText}>Historial</Overline>
           </MiniStateContainer>
           <MiniStateContainer
-            onPress={() => {}}
+            onPress={() => {
+              onPressConfiguration(true);
+            }}
             icon={config_image}
             style={styles.buttomContainer}>
             <Overline style={styles.buttomText}>Configuracion</Overline>

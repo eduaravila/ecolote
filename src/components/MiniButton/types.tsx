@@ -8,6 +8,7 @@ export interface MiniButtonType {
   iconSize?: number;
   iconStyle?: {[t: string]: any};
   style?: {[t: string]: any};
+  textStyle?: {[t: string]: any};
   onPress: () => void;
 }
 

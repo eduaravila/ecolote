@@ -8,6 +8,7 @@ import android.content.res.Configuration;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
 import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
+import com.facebook.ads.AudienceNetworkAds;
 
 public class MainActivity extends NavigationActivity {
 
@@ -19,6 +20,7 @@ public class MainActivity extends NavigationActivity {
   protected void onCreate(Bundle savedInstanceState) {
     SplashScreen.show(this,R.style.SplashScreenTheme);
     super.onCreate(savedInstanceState);
+    AudienceNetworkAds.initialize(this);
   }
 
   @Override

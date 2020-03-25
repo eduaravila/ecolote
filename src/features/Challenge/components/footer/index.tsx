@@ -1,10 +1,11 @@
-import React, {useRef, useEffect} from 'react';
+import React, {useRef, useEffect, useState} from 'react';
 import {View} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
 import {styles} from './styles';
 import {H6Title} from '../../../../components/H6Title/H6Title';
 import {Caption} from '../../../../components/Caption/Caption';
+import {getFact} from '../../../../utils/phrases';
 
 interface FooterType {
   show: boolean;
@@ -12,6 +13,7 @@ interface FooterType {
 }
 
 const Footer: React.FC<FooterType> = ({show, ref = useRef(null)}) => {
+  const [fact, setFact] = useState(getFact());
   const goUp = () => {
     if (ref?.current) {
       ref.current.bounceOut(500).then((e: any) => e);
@@ -35,10 +37,7 @@ const Footer: React.FC<FooterType> = ({show, ref = useRef(null)}) => {
   return (
     <Animatable.View style={styles.container} ref={ref}>
       <H6Title style={styles.title}>Sabias que?</H6Title>
-      <Caption>
-        I've written at length about you can defeat the spice industry by
-        growing your own spices.{' '}
-      </Caption>
+      <Caption>{fact}</Caption>
     </Animatable.View>
   );
 };

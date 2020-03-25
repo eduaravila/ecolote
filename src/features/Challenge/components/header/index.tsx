@@ -17,6 +17,7 @@ import {H3Title} from '../../../../components/H3Title/H3Title';
 import {H6Title} from '../../../../components/H6Title/H6Title';
 import {normalize} from '../../../../style/UTILS';
 import {LoadingSkeleton} from '../../../../components/LoadingSkeleton/LoadingSkeleton';
+import {Subtitle1} from '../../../../components/Subtitle1/Subtitle1';
 
 const coin_image = require('../../../../assets/img/dinero_es_dinero.png');
 const level_image = require('../../../../assets/img/level.png');
@@ -30,6 +31,8 @@ interface HeadType {
   ref?: any;
   refLoading?: any;
   data: any;
+  error: boolean;
+  retry: () => void;
   toggleShow: (e: boolean) => void;
 }
 
@@ -39,6 +42,8 @@ const Head: React.FC<HeadType> = ({
   refLoading = useRef(null),
   data,
   toggleShow,
+  error,
+  retry,
 }) => {
   const [initialDelay, setInitialDelay] = useState(true);
   let [loadingSize] = useState(new Animated.Value(0));
@@ -126,7 +131,11 @@ const Head: React.FC<HeadType> = ({
           <MiniStateContainer icon={news_image} onPress={() => {}} />
         </View>
       </Animatable.View>
-
+      {error && (
+        <Subtitle1 onPress={retry} style={styles.retry}>
+          Reintentar
+        </Subtitle1>
+      )}
       <Animatable.View style={styles.loadingStat} ref={refLoading}>
         {show && (
           <StatContainer
