@@ -121,10 +121,20 @@ const ConfigurationModal: React.FC<optionsType> = ({
           </View>
           <View style={styles.socialContainer}>
             <MiniButton
-              onPress={() => {}}
+              onPress={() => {
+                openLink('http://www.ecolote.com/termsconditions');
+              }}
               style={styles.blogButtom}
               textStyle={{height: '100%', fontSize: normalize(12)}}>
               Terminos & Condiciones
+            </MiniButton>
+            <MiniButton
+              onPress={() => {
+                openLink('http://www.ecolote.com/privacy');
+              }}
+              style={styles.blogButtom}
+              textStyle={{height: '100%', fontSize: normalize(12)}}>
+              Privacidad
             </MiniButton>
             <MiniButton
               onPress={() => {
