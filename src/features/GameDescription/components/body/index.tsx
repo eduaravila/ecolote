@@ -49,7 +49,7 @@ const Body: React.FC<bodyTypes> = ({
             ref={ref}
             data={data}
             hasParallaxImages
-            renderItem={GameCard}
+            renderItem={item => GameCard(item)}
             onSnapToItem={i => setactiveIndex(i)}
             sliderWidth={normalize(390)}
             // layout={'stack'}

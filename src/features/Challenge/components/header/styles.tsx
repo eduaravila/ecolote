@@ -86,4 +86,12 @@ export const styles = StyleSheet.create({
   loadingIconContainer: {
     width: '20%',
   },
+  retry: {
+    textDecorationLine: 'underline',
+    marginVertical: normalize(10),
+    fontFamily: 'Rubik-Bold',
+    fontSize: normalize(20),
+    width: '100%',
+    height: normalize(100),
+  },
 });

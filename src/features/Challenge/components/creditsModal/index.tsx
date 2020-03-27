@@ -51,7 +51,9 @@ const CreditsModal: React.FC<optionsType> = ({show, toggleShow, openLink}) => {
           <Image source={logo_image} style={styles.logo} />
 
           <View style={styles.socialContainer}>
-            <Subtitle1>Creado, Producida , Dirigida y Desarrollada por:</Subtitle1>
+            <Subtitle1>
+              Creado, Producida , Dirigida y Desarrollada por:
+            </Subtitle1>
             <H6Title style={styles.killer}>Eduardo Avila</H6Title>
           </View>
           <Subtitle1>Ponte en contacto</Subtitle1>

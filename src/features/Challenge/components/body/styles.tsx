@@ -78,8 +78,9 @@ export const styles = StyleSheet.create({
   },
   retry: {
     textDecorationLine: 'underline',
-    marginVertical: normalize(30),
+    marginVertical: normalize(10),
     fontFamily: 'Rubik-Bold',
     fontSize: normalize(20),
+    height: '100%',
   },
 });

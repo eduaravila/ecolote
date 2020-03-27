@@ -434,6 +434,7 @@ const Challenge: React.FC<ChallengeType> = ({componentId}) => {
           <Head
             retry={() => {
               refetch_current_arena();
+              refetch_my_wallet();
             }}
             error={!!error || !!error_my_wallet}
             show={searching}

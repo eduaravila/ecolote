@@ -88,48 +88,52 @@ const Head: React.FC<HeadType> = ({
         {height: show ? normalize(150) : normalize(100)},
       ]}>
       <Animatable.View ref={ref}>
-        <View style={styles.walletContainer}>
-          <StatContainer icon={level_image} iconText={'10'}>
-            <Subtitle2 style={styles.textBold}>
-              {data && data.MyWallet.Level.total}
-            </Subtitle2>
-          </StatContainer>
-          <StatContainer icon={coin_image}>
-            <Subtitle2 style={styles.textBold}>
-              {data && data.MyWallet.Coins.total}
-            </Subtitle2>
-          </StatContainer>
-        </View>
-        <View style={styles.walletContainer}>
-          <StatContainer
-            borderStyle={{backgroundColor: STAT_LABEL_COLOR}}
-            style={styles.userInfoContainer}
-            styleJr={styles.userInfoContainerJr}
-            contentStyle={styles.userInfoContent}>
-            <Subtitle2
-              style={[styles.textBold, styles.textBackground]}
-              numberOfLines={1}>
-              {data && data.MyWallet.User.username}
-            </Subtitle2>
-            <StatContainer
-              icon={trophy_image}
-              style={styles.trophyContainer}
-              styleJr={styles.trophyContainerJr}
-              logoStyle={styles.trophyIcon}
-              borderStyle={styles.trophyBorder}>
-              <Subtitle2
-                style={[styles.textBold, styles.textRight]}
-                numberOfLines={1}>
-                {data && data.MyWallet.Trophys.total}
+        {!error && (
+          <View style={styles.walletContainer}>
+            <StatContainer icon={level_image} iconText={'10'}>
+              <Subtitle2 style={styles.textBold}>
+                {data && data.MyWallet.Level.total}
               </Subtitle2>
             </StatContainer>
-          </StatContainer>
-          <MiniStateContainer
-            icon={config_image}
-            onPress={() => toggleShow(true)}
-          />
-          <MiniStateContainer icon={news_image} onPress={() => {}} />
-        </View>
+            <StatContainer icon={coin_image}>
+              <Subtitle2 style={styles.textBold}>
+                {data && data.MyWallet.Coins.total}
+              </Subtitle2>
+            </StatContainer>
+          </View>
+        )}
+        {!error && (
+          <View style={styles.walletContainer}>
+            <StatContainer
+              borderStyle={{backgroundColor: STAT_LABEL_COLOR}}
+              style={styles.userInfoContainer}
+              styleJr={styles.userInfoContainerJr}
+              contentStyle={styles.userInfoContent}>
+              <Subtitle2
+                style={[styles.textBold, styles.textBackground]}
+                numberOfLines={1}>
+                {data && data.MyWallet.User.username}
+              </Subtitle2>
+              <StatContainer
+                icon={trophy_image}
+                style={styles.trophyContainer}
+                styleJr={styles.trophyContainerJr}
+                logoStyle={styles.trophyIcon}
+                borderStyle={styles.trophyBorder}>
+                <Subtitle2
+                  style={[styles.textBold, styles.textRight]}
+                  numberOfLines={1}>
+                  {data && data.MyWallet.Trophys.total}
+                </Subtitle2>
+              </StatContainer>
+            </StatContainer>
+            <MiniStateContainer
+              icon={config_image}
+              onPress={() => toggleShow(true)}
+            />
+            <MiniStateContainer icon={news_image} onPress={() => {}} />
+          </View>
+        )}
       </Animatable.View>
       {error && (
         <Subtitle1 onPress={retry} style={styles.retry}>
