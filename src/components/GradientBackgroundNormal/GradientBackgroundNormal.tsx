@@ -12,6 +12,7 @@ import * as Animatable from 'react-native-animatable';
 import {useStoreState} from '../../state/store';
 import {BackgroundNormal} from './image';
 import {BackgroundLegendary} from './legendary';
+import {BackgroundEpic} from './epic';
 
 const GradientBackgroundNormal: React.FC<GradientBackgroundType> = ({
   children,
@@ -75,7 +76,7 @@ const GradientBackgroundNormal: React.FC<GradientBackgroundType> = ({
       ) : rarity == 'legendary' ? (
         <BackgroundLegendary />
       ) : (
-        <BackgroundNormal />
+        <BackgroundEpic />
       )}
       <KeyboardAwareScrollView
         contentContainerStyle={{flexGrow: 1}}

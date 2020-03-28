@@ -12,8 +12,8 @@ export const styles = StyleSheet.create({
     color: 'black',
   },
   descriptionText: {
-    textAlign: 'center',
-    marginVertical: normalize(20),
+    textAlign: 'justify',
+    marginVertical: normalize(10),
   },
   textBold: {
     fontFamily: 'Rubik-Bold',

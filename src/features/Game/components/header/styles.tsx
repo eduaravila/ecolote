@@ -8,8 +8,8 @@ export const styles = StyleSheet.create({
     marginVertical: normalize(10),
   },
   logo: {
-    width: normalize(150),
-    height: normalize(150),
+    width: normalize(130),
+    height: normalize(130),
     resizeMode: 'contain',
     alignSelf: 'center',
   },

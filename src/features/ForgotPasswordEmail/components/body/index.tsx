@@ -82,6 +82,10 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
   return (
     <View>
       <MiniButton
+        style={{
+          justifyContent: 'flex-start',
+          alignSelf: 'flex-start',
+        }}
         onPress={() => popStack(componentId)}
         iconName={'arrow-left-drop-circle'}>
         Volver

@@ -15,6 +15,8 @@ import {GameBadge} from '../../../../components/GameBadge/GameBadge';
 import {H6Title} from '../../../../components/H6Title/H6Title';
 import {HairLine} from '../../../../components/HairLine/HairLine';
 import {useStoreState} from '../../../../state/store';
+import {ScrollView} from 'react-native-gesture-handler';
+import {normalize} from '../../../../style/UTILS';
 
 const replace_icon = require('../../../../assets/img/replace.png');
 const bathroom_icon = require('../../../../assets/img/bathroom.png');
@@ -54,7 +56,11 @@ const Body: React.FC<bodyTypes> = ({
           logo={MEDIA_API + 'image/' + rarity.image + '/' + mediaToken}
         />
       </View>
-      <H6Title style={styles.descriptionText}>{subtitle}</H6Title>
+      <ScrollView
+        alwaysBounceVertical
+        style={{height: normalize(160), width: '100%'}}>
+        <H6Title style={styles.descriptionText}>{subtitle}</H6Title>
+      </ScrollView>
       <HairLine />
     </View>
   );

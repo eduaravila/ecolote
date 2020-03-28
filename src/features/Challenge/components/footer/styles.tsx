@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: normalize(80),
-    position: 'absolute',
+    // position: 'absolute',
     bottom: 0,
     paddingHorizontal: normalize(10),
     backgroundColor: PRIMARY_LIGHT_COLOR,

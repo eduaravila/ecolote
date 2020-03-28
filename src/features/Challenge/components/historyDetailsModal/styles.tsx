@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     height: normalize(450),
     position: 'absolute',
     width: '90%',
-    top: '15%',
+    top: '5%',
     backgroundColor: 'transparent',
     borderRadius: normalize(10),
     flexDirection: 'column',

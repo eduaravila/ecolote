@@ -35,7 +35,9 @@ const Footer: React.FC<FooterType> = ({show, ref = useRef(null)}) => {
   }, [show]);
 
   return (
-    <Animatable.View style={styles.container} ref={ref}>
+    <Animatable.View
+      style={[styles.container, {display: show ? 'none' : 'flex'}]}
+      ref={ref}>
       <H6Title style={styles.title}>Sabias que?</H6Title>
       <Caption>{fact}</Caption>
     </Animatable.View>

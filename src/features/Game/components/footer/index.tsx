@@ -16,6 +16,7 @@ import {
   pushStackWithProps,
 } from '../../../../navigation/navigators/stackUtils';
 import {ECOLOTE_GAME_DESCRIPTION} from '../../../../navigation/screen_names';
+import {normalize} from '../../../../style/UTILS';
 
 interface FooterType {
   componentId: string;
@@ -33,7 +34,14 @@ const Footer: React.FC<FooterType> = ({
   loading = false,
 }) => {
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {
+          position: loading ? 'absolute' : 'relative',
+          bottom: loading ? normalize(20) : 0,
+        },
+      ]}>
       <ColorButton style={styles.go} disabled={loading} onPress={onPress}>
         Vamos!
       </ColorButton>

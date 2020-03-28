@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: normalize(5),
+    marginBottom: normalize(10),
   },
   noChallengeSubtitle: {
     marginVertical: normalize(10),
