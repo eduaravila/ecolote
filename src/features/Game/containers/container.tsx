@@ -21,7 +21,7 @@ import {ECOLOTE_GAME_DESCRIPTION} from '../../../navigation/screen_names';
 interface GameTypes {
   componentId: string;
   Last: string;
-  Arena: string;
+  Arena: string[];
   currentChallenge: string;
   _id: string;
   title: string;
@@ -52,7 +52,7 @@ const GET_CHALLENGE_GQL = gql`
   query GetChallenge(
     $currentChallenge: String
     $completedChallenges: [ChallengeId!]
-    $Arena: ID!
+    $Arena: [ID!]!
     $Last: String
   ) {
     GetChallenge(
@@ -94,6 +94,9 @@ const MY_COMPLETED_CHALLENGES_GQL = gql`
   query MyCompletedChallenges {
     MyCompletedChallenges {
       _id
+      Challenge {
+        _id
+      }
     }
   }
 `;
@@ -146,7 +149,7 @@ const Game: React.FC<GameTypes> = props => {
           currentChallenge: props.currentChallenge,
           completedChallenges:
             e && e.MyCompletedChallenges.length > 0
-              ? e.MyCompletedChallenges
+              ? [...e.MyCompletedChallenges.map((i: any) => i.Challenge)]
               : null,
           Arena: props.Arena,
           Last: lastRecomended ? lastRecomended : props.Last,

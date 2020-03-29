@@ -53,7 +53,9 @@ const MY_CURRENT_CHALLENGE_GQL = gql`
 const MY_COMPLETED_CHALLENGES_GQL = gql`
   query MyCompletedChallenges {
     MyCompletedChallenges {
-      _id
+      Challenge {
+        _id
+      }
     }
   }
 `;
@@ -132,6 +134,7 @@ const MY_CURRENT_ARENA_GQL = gql`
     MyArena(arenas: $arenas) {
       availableArenas {
         name
+        _id
       }
       currentArena {
         name
@@ -148,7 +151,7 @@ const GET_CHALLENGE_GQL = gql`
   query GetChallenge(
     $currentChallenge: String
     $completedChallenges: [ChallengeId!]
-    $Arena: ID!
+    $Arena: [ID!]!
     $Last: String
   ) {
     GetChallenge(
@@ -282,7 +285,11 @@ const Challenge: React.FC<ChallengeType> = ({componentId}) => {
             data && data.MyCurrentChallenge
               ? data.MyCurrentChallenge.Challenge._id
               : null,
-          Arena: data_current_arena.MyArena.currentArena._id,
+          Arena: [
+            ...data_current_arena.MyArena.availableArenas.map(
+              (i: any) => i._id,
+            ),
+          ],
           Last: e.GetChallenge._id,
         });
       }
@@ -327,6 +334,8 @@ const Challenge: React.FC<ChallengeType> = ({componentId}) => {
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'network-only',
     onCompleted: e => {
+      console.log(e.MyCompletedChallenges.map(i => i.Challenge));
+
       if (data_current_arena) {
         GetChallenge({
           variables: {
@@ -336,9 +345,13 @@ const Challenge: React.FC<ChallengeType> = ({componentId}) => {
                 : null,
             completedChallenges:
               e && e.MyCompletedChallenges.length > 0
-                ? e.MyCompletedChallenges
+                ? [...e.MyCompletedChallenges.map((i: any) => i.Challenge)]
                 : null,
-            Arena: data_current_arena.MyArena.currentArena._id,
+            Arena: [
+              ...data_current_arena.MyArena.availableArenas.map(
+                (i: any) => i._id,
+              ),
+            ],
             Last: lastRecomended,
           },
         });

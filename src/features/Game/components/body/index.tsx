@@ -61,7 +61,7 @@ const Body: React.FC<bodyTypes> = ({
         style={{height: normalize(160), width: '100%'}}>
         <H6Title style={styles.descriptionText}>{subtitle}</H6Title>
       </ScrollView>
-      <HairLine />
+      
     </View>
   );
 };
