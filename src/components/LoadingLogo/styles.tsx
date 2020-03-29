@@ -4,14 +4,15 @@ import {normalize} from '../../style/UTILS';
 export const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: 0,
+    top: '20%',
     left: 0,
-    height: '90%',
+    height: '50%',
     width: '100%',
     backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 5,
+    alignSelf: 'center',
+    // elevation: 5,
     zIndex: 10,
   },
   image: {

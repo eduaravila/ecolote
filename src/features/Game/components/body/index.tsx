@@ -58,10 +58,13 @@ const Body: React.FC<bodyTypes> = ({
       </View>
       <ScrollView
         alwaysBounceVertical
-        style={{height: normalize(160), width: '100%'}}>
+        style={{
+          height: normalize(160),
+          width: '100%',
+          marginVertical: normalize(10),
+        }}>
         <H6Title style={styles.descriptionText}>{subtitle}</H6Title>
       </ScrollView>
-      
     </View>
   );
 };
