@@ -4,6 +4,7 @@ import Carousel, {
   Pagination,
   getInputRangeFromIndexes,
 } from 'react-native-snap-carousel';
+import {AdMobBanner} from 'react-native-admob';
 
 import {styles} from './styles';
 import {bodyTypes} from './types';
@@ -45,6 +46,12 @@ const Body: React.FC<bodyTypes> = ({
         />
       ) : (
         <Fragment>
+          <AdMobBanner
+            adSize="largeBanner"
+            adUnitID="ca-app-pub-4958442923480574/5517307299"
+            testDevices={[AdMobBanner.simulatorId]}
+            onAdFailedToLoad={error => console.log(error)}
+          />
           <Carousel
             ref={ref}
             data={data}

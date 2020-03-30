@@ -9,12 +9,13 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     flexWrap: 'nowrap',
+    marginBottom: normalize(20),
   },
   go: {
     flex: 1,
   },
   another: {
-    flex: 0.5,  
+    flex: 0.5,
     marginLeft: normalize(10),
   },
   anotherText: {

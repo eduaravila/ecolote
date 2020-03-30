@@ -42,6 +42,7 @@ export function Grapper(MyComponent: React.FunctionComponent<any>) {
       componentDidMount() {
         AdMobInterstitial.setTestDevices([AdMobInterstitial.simulatorId]);
         AdMobInterstitial.setAdUnitID('ca-app-pub-4958442923480574/3317669302');
+        // AdMobInterstitial.setAdUnitID('ca-app-pub-3940256099942544/1033173712');
         Orientation.lockToPortrait();
       }
       constructor(props: any) {

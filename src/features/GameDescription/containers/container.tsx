@@ -87,8 +87,9 @@ const GameDescrption: React.FC<GameDescrptionTypes> = props => {
         }),
       );
       console.log('articles', articles);
-
+      
       setArticles(i => i.sort((a, b) => (a.name > b.name ? 1 : -1)));
+      
       setloadingArticles(false);
     };
     getArticles();
