@@ -131,8 +131,8 @@ android {
         applicationId "com.ecolote"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 2
-        versionName "1.1"
+        versionCode 3
+        versionName "1.1.1"
         missingDimensionStrategy "RNN.reactNativeVersion", "reactNative60"
         missingDimensionStrategy 'react-native-camera', 'general' // <--- insert this line
         multiDexEnabled true
