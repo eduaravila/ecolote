@@ -2,7 +2,7 @@ import {ApolloLink, InMemoryCache} from 'apollo-boost';
 import {ErrorLink} from 'apollo-link-error';
 import {HttpLink} from 'apollo-link-http';
 import {ApolloClient} from 'apollo-client';
-import {API} from 'react-native-dotenv';
+import {API, API_PROD, DEV} from 'react-native-dotenv';
 import {setContext} from 'apollo-link-context';
 import {createUploadLink} from 'apollo-upload-client';
 import {MEDIA_UPLOAD_API} from 'react-native-dotenv';
@@ -73,8 +73,9 @@ const authLinkMedia = setContext((_, {headers}) => {
 });
 
 const httpLink = new HttpLink({
-  uri: API.trim(),
+  uri: DEV == 'true' ? API.trim() : API_PROD.trim(),
 });
+console.log(API_PROD, DEV);
 
 export const client = new ApolloClient({
   link: ApolloLink.from([authLink, errorLink, httpLink]),

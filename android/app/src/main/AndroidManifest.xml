@@ -11,6 +11,7 @@
   <!-- Include this only if you are planning to use the microphone for video recording -->
   <uses-permission android:name="android.permission.RECORD_AUDIO"/>
   <application android:name=".MainApplication" android:label="@string/app_name" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round" android:allowBackup="false" android:theme="@style/AppTheme" android:screenOrientation="portrait" android:usesCleartextTraffic="true">
+    <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-4958442923480574~3808817419"/>
     <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
     <activity android:name=".SplashActivity" android:theme="@style/SplashTheme" android:label="@string/app_name" android:screenOrientation="portrait">
     </activity>

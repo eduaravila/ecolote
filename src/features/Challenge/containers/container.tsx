@@ -2,6 +2,7 @@ import React, {useState, useEffect, Fragment} from 'react';
 import {useQuery, useLazyQuery} from '@apollo/react-hooks';
 import {gql} from 'apollo-boost';
 import {MEDIA_API} from 'react-native-dotenv';
+import {AdMobInterstitial} from 'react-native-admob';
 
 import Body from '../components/body/index';
 import Head from '../components/header';
@@ -437,7 +438,20 @@ const Challenge: React.FC<ChallengeType> = ({componentId}) => {
       },
     });
   };
-
+  useEffect(() => {
+    AdMobInterstitial.requestAd()
+      .then(e => {
+        console.log('====================================');
+        console.log(e);
+        console.log('====================================');
+        AdMobInterstitial.showAd();
+      })
+      .catch(e => {
+        console.log('====================================');
+        console.log(e);
+        console.log('====================================');
+      });
+  }, []);
   return (
     <GradientBackground
       colors={['transparent', 'transparent']}

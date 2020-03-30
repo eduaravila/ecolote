@@ -4,6 +4,7 @@ import Orientation from 'react-native-orientation';
 import {persistStore} from 'redux-persist';
 import changeNavigationBarColor from 'react-native-navigation-bar-color';
 import {GoogleSignin} from '@react-native-community/google-signin';
+import {API, API_PROD, DEV} from 'react-native-dotenv';
 
 import {registryComponents} from './src/navigation/registry_routes';
 import SplashScreen from 'react-native-splash-screen';
@@ -13,6 +14,8 @@ import store from './src/state/store';
 import goTutorial from './src/navigation/navigators/Tutorial';
 import goAccess from './src/navigation/navigators/Access';
 import goDashboard from './src/navigation/navigators/Dashboard';
+
+console.log('Wprod', API_PROD);
 
 // ? configure google services
 GoogleSignin.configure({

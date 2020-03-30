@@ -5,6 +5,7 @@ declare module 'react-native-tab-view-viewpager-adapter';
 declare module 'react-native-navigation-bar-color';
 declare module 'react-native-shadow';
 declare module 'react-native-touchable-scale';
+declare module 'react-native-admob';
 declare type VoidFunction = any;
 declare module '*.svg' {
   import {SvgProps} from 'react-native-svg';

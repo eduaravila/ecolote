@@ -66,6 +66,8 @@ target 'ecolote' do
 
   pod 'RNInAppBrowser', :path => '../node_modules/react-native-inappbrowser-reborn'
 
+  pod 'react-native-admob', :path => '../node_modules/react-native-admob'
+
   target 'ecoloteTests' do
     inherit! :search_paths
     # Pods for testing

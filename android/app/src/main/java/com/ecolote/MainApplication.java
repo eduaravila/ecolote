@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.sbugert.rnadmob.RNAdMobPackage;
 import com.proyecto26.inappbrowser.RNInAppBrowserPackage;
 import suraj.tiwari.reactnativefbads.FBAdsPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
@@ -61,7 +62,7 @@ public class MainApplication extends NavigationApplication {
         new SplashScreenReactPackage(), new SvgPackage(), new LinearGradientPackage(), new VectorIconsPackage(),
         new OrientationPackage(), new RNGestureHandlerPackage(), new ReanimatedPackage(), new RNCViewPagerPackage(),
         new NavigationBarColorPackage(), new AsyncStoragePackage(), new NetInfoPackage(), new RNCameraPackage(),
-        new RNGoogleSigninPackage(), new FBSDKPackage(), new FBAdsPackage(), new RNInAppBrowserPackage());
+        new RNGoogleSigninPackage(), new FBSDKPackage(), new FBAdsPackage(), new RNInAppBrowserPackage(), new RNAdMobPackage());
 
   }
 

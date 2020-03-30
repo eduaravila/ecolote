@@ -2,10 +2,11 @@ import React, {ReactNode} from 'react';
 import Orientation from 'react-native-orientation';
 import {ApolloProvider} from '@apollo/react-hooks';
 import {StoreProvider} from 'easy-peasy';
-import {API} from 'react-native-dotenv';
+import {API_PROD} from 'react-native-dotenv';
 import {PersistGate} from 'redux-persist/integration/react';
 import {persistStore} from 'redux-persist';
 import NetInfo from '@react-native-community/netinfo';
+import {AdMobInterstitial} from 'react-native-admob';
 
 import {StatusBarCustom} from '../../components/StatusBar/StatusBarCustom';
 import {client} from '../../api';
@@ -21,6 +22,7 @@ const persistor = persistStore(store, null, () => {
   const unsubscribe = NetInfo.addEventListener(state => {
     console.log('Connection type', state.type);
     console.log('Is connected?', state.isConnected);
+    console.log('Is connected?', API_PROD);
     store.dispatch.network.setOnline({online: state.isConnected});
   });
 
@@ -38,6 +40,8 @@ export function Grapper(MyComponent: React.FunctionComponent<any>) {
   return () => {
     return class StoreWrapper extends React.Component<any, any> {
       componentDidMount() {
+        AdMobInterstitial.setTestDevices([AdMobInterstitial.simulatorId]);
+        AdMobInterstitial.setAdUnitID('ca-app-pub-4958442923480574/3317669302');
         Orientation.lockToPortrait();
       }
       constructor(props: any) {
