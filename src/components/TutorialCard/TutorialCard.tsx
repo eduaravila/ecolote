@@ -15,7 +15,10 @@ const TutorialCard: React.FC<TutorialCardType> = ({item}) => {
       {item.logo}
       <View style={styles.descriptionBox}>
         <H5Title style={styles.title}>{item.title}</H5Title>
-        <Subtitle1>{item.description}</Subtitle1>
+        <Subtitle1
+          style={{fontFamily: 'Rubik-Bold', marginVertical: normalize(10)}}>
+          {item.description}
+        </Subtitle1>
       </View>
       {item.buttom && item.buttom}
     </View>

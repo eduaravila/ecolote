@@ -90,7 +90,8 @@ const GradientBackgroundNormal: React.FC<GradientBackgroundType> = ({
           contentContainerStyle={{
             height: '100%',
             paddingBottom,
-          }}>
+          }}
+          indicatorStyle={'white'}>
           {children}
         </ScrollView>
         {show && (

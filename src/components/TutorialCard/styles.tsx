@@ -4,11 +4,13 @@ import {
   PRIMARY_LIGHT_COLOR,
   GAME_POINT_INACTIVE,
   PRIMARY_DARK_COLOR,
+  PRIMARY_COLOR,
+  STAT_LABEL_COLOR,
 } from '../../style/COLOR';
 export const styles = StyleSheet.create({
   descriptionText: {
     textAlign: 'center',
-    marginVertical: normalize(20),
+    marginVertical: normalize(10),
     fontSize: normalize(20),
     fontFamily: 'Rubik-Medium',
     width: '100%',
@@ -27,10 +29,10 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   constainer: {
-    justifyContent: 'center',
-    backgroundColor: PRIMARY_DARK_COLOR,
+    justifyContent: 'space-evenly',
+    backgroundColor: STAT_LABEL_COLOR,
     borderRadius: normalize(10),
-    flex: 1,
+    // flex: 0.8,
     width: '100%',
     alignItems: 'center',
     paddingHorizontal: 5,
@@ -39,8 +41,10 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowOffset: {width: 0, height: 10},
     shadowRadius: 10,
+    paddingVertical: normalize(20),
+    elevation: 5,
   },
   descriptionBox: {
-    marginVertical: normalize(30),
+    marginVertical: normalize(5),
   },
 });

@@ -15,6 +15,7 @@ import {
   GAME_POINT_INACTIVE,
   PRIMARY_LIGHT_COLOR,
   GOOGLE_SIGN_UP_COLOR,
+  STAT_LABEL_COLOR,
 } from '../../../../style/COLOR';
 import {TutorialCard} from '../../../../components/TutorialCard/TutorialCard';
 const game_logo = require('../../../../assets/img/paper.png');
@@ -92,19 +93,19 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
           },
           {
             title: 'Cambia tu estilo de vida ',
-            logo: <Change_logo width={normalize(320)} height={320} />,
+            logo: <Change_logo width={normalize(300)} height={300} />,
             description:
               'Consumiedo productos, amigables con el medio ambiente, con acciones simples que generan gran impacto',
           },
           {
             title: 'Visualiza tus resultados y estadisticas',
-            logo: <Compare_logo width={normalize(320)} height={320} />,
+            logo: <Compare_logo width={normalize(300)} height={300} />,
             description:
               'Mantente a el tanto de tus resultados y llega a el top de los rankins',
           },
           {
             title: 'Comparte tus experiencias',
-            logo: <Share_logo width={normalize(400)} height={400} />,
+            logo: <Share_logo width={normalize(320)} height={320} />,
             description:
               'Toma fotos y agrega comentarios sobre tus experiencias con los retos asignados',
             buttom: (
@@ -129,27 +130,29 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
         inactiveSlideScale={0.94}
         inactiveSlideOpacity={1}
         slideStyle={{flex: 1}}
-        containerCustomStyle={{flex: 1}}
+        containerCustomStyle={{flex: 0.5}}
         scrollInterpolator={_scrollInterpolator}
         itemWidth={normalize(300)}
       />
       <Pagination
         dotsLength={4}
         containerStyle={{
-          backgroundColor: PRIMARY_LIGHT_COLOR,
+          backgroundColor: STAT_LABEL_COLOR,
           borderRadius: normalize(50),
           height: normalize(20),
           minHeight: normalize(20),
           width: normalize(250),
           paddingVertical: 0,
+          flex: 0.1,
+          elevation: 5,
           marginVertical: normalize(10),
-          justifyContent: 'space-around',
+          justifyContent: 'space-between',
         }}
         dotStyle={{
           width: normalize(15),
           borderRadius: normalize(10),
           height: normalize(15),
-          backgroundColor: PRIMARY_DARK_COLOR,
+          backgroundColor: 'white',
         }}
         activeDotIndex={activeIndex}
       />
