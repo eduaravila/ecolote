@@ -147,6 +147,7 @@ const Body: React.FC<bodyTypes> = ({componentId}) => {
           elevation: 5,
           marginVertical: normalize(10),
           justifyContent: 'space-between',
+          alignItems: 'center',
         }}
         dotStyle={{
           width: normalize(15),
