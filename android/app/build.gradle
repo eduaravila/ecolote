@@ -131,8 +131,8 @@ android {
         applicationId "com.ecolote"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
-        versionName "1.1.1"
+        versionCode 4
+        versionName "1.1.3"
         missingDimensionStrategy "RNN.reactNativeVersion", "reactNative60"
         missingDimensionStrategy 'react-native-camera', 'general' // <--- insert this line
         multiDexEnabled true
@@ -201,6 +201,7 @@ configurations.all {
 }
 
 dependencies {
+    implementation project(':lottie-react-native')
     implementation project(':react-native-admob')
     implementation project(':react-native-inappbrowser-reborn')
     implementation project(':react-native-fbads')

@@ -1,6 +1,8 @@
 import React, {useState, useEffect, Fragment} from 'react';
 import {View, Text, RefreshControl, Image} from 'react-native';
 import Modal from 'react-native-modal';
+import LottieView from 'lottie-react-native';
+
 import {normalize} from '../../../../style/UTILS';
 import {styles} from './styles';
 import {MEDIA_API} from 'react-native-dotenv';
@@ -99,7 +101,7 @@ const HistoryModal: React.FC<optionsType> = ({
   _refresh_history,
   get_more,
 }) => {
-  let {mediaToken} = useStoreState(state => state.credentials);
+  let {mediaToken} = useStoreState((state) => state.credentials);
   const [images, setImages] = useState<{url: string}[]>([]);
   const [currentDatailsData, setcurrentDatailsData] = useState<dataType>({});
 
@@ -108,7 +110,7 @@ const HistoryModal: React.FC<optionsType> = ({
   const _onPressMedia = (index: number, indexPhoto: number) => {
     setindexPhoto(indexPhoto);
     setImages([
-      ...data[index].media.map(i => ({
+      ...data[index].media.map((i) => ({
         url: MEDIA_API + 'public/' + i + '/' + mediaToken,
       })),
     ]);
@@ -205,7 +207,25 @@ const HistoryModal: React.FC<optionsType> = ({
           </View>
           <View style={styles.historyContainer}>
             <View style={styles.historyContainerBackDrop} />
-
+            {!data ||
+              (data.length < 1 && (
+                <View style={{height: '100%', flexDirection: 'column'}}>
+                  <LottieView
+                    source={require('../../../../assets/animations/empty.json')}
+                    autoPlay
+                    loop
+                  />
+                  <Subtitle2
+                    style={{
+                      position: 'absolute',
+                      alignSelf: 'center',
+                      bottom: normalize(30),
+                      fontFamily: 'Rubik-Bold',
+                    }}>
+                    No se encontro ningun reto
+                  </Subtitle2>
+                </View>
+              ))}
             <FlatList
               refreshControl={
                 <RefreshControl

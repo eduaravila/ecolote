@@ -68,6 +68,8 @@ target 'ecolote' do
 
   pod 'react-native-admob', :path => '../node_modules/react-native-admob'
 
+  pod 'lottie-react-native', :path => '../node_modules/lottie-react-native'
+
   target 'ecoloteTests' do
     inherit! :search_paths
     # Pods for testing

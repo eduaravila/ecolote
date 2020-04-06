@@ -35,6 +35,7 @@
     "expo-random": "^8.0.0",
     "extract-files": "^7.0.0",
     "graphql": "^14.6.0",
+    "lottie-react-native": "^3.3.2",
     "markdown-it": "^10.0.0",
     "markdown-it-emoji": "^1.4.0",
     "moment": "^2.24.0",

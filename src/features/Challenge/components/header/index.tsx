@@ -90,7 +90,7 @@ const Head: React.FC<HeadType> = ({
       <Animatable.View ref={ref}>
         {!error && (
           <View style={styles.walletContainer}>
-            <StatContainer icon={level_image} iconText={'10'}>
+            <StatContainer icon={level_image} iconText={''}>
               <Subtitle2 style={styles.textBold}>
                 {data && data.MyWallet.Level.total}
               </Subtitle2>

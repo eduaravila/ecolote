@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.airbnb.android.react.lottie.LottiePackage;
 import com.sbugert.rnadmob.RNAdMobPackage;
 import com.proyecto26.inappbrowser.RNInAppBrowserPackage;
 import suraj.tiwari.reactnativefbads.FBAdsPackage;
@@ -62,7 +63,7 @@ public class MainApplication extends NavigationApplication {
         new SplashScreenReactPackage(), new SvgPackage(), new LinearGradientPackage(), new VectorIconsPackage(),
         new OrientationPackage(), new RNGestureHandlerPackage(), new ReanimatedPackage(), new RNCViewPagerPackage(),
         new NavigationBarColorPackage(), new AsyncStoragePackage(), new NetInfoPackage(), new RNCameraPackage(),
-        new RNGoogleSigninPackage(), new FBSDKPackage(), new FBAdsPackage(), new RNInAppBrowserPackage(), new RNAdMobPackage());
+        new RNGoogleSigninPackage(), new FBSDKPackage(), new FBAdsPackage(), new RNInAppBrowserPackage(), new RNAdMobPackage(), new LottiePackage());
 
   }
 
